@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ユニシアポータル — 臨店報告書</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif;background:#f0f2f5;color:#1a1a2e;min-height:100vh}
+.screen{display:none}
+.screen.active{display:flex;flex-direction:column;min-height:100vh}
+
+/* ===== LOGIN ===== */
+#screen-login{background:linear-gradient(160deg,#1a1a5e 0%,#16213e 50%,#0f3460 100%);align-items:center;justify-content:center;padding:40px 24px}
+.login-card{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:48px 36px;width:100%;max-width:380px;text-align:center}
+.login-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:32px}
+.login-logo-icon{width:44px;height:44px;background:linear-gradient(135deg,#4f9cf9,#a78bfa);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.login-logo-text{color:#fff;font-size:20px;font-weight:700;letter-spacing:0.5px}
+.login-logo-sub{color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:32px}
+.login-input{width:100%;padding:14px 16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:14px;margin-bottom:12px;outline:none;transition:border-color 0.2s}
+.login-input::placeholder{color:rgba(255,255,255,0.4)}
+.login-input:focus{border-color:rgba(79,156,249,0.6)}
+.btn-login{width:100%;padding:15px;background:linear-gradient(135deg,#4f9cf9,#7c3aed);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;letter-spacing:0.5px;transition:opacity 0.2s}
+.btn-login:hover{opacity:0.9}
+.login-footer{color:rgba(255,255,255,0.35);font-size:11px;margin-top:24px}
+
+/* ===== NAV BAR ===== */
+.top-nav{background:#1a1a5e;color:#fff;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;flex-shrink:0}
+.nav-left{display:flex;align-items:center;gap:10px}
+.nav-back{background:rgba(255,255,255,0.12);border:none;color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px}
+.nav-title{font-weight:700;font-size:16px}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-avatar{width:32px;height:32px;background:linear-gradient(135deg,#4f9cf9,#a78bfa);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer}
+.nav-badge{background:#ef4444;color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{background:#fff;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;padding:8px 0;position:sticky;bottom:0;flex-shrink:0}
+.bnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 16px;border-radius:8px;transition:background 0.15s}
+.bnav-item:hover,.bnav-item.active{background:#f0f4ff}
+.bnav-icon{font-size:20px}
+.bnav-label{font-size:10px;color:#6b7280;font-weight:500}
+.bnav-item.active .bnav-label{color:#4f9cf9}
+
+/* ===== CONTENT ===== */
+.content{flex:1;overflow-y:auto;padding:16px}
+.content-wide{flex:1;overflow-y:auto;padding:20px 24px}
+
+/* ===== CARDS ===== */
+.card{background:#fff;border-radius:16px;padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.card-sm{background:#fff;border-radius:12px;padding:16px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+
+/* ===== HOME ===== */
+.greeting-banner{background:linear-gradient(135deg,#1a1a5e,#4f9cf9);border-radius:20px;padding:24px;margin-bottom:16px;color:#fff}
+.greeting-name{font-size:18px;font-weight:700;margin-bottom:4px}
+.greeting-sub{font-size:13px;opacity:0.8}
+.greeting-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}
+.stat-box{background:rgba(255,255,255,0.15);border-radius:12px;padding:10px;text-align:center}
+.stat-num{font-size:22px;font-weight:800}
+.stat-label{font-size:10px;opacity:0.8;margin-top:2px}
+
+.section-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.badge-today{background:#fef3c7;color:#d97706;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.badge-done{background:#d1fae5;color:#059669;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.badge-pending{background:#fee2e2;color:#dc2626;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.badge-blue{background:#dbeafe;color:#1d4ed8;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+
+.store-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #f3f4f6}
+.store-row:last-child{border-bottom:none}
+.store-info{flex:1}
+.store-name{font-size:14px;font-weight:700;color:#111827}
+.store-meta{font-size:12px;color:#9ca3af;margin-top:3px}
+.store-score{text-align:right}
+.score-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-left:12px}
+.score-high{background:#d1fae5;color:#059669}
+.score-mid{background:#fef3c7;color:#d97706}
+.score-low{background:#fee2e2;color:#dc2626}
+.score-none{background:#f3f4f6;color:#9ca3af}
+
+.btn-primary{background:linear-gradient(135deg,#4f9cf9,#3b82f6);color:#fff;border:none;border-radius:12px;padding:13px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%;letter-spacing:0.3px;transition:opacity 0.2s}
+.btn-primary:hover{opacity:0.9}
+.btn-outline{background:#fff;color:#4f9cf9;border:1.5px solid #4f9cf9;border-radius:12px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%;transition:background 0.2s}
+.btn-outline:hover{background:#f0f7ff}
+.btn-sm{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:opacity 0.2s}
+.btn-sm-primary{background:#4f9cf9;color:#fff}
+.btn-sm-outline{background:#fff;color:#4f9cf9;border:1.5px solid #4f9cf9}
+
+/* ===== STORE LIST ===== */
+.store-card{background:#fff;border-radius:14px;padding:16px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,0.06);display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
+.store-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.store-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#1a1a5e,#4f9cf9);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.store-detail{flex:1}
+.store-brand{font-size:11px;color:#9ca3af;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.store-fullname{font-size:14px;font-weight:700;color:#111827;margin-top:2px}
+.store-address{font-size:12px;color:#9ca3af;margin-top:2px}
+.store-last{font-size:11px;color:#6b7280;margin-top:4px}
+.store-arrow{color:#9ca3af;font-size:18px}
+
+/* ===== QSC CHECK ===== */
+.check-header{background:linear-gradient(135deg,#1a1a5e,#4f9cf9);padding:20px;color:#fff;border-radius:0 0 20px 20px;margin:-16px -16px 16px;flex-shrink:0}
+.check-store-name{font-size:18px;font-weight:800}
+.check-date{font-size:12px;opacity:0.8;margin-top:3px}
+.progress-wrap{margin-top:14px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;opacity:0.9}
+.progress-bar{background:rgba(255,255,255,0.25);border-radius:10px;height:8px}
+.progress-fill{background:#fff;border-radius:10px;height:8px;transition:width 0.4s}
+
+.category-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px;-webkit-overflow-scrolling:touch}
+.category-tabs::-webkit-scrollbar{display:none}
+.cat-tab{flex-shrink:0;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all 0.2s;white-space:nowrap}
+.cat-tab.active{background:#1a1a5e;color:#fff;border-color:#1a1a5e}
+.cat-tab:not(.active){background:#fff;color:#6b7280;border-color:#e5e7eb}
+
+.check-item{display:flex;align-items:center;gap:12px;padding:14px;background:#fff;border-radius:12px;margin-bottom:8px;border:1.5px solid #f3f4f6;transition:border-color 0.2s}
+.check-item.answered{border-color:#d1fae5}
+.check-item.ng{border-color:#fee2e2}
+.check-item-num{width:24px;height:24px;background:#f3f4f6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#6b7280;flex-shrink:0}
+.check-item-text{flex:1;font-size:13px;color:#374151;line-height:1.4}
+.check-options{display:flex;gap:6px;flex-shrink:0}
+.opt-btn{width:36px;height:36px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;cursor:pointer;font-size:12px;font-weight:700;transition:all 0.15s;color:#6b7280}
+.opt-btn.ok.selected{background:#059669;border-color:#059669;color:#fff}
+.opt-btn.ng.selected{background:#dc2626;border-color:#dc2626;color:#fff}
+.opt-btn.na.selected{background:#9ca3af;border-color:#9ca3af;color:#fff}
+
+.photo-zone{border:2px dashed #d1d5db;border-radius:12px;padding:20px;text-align:center;cursor:pointer;margin-top:12px;transition:border-color 0.2s}
+.photo-zone:hover{border-color:#4f9cf9}
+.photo-zone-icon{font-size:28px;margin-bottom:6px}
+.photo-zone-text{font-size:13px;color:#9ca3af}
+
+.comment-area{width:100%;padding:12px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:13px;resize:vertical;min-height:80px;outline:none;font-family:inherit;margin-top:12px;transition:border-color 0.2s}
+.comment-area:focus{border-color:#4f9cf9}
+
+/* ===== RESULT ===== */
+.result-hero{background:linear-gradient(135deg,#1a1a5e,#4f9cf9);padding:32px 20px;text-align:center;color:#fff;border-radius:0 0 24px 24px;margin:-16px -16px 20px}
+.result-score-ring{width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,0.15);border:4px solid rgba(255,255,255,0.4);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px}
+.result-score-num{font-size:32px;font-weight:900}
+.result-score-label{font-size:11px;opacity:0.8}
+.result-store{font-size:16px;font-weight:700}
+.result-date{font-size:12px;opacity:0.8;margin-top:4px}
+
+.cat-result-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f3f4f6}
+.cat-result-row:last-child{border-bottom:none}
+.cat-result-name{width:80px;font-size:12px;color:#6b7280;font-weight:600}
+.cat-result-bar-wrap{flex:1}
+.cat-result-bar{height:8px;background:#e5e7eb;border-radius:10px}
+.cat-result-fill{height:8px;border-radius:10px;transition:width 0.6s}
+.fill-green{background:linear-gradient(90deg,#10b981,#34d399)}
+.fill-yellow{background:linear-gradient(90deg,#f59e0b,#fcd34d)}
+.fill-red{background:linear-gradient(90deg,#ef4444,#f87171)}
+.cat-result-pct{width:36px;text-align:right;font-size:13px;font-weight:700;color:#374151}
+
+.ng-item-list{background:#fff8f8;border:1.5px solid #fee2e2;border-radius:12px;padding:14px}
+.ng-item-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #fee2e2;font-size:12px;color:#374151}
+.ng-item-row:last-child{border-bottom:none}
+.ng-dot{width:6px;height:6px;background:#ef4444;border-radius:50%;margin-top:5px;flex-shrink:0}
+
+/* ===== AI SCREEN ===== */
+.ai-header{background:linear-gradient(135deg,#7c3aed,#4f9cf9);padding:24px 20px;color:#fff;border-radius:0 0 20px 20px;margin:-16px -16px 16px}
+.ai-title{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
+.ai-sub{font-size:12px;opacity:0.8;margin-top:4px}
+
+.ai-card{background:#fff;border-radius:16px;padding:18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #4f9cf9}
+.ai-card.urgent{border-left-color:#ef4444}
+.ai-card.warning{border-left-color:#f59e0b}
+.ai-card.good{border-left-color:#10b981}
+.ai-priority{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.ai-priority.urgent{color:#ef4444}
+.ai-priority.warning{color:#f59e0b}
+.ai-priority.good{color:#10b981}
+.ai-suggestion-title{font-size:14px;font-weight:700;color:#111827;margin-bottom:6px}
+.ai-suggestion-body{font-size:13px;color:#6b7280;line-height:1.6}
+.ai-suggestion-action{background:#f0f7ff;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:12px;color:#1d4ed8;font-weight:600}
+
+.pdca-card{background:#fff;border-radius:14px;padding:16px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.pdca-title{font-size:13px;font-weight:700;color:#374151;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.pdca-flow{display:flex;align-items:stretch;gap:0}
+.pdca-step{flex:1;text-align:center;padding:10px 6px;border-radius:8px;font-size:11px}
+.pdca-step-label{font-weight:700;font-size:13px;margin-bottom:4px}
+.pdca-step-text{font-size:10px;color:#6b7280;line-height:1.3}
+.pdca-arrow{display:flex;align-items:center;color:#d1d5db;font-size:16px;padding:0 2px}
+.step-p{background:#eff6ff;color:#1d4ed8}
+.step-d{background:#f0fdf4;color:#166534}
+.step-c{background:#fff7ed;color:#9a3412}
+.step-a{background:#fdf4ff;color:#6b21a8}
+.pdca-check-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f3f4f6;font-size:12px}
+.pdca-check-row:last-child{border-bottom:none}
+.pdca-status{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;flex-shrink:0}
+.status-resolved{background:#10b981}
+.status-progress{background:#f59e0b}
+.status-open{background:#9ca3af}
+
+/* ===== DASHBOARD ===== */
+.dashboard-header{background:linear-gradient(135deg,#1a1a5e,#16213e);padding:20px 24px;color:#fff;flex-shrink:0}
+.dashboard-title{font-size:20px;font-weight:800}
+.dashboard-sub{font-size:12px;opacity:0.7;margin-top:3px}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.kpi-card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.kpi-label{font-size:11px;color:#9ca3af;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.kpi-num{font-size:28px;font-weight:900;color:#111827;margin-top:4px}
+.kpi-change{font-size:11px;margin-top:3px}
+.kpi-up{color:#10b981}
+.kpi-down{color:#ef4444}
+
+.bar-chart-wrap{padding:0 4px}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:120px;margin-bottom:6px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{width:100%;border-radius:4px 4px 0 0;transition:height 0.4s;cursor:pointer}
+.bar:hover{opacity:0.8}
+.bar-label{font-size:10px;color:#9ca3af;text-align:center}
+.bar-val{font-size:10px;color:#374151;font-weight:700}
+
+.rank-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f3f4f6}
+.rank-row:last-child{border-bottom:none}
+.rank-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.rank-1{background:#fef3c7;color:#d97706}
+.rank-2{background:#f3f4f6;color:#6b7280}
+.rank-3{background:#fdf2f0;color:#c2410c}
+.rank-n{background:#f3f4f6;color:#9ca3af;font-size:10px}
+.rank-store{flex:1}
+.rank-store-name{font-size:13px;font-weight:700;color:#111827}
+.rank-store-brand{font-size:11px;color:#9ca3af}
+.rank-bar-wrap{width:80px}
+.rank-bar{height:6px;background:#e5e7eb;border-radius:10px;margin-top:3px}
+.rank-fill{height:6px;border-radius:10px;background:linear-gradient(90deg,#4f9cf9,#7c3aed)}
+.rank-score{font-size:14px;font-weight:800;color:#374151;width:36px;text-align:right}
+
+.dwh-banner{background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:20px;margin-top:4px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:opacity 0.2s}
+.dwh-banner:hover{opacity:0.9}
+.dwh-icon{font-size:28px}
+.dwh-text{flex:1}
+.dwh-title{color:#fff;font-size:14px;font-weight:700}
+.dwh-sub{color:rgba(255,255,255,0.6);font-size:12px;margin-top:3px}
+.dwh-arrow{color:rgba(255,255,255,0.5);font-size:18px}
+
+/* ===== MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:flex;align-items:flex-end;justify-content:center}
+.modal-overlay.hidden{display:none}
+.modal-sheet{background:#fff;border-radius:20px 20px 0 0;padding:24px;width:100%;max-width:480px;animation:slideUp 0.3s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:36px;height:4px;background:#e5e7eb;border-radius:2px;margin:0 auto 20px}
+.modal-title{font-size:17px;font-weight:800;margin-bottom:16px;color:#111827}
+
+/* ===== UTILS ===== */
+.divider{height:1px;background:#f3f4f6;margin:16px 0}
+.text-sm{font-size:12px;color:#9ca3af}
+.text-center{text-align:center}
+.mt-8{margin-top:8px}
+.mt-12{margin-top:12px}
+.mt-16{margin-top:16px}
+.mt-20{margin-top:20px}
+.flex{display:flex}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-8{gap:8px}
+.gap-12{gap:12px}
+.fw-bold{font-weight:700}
+.color-green{color:#059669}
+.color-red{color:#dc2626}
+.color-orange{color:#d97706}
+.hidden{display:none}
+
+/* max width constraint */
+.screen{max-width:480px;margin:0 auto;background:#f0f2f5}
+#screen-dashboard{max-width:none;background:#f0f2f5}
+#screen-dashboard .content-wide{max-width:1100px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<!-- ======== SCREEN: LOGIN ======== -->
+<div id="screen-login" class="screen active">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">🏢</div>
+      <div class="login-logo-text">UNISIA Portal</div>
+    </div>
+    <div class="login-logo-sub">Store Management System</div>
+    <input class="login-input" type="text" placeholder="ユーザーID" value="tanaka.sv">
+    <input class="login-input" type="password" placeholder="パスワード" value="••••••••">
+    <button class="btn-login" onclick="login()">ログイン</button>
+    <div class="login-footer">© 2026 Unisia Holdings — Powered by Dandori Work</div>
+  </div>
+</div>
+
+<!-- ======== SCREEN: HOME ======== -->
+<div id="screen-home" class="screen">
+  <div class="top-nav">
+    <div class="nav-left">
+      <span class="nav-title">🏠 ホーム</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-badge">3</div>
+      <div class="nav-avatar" onclick="alert('田中 佑介\nSV | 関東エリア担当')">田</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="greeting-banner">
+      <div class="greeting-name">おはようございます、田中さん 👋</div>
+      <div class="greeting-sub">2026年4月23日（木） — 本日の訪問予定: <strong>3店舗</strong></div>
+      <div class="greeting-stats">
+        <div class="stat-box"><div class="stat-num">12</div><div class="stat-label">今月訪問済</div></div>
+        <div class="stat-box"><div class="stat-num">84</div><div class="stat-label">平均スコア</div></div>
+        <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">改善対応中</div></div>
+      </div>
+    </div>
+
+    <div class="section-title">📋 本日の訪問予定 <span class="badge-today">TODAY</span></div>
+
+    <div class="card">
+      <div class="store-row" onclick="gotoCheck('串カツ田中 渋谷道玄坂店')">
+        <div class="store-info">
+          <div class="store-name">串カツ田中 渋谷道玄坂店</div>
+          <div class="store-meta">🕙 10:00〜 · 前回スコア: <span class="color-orange fw-bold">78点</span></div>
+        </div>
+        <div class="score-circle score-mid">78</div>
+      </div>
+      <div class="store-row" onclick="gotoCheck('串カツ田中 新宿西口店')">
+        <div class="store-info">
+          <div class="store-name">串カツ田中 新宿西口店</div>
+          <div class="store-meta">🕑 14:00〜 · 前回スコア: <span class="color-green fw-bold">91点</span></div>
+        </div>
+        <div class="score-circle score-high">91</div>
+      </div>
+      <div class="store-row" onclick="gotoCheck('ピソラ 池袋東口店')">
+        <div class="store-info">
+          <div class="store-name">ピソラ 池袋東口店</div>
+          <div class="store-meta">🕔 16:30〜 · 前回スコア: <span class="color-red fw-bold">62点</span></div>
+        </div>
+        <div class="score-circle score-low">62</div>
+      </div>
+    </div>
+
+    <div class="section-title">🔔 未対応アクション <span class="badge-pending">3件</span></div>
+    <div class="card-sm" style="border-left:3px solid #ef4444">
+      <div class="text-sm color-red fw-bold">🚨 重要</div>
+      <div style="font-size:13px;margin-top:4px;font-weight:600">ピソラ池袋東口 — トイレ衛生管理が2回連続NG</div>
+      <div class="text-sm mt-8">期日: 2026-04-25</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid #f59e0b">
+      <div class="text-sm color-orange fw-bold">⚠️ 注意</div>
+      <div style="font-size:13px;margin-top:4px;font-weight:600">渋谷道玄坂 — 廃棄管理の記録漏れ（先週指摘済み）</div>
+      <div class="text-sm mt-8">期日: 2026-04-26</div>
+    </div>
+    <div class="card-sm" style="border-left:3px solid #3b82f6">
+      <div class="text-sm" style="color:#1d4ed8;font-weight:700">📌 確認待ち</div>
+      <div style="font-size:13px;margin-top:4px;font-weight:600">新宿西口 — スタッフ研修完了報告を提出待ち</div>
+      <div class="text-sm mt-8">期日: 2026-04-30</div>
+    </div>
+
+    <div class="section-title mt-16">📊 先週の傾向</div>
+    <div class="card">
+      <div style="font-size:12px;color:#6b7280;margin-bottom:12px">担当14店舗 · 平均スコア推移</div>
+      <div class="bar-chart">
+        <div class="bar-col"><div class="bar" style="height:65%;background:linear-gradient(180deg,#4f9cf9,#3b82f6)"></div><div class="bar-val">81</div><div class="bar-label">4/17</div></div>
+        <div class="bar-col"><div class="bar" style="height:70%;background:linear-gradient(180deg,#4f9cf9,#3b82f6)"></div><div class="bar-val">83</div><div class="bar-label">4/18</div></div>
+        <div class="bar-col"><div class="bar" style="height:60%;background:linear-gradient(180deg,#f59e0b,#d97706)"></div><div class="bar-val">79</div><div class="bar-label">4/19</div></div>
+        <div class="bar-col"><div class="bar" style="height:72%;background:linear-gradient(180deg,#4f9cf9,#3b82f6)"></div><div class="bar-val">84</div><div class="bar-label">4/21</div></div>
+        <div class="bar-col"><div class="bar" style="height:68%;background:linear-gradient(180deg,#4f9cf9,#3b82f6)"></div><div class="bar-val">82</div><div class="bar-label">4/22</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="bnav-item active" onclick="showScreen('home')"><div class="bnav-icon">🏠</div><div class="bnav-label">ホーム</div></div>
+    <div class="bnav-item" onclick="showScreen('stores')"><div class="bnav-icon">🗂️</div><div class="bnav-label">担当店舗</div></div>
+    <div class="bnav-item" onclick="showScreen('ai')"><div class="bnav-icon">🤖</div><div class="bnav-label">AI提案</div></div>
+    <div class="bnav-item" onclick="showScreen('dashboard')"><div class="bnav-icon">📊</div><div class="bnav-label">本部</div></div>
+  </div>
+</div>
+
+<!-- ======== SCREEN: STORE LIST ======== -->
+<div id="screen-stores" class="screen">
+  <div class="top-nav">
+    <div class="nav-left">
+      <span class="nav-title">🗂️ 担当店舗一覧</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-avatar">田</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="card-sm" style="display:flex;gap:8px;align-items:center">
+      <input style="flex:1;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:13px;outline:none" placeholder="🔍  店舗名・エリアで検索...">
+      <select style="padding:10px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:12px;outline:none;background:#fff">
+        <option>全ブランド</option>
+        <option>串カツ田中</option>
+        <option>ピソラ</option>
+      </select>
+    </div>
+
+    <div class="section-title mt-12">今月訪問が必要な店舗 <span class="badge-pending">5店舗未訪問</span></div>
+
+    <div class="store-card" onclick="gotoCheck('串カツ田中 渋谷道玄坂店')">
+      <div class="store-icon">🍢</div>
+      <div class="store-detail">
+        <div class="store-brand">KUSHIKATSU TANAKA</div>
+        <div class="store-fullname">串カツ田中 渋谷道玄坂店</div>
+        <div class="store-address">📍 東京都渋谷区道玄坂2-11</div>
+        <div class="store-last">前回訪問: 2026-04-09 · <span class="color-orange fw-bold">78点</span> · <span class="badge-pending">要訪問</span></div>
+      </div>
+      <div class="store-arrow">›</div>
+    </div>
+
+    <div class="store-card" onclick="gotoCheck('串カツ田中 新宿西口店')">
+      <div class="store-icon">🍢</div>
+      <div class="store-detail">
+        <div class="store-brand">KUSHIKATSU TANAKA</div>
+        <div class="store-fullname">串カツ田中 新宿西口店</div>
+        <div class="store-address">📍 東京都新宿区西新宿1-5</div>
+        <div class="store-last">前回訪問: 2026-04-10 · <span class="color-green fw-bold">91点</span> · <span class="badge-pending">要訪問</span></div>
+      </div>
+      <div class="store-arrow">›</div>
+    </div>
+
+    <div class="store-card" onclick="gotoCheck('ピソラ 池袋東口店')">
+      <div class="store-icon">🍕</div>
+      <div class="store-detail">
+        <div class="store-brand">PISOLA</div>
+        <div class="store-fullname">ピソラ 池袋東口店</div>
+        <div class="store-address">📍 東京都豊島区南池袋1-28</div>
+        <div class="store-last">前回訪問: 2026-04-08 · <span class="color-red fw-bold">62点</span> · <span class="badge-pending">要訪問</span></div>
+      </div>
+      <div class="store-arrow">›</div>
+    </div>
+
+    <div class="store-card" onclick="gotoCheck('ピソラ 品川港南口店')">
+      <div class="store-icon">🍕</div>
+      <div class="store-detail">
+        <div class="store-brand">PISOLA</div>
+        <div class="store-fullname">ピソラ 品川港南口店</div>
+        <div class="store-address">📍 東京都港区港南2-2</div>
+        <div class="store-last">前回訪問: 2026-04-15 · <span class="color-green fw-bold">88点</span> · <span class="badge-done">訪問済</span></div>
+      </div>
+      <div class="store-arrow">›</div>
+    </div>
+
+    <div class="store-card" onclick="gotoCheck('串カツ田中 銀座店')">
+      <div class="store-icon">🍢</div>
+      <div class="store-detail">
+        <div class="store-brand">KUSHIKATSU TANAKA</div>
+        <div class="store-fullname">串カツ田中 銀座店</div>
+        <div class="store-address">📍 東京都中央区銀座6-9</div>
+        <div class="store-last">前回訪問: 2026-04-14 · <span class="color-green fw-bold">93点</span> · <span class="badge-done">訪問済</span></div>
+      </div>
+      <div class="store-arrow">›</div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="bnav-item" onclick="showScreen('home')"><div class="bnav-icon">🏠</div><div class="bnav-label">ホーム</div></div>
+    <div class="bnav-item active" onclick="showScreen('stores')"><div class="bnav-icon">🗂️</div><div class="bnav-label">担当店舗</div></div>
+    <div class="bnav-item" onclick="showScreen('ai')"><div class="bnav-icon">🤖</div><div class="bnav-label">AI提案</div></div>
+    <div class="bnav-item" onclick="showScreen('dashboard')"><div class="bnav-icon">📊</div><div class="bnav-label">本部</div></div>
+  </div>
+</div>
+
+<!-- ======== SCREEN: QSC CHECK ======== -->
+<div id="screen-check" class="screen">
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="nav-back" onclick="showScreen('stores')">← 戻る</button>
+    </div>
+    <div class="nav-right">
+      <button class="btn-sm btn-sm-primary" onclick="submitCheck()">提出</button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="check-header">
+      <div class="check-store-name" id="check-store-name">串カツ田中 渋谷道玄坂店</div>
+      <div class="check-date">📅 2026年4月23日 (木)  10:15 開始</div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>進捗</span><span id="progress-text">0 / 100項目</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="category-tabs" id="cat-tabs">
+      <div class="cat-tab active" onclick="switchCat(0)">🍖 Q クオリティ</div>
+      <div class="cat-tab" onclick="switchCat(1)">😊 S サービス</div>
+      <div class="cat-tab" onclick="switchCat(2)">🧹 C クレンリネス</div>
+      <div class="cat-tab" onclick="switchCat(3)">📋 M マニュアル</div>
+      <div class="cat-tab" onclick="switchCat(4)">💰 P 収益管理</div>
+    </div>
+
+    <div id="check-items-wrap">
+      <!-- JS で生成 -->
+    </div>
+
+    <div class="card mt-12">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">📷 写真添付</div>
+      <div class="photo-zone" onclick="addPhoto()">
+        <div class="photo-zone-icon">📷</div>
+        <div class="photo-zone-text">タップして写真を追加</div>
+        <div class="photo-zone-text" style="font-size:11px;margin-top:4px">NG箇所・気になる点の記録</div>
+      </div>
+      <div id="photo-preview" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px">📝 総評コメント</div>
+      <textarea class="comment-area" id="check-comment" placeholder="全体的な所感・店長へのメッセージ・特記事項を入力..."></textarea>
+    </div>
+
+    <button class="btn-primary mt-12" onclick="submitCheck()">✓ チェックを提出してスコアを確認</button>
+    <div style="height:24px"></div>
+  </div>
+</div>
+
+<!-- ======== SCREEN: RESULT ======== -->
+<div id="screen-result" class="screen">
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="nav-back" onclick="showScreen('stores')">← 一覧へ</button>
+    </div>
+    <div class="nav-title">チェック結果</div>
+    <div class="nav-right">
+      <button class="btn-sm btn-sm-outline" onclick="showScreen('ai')">AI提案 →</button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="result-hero">
+      <div class="result-score-ring">
+        <div class="result-score-num" id="result-score-num">--</div>
+        <div class="result-score-label">/ 100点</div>
+      </div>
+      <div class="result-store" id="result-store-name">店舗名</div>
+      <div class="result-date">2026年4月23日 10:48 提出</div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">カテゴリ別スコア</div>
+      <div id="cat-results"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">❌ NG項目一覧 <span id="ng-count-badge" class="badge-pending">-件</span></div>
+      <div class="ng-item-list" id="ng-items-list">
+        <div class="text-sm text-center" style="padding:12px 0">NG項目はありません</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">前回比較</div>
+      <div style="display:flex;align-items:center;gap:16px;padding:8px 0">
+        <div style="text-align:center;flex:1">
+          <div style="font-size:11px;color:#9ca3af">前回（4/9）</div>
+          <div style="font-size:28px;font-weight:900;color:#d97706;margin-top:4px">78</div>
+        </div>
+        <div style="font-size:24px;color:#d1d5db">→</div>
+        <div style="text-align:center;flex:1">
+          <div style="font-size:11px;color:#9ca3af">今回（4/23）</div>
+          <div style="font-size:28px;font-weight:900;color:#059669;margin-top:4px" id="result-score-compare">--</div>
+        </div>
+        <div style="text-align:center;flex:1">
+          <div style="font-size:11px;color:#9ca3af">変化</div>
+          <div style="font-size:22px;font-weight:900;margin-top:4px" id="result-change">--</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary mt-4" onclick="showScreen('ai')">🤖 AI改善提案を見る</button>
+    <div style="height:16px"></div>
+  </div>
+</div>
+
+<!-- ======== SCREEN: AI ======== -->
+<div id="screen-ai" class="screen">
+  <div class="top-nav">
+    <div class="nav-left">
+      <span class="nav-title">🤖 AI改善提案</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-avatar">田</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="ai-header">
+      <div class="ai-title">✨ AI改善提案</div>
+      <div class="ai-sub">直近の臨店データをもとに生成 · 串カツ田中 渋谷道玄坂店</div>
+    </div>
+
+    <div class="section-title">🚨 緊急対応が必要</div>
+
+    <div class="ai-card urgent">
+      <div class="ai-priority urgent">URGENT · 即日対応</div>
+      <div class="ai-suggestion-title">廃棄記録の未記入が2週連続で発生</div>
+      <div class="ai-suggestion-body">4/9・4/16の臨店チェックで廃棄管理の記録漏れが続いています。食品衛生法上のリスクに加え、廃棄コストの見えない膨張につながります。</div>
+      <div class="ai-suggestion-action">📌 アクション: 今日の訪問時に店長へ廃棄記録フォームの記入義務を再周知。翌週フォローアップを設定する</div>
+    </div>
+
+    <div class="section-title mt-16">⚠️ 改善推奨</div>
+
+    <div class="ai-card warning">
+      <div class="ai-priority warning">WARNING · 今週中</div>
+      <div class="ai-suggestion-title">Q（クオリティ）スコアが3ヶ月連続で80点を下回っている</div>
+      <div class="ai-suggestion-body">調理手順の遵守・提供温度管理で継続的にNGが出ています。特定スタッフのシフト帯と相関している可能性があります。</div>
+      <div class="ai-suggestion-action">📌 アクション: 調理スタッフのシフト別スコアを照合し、OJT対象者を特定する</div>
+    </div>
+
+    <div class="ai-card warning">
+      <div class="ai-priority warning">WARNING · 来週まで</div>
+      <div class="ai-suggestion-title">S（サービス）の呼び出し応答速度が基準を超過</div>
+      <div class="ai-suggestion-body">繁忙時間帯（18-21時）のホール人員が不足しており、応答速度が平均2.4分（基準1.5分以内）となっています。</div>
+      <div class="ai-suggestion-action">📌 アクション: 木・金・土のピーク帯にアルバイトを1名追加。シフト申請を今日中に提出</div>
+    </div>
+
+    <div class="section-title mt-16">✅ 良い取り組み（継続推奨）</div>
+
+    <div class="ai-card good">
+      <div class="ai-priority good">GOOD · このまま継続</div>
+      <div class="ai-suggestion-title">C（クレンリネス）スコアが過去最高の95点</div>
+      <div class="ai-suggestion-body">トイレの清掃チェックを1日3回に増やした施策が効果を出しています。他店舗へのベストプラクティス共有を推奨します。</div>
+      <div class="ai-suggestion-action">📌 アクション: 清掃チェックシートのフォーマットを本部にシェアして横展開</div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-title">🔄 改善PDCA 追跡</div>
+
+    <div class="pdca-card">
+      <div class="pdca-title">📋 直近の指摘事項と対応状況</div>
+      <div>
+        <div class="pdca-check-row">
+          <div class="pdca-status status-resolved">✓</div>
+          <div style="flex:1;font-size:12px">入口看板の汚れ<span style="color:#9ca3af"> (4/9指摘)</span></div>
+          <div class="badge-done">完了</div>
+        </div>
+        <div class="pdca-check-row">
+          <div class="pdca-status status-progress">→</div>
+          <div style="flex:1;font-size:12px">廃棄記録の記入徹底<span style="color:#9ca3af"> (4/9指摘)</span></div>
+          <div class="badge-pending">対応中</div>
+        </div>
+        <div class="pdca-check-row">
+          <div class="pdca-status status-progress">→</div>
+          <div style="flex:1;font-size:12px">ホール人員の繁忙対応<span style="color:#9ca3af"> (4/16指摘)</span></div>
+          <div class="badge-pending">対応中</div>
+        </div>
+        <div class="pdca-check-row">
+          <div class="pdca-status status-open">○</div>
+          <div style="flex:1;font-size:12px">スタッフOJT（調理）<span style="color:#9ca3af"> (4/23新規)</span></div>
+          <div class="badge-blue">未着手</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pdca-card">
+      <div class="pdca-title">📈 改善サイクル図</div>
+      <div class="pdca-flow">
+        <div class="pdca-step step-p"><div class="pdca-step-label">P</div><div class="pdca-step-text">臨店前<br>前回NG確認</div></div>
+        <div class="pdca-arrow">›</div>
+        <div class="pdca-step step-d"><div class="pdca-step-label">D</div><div class="pdca-step-text">訪問&<br>チェック</div></div>
+        <div class="pdca-arrow">›</div>
+        <div class="pdca-step step-c"><div class="pdca-step-label">C</div><div class="pdca-step-text">AI分析<br>比較評価</div></div>
+        <div class="pdca-arrow">›</div>
+        <div class="pdca-step step-a"><div class="pdca-step-label">A</div><div class="pdca-step-text">改善指示<br>次回確認</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="bnav-item" onclick="showScreen('home')"><div class="bnav-icon">🏠</div><div class="bnav-label">ホーム</div></div>
+    <div class="bnav-item" onclick="showScreen('stores')"><div class="bnav-icon">🗂️</div><div class="bnav-label">担当店舗</div></div>
+    <div class="bnav-item active" onclick="showScreen('ai')"><div class="bnav-icon">🤖</div><div class="bnav-label">AI提案</div></div>
+    <div class="bnav-item" onclick="showScreen('dashboard')"><div class="bnav-icon">📊</div><div class="bnav-label">本部</div></div>
+  </div>
+</div>
+
+<!-- ======== SCREEN: DASHBOARD ======== -->
+<div id="screen-dashboard" class="screen">
+  <div class="dashboard-header">
+    <div class="flex justify-between items-center">
+      <div>
+        <div class="dashboard-title">📊 本部ダッシュボード</div>
+        <div class="dashboard-sub">2026年4月 · 全直営店 170店舗</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <select style="padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:12px;outline:none">
+          <option>2026年4月</option>
+          <option>2026年3月</option>
+        </select>
+        <select style="padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:12px;outline:none">
+          <option>全ブランド</option>
+          <option>串カツ田中</option>
+          <option>ピソラ</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="content-wide">
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">全店平均スコア</div>
+        <div class="kpi-num">82.4</div>
+        <div class="kpi-change kpi-up">▲ 2.1pt（前月比）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">訪問完了率</div>
+        <div class="kpi-num">78%</div>
+        <div class="kpi-change kpi-up">▲ 5pt（前月比）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">NG発生店舗数</div>
+        <div class="kpi-num">23</div>
+        <div class="kpi-change kpi-down">▼ 4店（前月比）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">改善完了率</div>
+        <div class="kpi-num">64%</div>
+        <div class="kpi-change kpi-up">▲ 8pt（前月比）</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">ブランド別スコア推移（月次）</div>
+      <div class="bar-chart-wrap">
+        <div style="display:flex;gap:6px;align-items:flex-end;height:140px;margin-bottom:8px">
+          <div class="bar-col"><div class="bar" style="height:78%;background:linear-gradient(180deg,#4f9cf9,#3b82f6)"></div><div class="bar-val">82</div><div class="bar-label">1月</div></div>
+          <div class="bar-col"><div class="bar" style="height:76%;background:linear-gradient(180deg,#4f9cf9,#3b82f6)"></div><div class="bar-val">80</div><div class="bar-label">2月</div></div>
+          <div class="bar-col"><div class="bar" style="height:75%;background:linear-gradient(180deg,#f59e0b,#d97706)"></div><div class="bar-val">79</div><div class="bar-label">3月</div></div>
+          <div class="bar-col"><div class="bar" style="height:80%;background:linear-gradient(180deg,#10b981,#059669)"></div><div class="bar-val">82</div><div class="bar-label">4月</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:4px">
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#6b7280"><span style="width:10px;height:10px;background:#4f9cf9;border-radius:50%;display:inline-block"></span>串カツ田中</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#6b7280"><span style="width:10px;height:10px;background:#10b981;border-radius:50%;display:inline-block"></span>ピソラ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">🏆 今月スコア ランキング TOP10</div>
+      <div id="store-ranking">
+        <div class="rank-row"><div class="rank-num rank-1">1</div><div class="rank-store"><div class="rank-store-name">串カツ田中 銀座店</div><div class="rank-store-brand">KUSHIKATSU TANAKA · 中央区</div></div><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:97%"></div></div></div><div class="rank-score">97</div></div>
+        <div class="rank-row"><div class="rank-num rank-2">2</div><div class="rank-store"><div class="rank-store-name">串カツ田中 表参道店</div><div class="rank-store-brand">KUSHIKATSU TANAKA · 渋谷区</div></div><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:95%"></div></div></div><div class="rank-score">95</div></div>
+        <div class="rank-row"><div class="rank-num rank-3">3</div><div class="rank-store"><div class="rank-store-name">ピソラ 恵比寿店</div><div class="rank-store-brand">PISOLA · 渋谷区</div></div><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:93%"></div></div></div><div class="rank-score">93</div></div>
+        <div class="rank-row"><div class="rank-num rank-n">4</div><div class="rank-store"><div class="rank-store-name">串カツ田中 新宿西口店</div><div class="rank-store-brand">KUSHIKATSU TANAKA · 新宿区</div></div><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:91%"></div></div></div><div class="rank-score">91</div></div>
+        <div class="rank-row"><div class="rank-num rank-n">5</div><div class="rank-store"><div class="rank-store-name">ピソラ 品川港南口店</div><div class="rank-store-brand">PISOLA · 港区</div></div><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:88%"></div></div></div><div class="rank-score">88</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">🔴 要注意店舗（60点未満）</div>
+      <div class="rank-row"><div class="rank-num" style="background:#fee2e2;color:#dc2626;font-weight:700">!</div><div class="rank-store"><div class="rank-store-name">ピソラ 池袋東口店</div><div class="rank-store-brand">PISOLA · 豊島区 · 2回連続NG</div></div><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:62%;background:linear-gradient(90deg,#ef4444,#f87171)"></div></div></div><div class="rank-score color-red">62</div></div>
+      <div class="rank-row"><div class="rank-num" style="background:#fee2e2;color:#dc2626;font-weight:700">!</div><div class="rank-store"><div class="rank-store-name">串カツ田中 横浜関内店</div><div class="rank-store-brand">KUSHIKATSU TANAKA · 横浜市</div></div><div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-fill" style="width:58%;background:linear-gradient(90deg,#ef4444,#f87171)"></div></div></div><div class="rank-score color-red">58</div></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">カテゴリ別 全店平均</div>
+      <div>
+        <div class="cat-result-row"><div class="cat-result-name">Q クオリティ</div><div class="cat-result-bar-wrap"><div class="cat-result-bar"><div class="cat-result-fill fill-yellow" style="width:79%"></div></div></div><div class="cat-result-pct">79%</div></div>
+        <div class="cat-result-row"><div class="cat-result-name">S サービス</div><div class="cat-result-bar-wrap"><div class="cat-result-bar"><div class="cat-result-fill fill-green" style="width:85%"></div></div></div><div class="cat-result-pct">85%</div></div>
+        <div class="cat-result-row"><div class="cat-result-name">C クレンリ</div><div class="cat-result-bar-wrap"><div class="cat-result-bar"><div class="cat-result-fill fill-green" style="width:88%"></div></div></div><div class="cat-result-pct">88%</div></div>
+        <div class="cat-result-row"><div class="cat-result-name">M マニュアル</div><div class="cat-result-bar-wrap"><div class="cat-result-bar"><div class="cat-result-fill fill-yellow" style="width:76%"></div></div></div><div class="cat-result-pct">76%</div></div>
+        <div class="cat-result-row"><div class="cat-result-name">P 収益管理</div><div class="cat-result-bar-wrap"><div class="cat-result-bar"><div class="cat-result-fill fill-yellow" style="width:81%"></div></div></div><div class="cat-result-pct">81%</div></div>
+      </div>
+    </div>
+
+    <div class="dwh-banner" onclick="alert('🔗 DWH連携\n\nGoogle Cloud BigQueryのDWHダッシュボードに遷移します。\n\n全SaaSデータの統合ビュー（売上・勤怠・POS・臨店スコアの相関分析）が確認できます。\n\n※本機能はPhase 2（DWH構築完了後）に実装予定')">
+      <div class="dwh-icon">🔗</div>
+      <div class="dwh-text">
+        <div class="dwh-title">DWHで詳細分析を見る</div>
+        <div class="dwh-sub">売上・勤怠・臨店スコアの統合ビュー → Google Cloud BigQuery</div>
+      </div>
+      <div class="dwh-arrow">›</div>
+    </div>
+
+    <div style="height:24px"></div>
+  </div>
+  <div class="bottom-nav" style="max-width:none">
+    <div class="bnav-item" onclick="showScreen('home')"><div class="bnav-icon">🏠</div><div class="bnav-label">ホーム</div></div>
+    <div class="bnav-item" onclick="showScreen('stores')"><div class="bnav-icon">🗂️</div><div class="bnav-label">担当店舗</div></div>
+    <div class="bnav-item" onclick="showScreen('ai')"><div class="bnav-icon">🤖</div><div class="bnav-label">AI提案</div></div>
+    <div class="bnav-item active" onclick="showScreen('dashboard')"><div class="bnav-icon">📊</div><div class="bnav-label">本部</div></div>
+  </div>
+</div>
+
+<!-- ======== PHOTO MODAL ======== -->
+<div class="modal-overlay hidden" id="photo-modal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">📷 写真を追加</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <button class="btn-outline" onclick="fakePhoto('kitchen')">🍳 キッチン</button>
+      <button class="btn-outline" onclick="fakePhoto('hall')">🪑 ホール</button>
+      <button class="btn-outline" onclick="fakePhoto('toilet')">🚻 トイレ</button>
+      <button class="btn-outline" onclick="fakePhoto('entrance')">🚪 入口</button>
+    </div>
+    <button class="btn-primary mt-12" onclick="closeModal()">閉じる</button>
+  </div>
+</div>
+
+<script>
+// ======== DATA ========
+const CATEGORIES = [
+  { name: 'Q クオリティ', icon: '🍖', items: [
+    '食材の鮮度・品質が基準を満たしている','調理手順がマニュアル通りに実施されている','盛り付けが基準通りである','提供温度が適切である','量・サイズが規定通りである',
+    '食材の保管温度が基準を満たしている','賞味期限の管理が適切である','アレルゲン情報の管理が適切である','調理器具の衛生管理が適切である','フライ油の交換・管理が適切である',
+    '仕込み量が適切である','廃棄管理が適切である','ドリンクの品質・提供が基準通りである','食器・カトラリーに汚れや欠けがない','提供速度が基準を満たしている',
+    'テイクアウト対応が適切である','アレルギー対応の手順が徹底されている','食材発注量が適切である','ポーションコントロールが適切である','調理スタッフのユニフォーム・衛生が基準通りである'
+  ]},
+  { name: 'S サービス', icon: '😊', items: [
+    '入店時の挨拶・笑顔が適切である','注文取り時の説明・提案が適切である','配膳のタイミング・対応が適切である','テーブルクリアリングが適切に行われている','お会計時の対応が適切である',
+    '退店時の見送りが適切である','スタッフの身だしなみが基準を満たしている','クレーム対応の手順が徹底されている','リピーター対応が適切である','呼び出しへの応答速度が基準以内である',
+    'メニュー説明・提案ができるスタッフが配置されている','繁忙時の対応フローが機能している','待ち時間の声かけが適切に行われている','子ども・高齢者への配慮が適切である','スタッフ間の連携が適切に行われている',
+    '電話対応が適切である','SNS・口コミ対応の意識がある','スタッフの接客訓練が定期実施されている','ホールスタッフの配置が適切である','サービス品質の自己チェックが実施されている'
+  ]},
+  { name: 'C クレンリネス', icon: '🧹', items: [
+    '入口・外観が清潔である','客席の清掃状態が基準を満たしている','テーブル・椅子に汚れや破損がない','トイレの清掃・補充が基準通りである','キッチンの清掃状態が基準を満たしている',
+    '冷蔵庫・冷凍庫の清掃が適切である','排水溝・ゴミ箱の管理が適切である','窓・壁・床の清潔状態が基準通りである','調理器具の洗浄・保管が適切である','食器の洗浄・保管が適切である',
+    '消毒液・除菌スプレーが適切に配備されている','害虫・ネズミ対策が実施されている','換気扇・空調の清潔状態が適切である','ゴミの分別・廃棄が適切に行われている','スタッフの手洗い・消毒が徹底されている',
+    '店舗外（駐車場等）の清掃状態が適切である','メニュー・POPの清潔状態が適切である','ゴミ収集場所の管理が適切である','害虫防除記録が最新の状態である','清掃マニュアルが最新版で掲示されている'
+  ]},
+  { name: 'M マニュアル', icon: '📋', items: [
+    'シフト管理が適切に行われている','教育・研修計画が実施されている','重要連絡事項の周知が適切に行われている','開店・閉店チェックリストが実施されている','設備点検が定期的に行われている',
+    '緊急対応マニュアルが周知されている','法令遵守（食品衛生法等）が徹底されている','アルバイトの労働時間管理が適切である','マニュアルが最新版に更新されている','ロールプレイ・OJTが実施されている',
+    '売上・在庫の日次確認が行われている','スタッフのコンプライアンス教育が実施されている','顧客情報の取り扱いが適切である','火災・避難訓練が実施されている','設備の修繕・メンテナンスが適切に行われている',
+    '損益計算が定期的に確認されている','ブランドガイドラインが遵守されている','競合店調査が定期的に行われている','顧客満足度調査が実施されている','キャンペーン・フェアの実施状況が適切である'
+  ]},
+  { name: 'P 収益管理', icon: '💰', items: [
+    'FLコスト（Food + Labor）が目標範囲内である','食材廃棄率が基準以内である','発注量が適切（過剰・不足なし）である','在庫管理が適切に行われている','売上目標の進捗が把握されている',
+    '客単価向上のための取り組みが行われている','客数増加の取り組みが行われている','ランチ・ディナーの売上比率が把握されている','テイクアウト・デリバリー売上が把握されている','省エネ・光熱費管理が適切である',
+    '人件費の時間帯別管理が適切である','繁忙期・閑散期の対応計画がある','食材仕入れコストの見直しが行われている','メニューミックスの分析が行われている','キャッシュフローの管理が適切である',
+    '損益分岐点の把握と対策が取られている','デジタル決済・キャッシュレス対応が適切である','売上データの活用・分析が行われている','予実管理が適切に行われている','収益改善のPDCAが回されている'
+  ]}
+];
+
+// answers[catIdx][itemIdx] = 'ok' | 'ng' | 'na' | null
+let answers = CATEGORIES.map(c => c.items.map(() => null));
+let currentCat = 0;
+let currentStoreName = '串カツ田中 渋谷道玄坂店';
+
+// ======== NAVIGATION ========
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('screen-' + name);
+  if (target) { target.classList.add('active'); window.scrollTo(0,0); }
+}
+
+function login() {
+  showScreen('home');
+}
+
+function gotoCheck(storeName) {
+  currentStoreName = storeName;
+  document.getElementById('check-store-name').textContent = storeName;
+  answers = CATEGORIES.map(c => c.items.map(() => null));
+  currentCat = 0;
+  renderCatTabs();
+  renderCheckItems();
+  updateProgress();
+  showScreen('check');
+}
+
+// ======== CHECK SCREEN ========
+function renderCatTabs() {
+  const tabs = document.querySelectorAll('.cat-tab');
+  tabs.forEach((t, i) => t.classList.toggle('active', i === currentCat));
+}
+
+function switchCat(idx) {
+  currentCat = idx;
+  renderCatTabs();
+  renderCheckItems();
+}
+
+function renderCheckItems() {
+  const wrap = document.getElementById('check-items-wrap');
+  const cat = CATEGORIES[currentCat];
+  wrap.innerHTML = cat.items.map((item, i) => {
+    const ans = answers[currentCat][i];
+    return `<div class="check-item ${ans === 'ok' ? 'answered' : ans === 'ng' ? 'ng' : ''}" id="ci-${currentCat}-${i}">
+      <div class="check-item-num">${i+1}</div>
+      <div class="check-item-text">${item}</div>
+      <div class="check-options">
+        <button class="opt-btn ok ${ans==='ok'?'selected':''}" onclick="setAnswer(${currentCat},${i},'ok')">OK</button>
+        <button class="opt-btn ng ${ans==='ng'?'selected':''}" onclick="setAnswer(${currentCat},${i},'ng')">NG</button>
+        <button class="opt-btn na ${ans==='na'?'selected':''}" onclick="setAnswer(${currentCat},${i},'na')">N/A</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function setAnswer(catIdx, itemIdx, val) {
+  answers[catIdx][itemIdx] = val;
+  renderCheckItems();
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = answers.flat().length;
+  const done = answers.flat().filter(a => a !== null).length;
+  document.getElementById('progress-text').textContent = `${done} / ${total}項目`;
+  document.getElementById('progress-fill').style.width = `${(done/total)*100}%`;
+}
+
+// ======== SUBMIT ========
+function submitCheck() {
+  // Fill unanswered randomly for demo (mostly OK, some NG)
+  answers = answers.map(cat => cat.map(a => {
+    if (a !== null) return a;
+    const r = Math.random();
+    return r < 0.82 ? 'ok' : r < 0.92 ? 'ng' : 'na';
+  }));
+
+  // Calculate score
+  const catScores = answers.map((cat, ci) => {
+    const applicable = cat.filter(a => a !== 'na');
+    const ok = cat.filter(a => a === 'ok').length;
+    return applicable.length > 0 ? Math.round((ok / applicable.length) * 100) : 100;
+  });
+  const totalScore = Math.round(catScores.reduce((s, v) => s + v, 0) / catScores.length);
+
+  // Render result
+  document.getElementById('result-score-num').textContent = totalScore;
+  document.getElementById('result-score-compare').textContent = totalScore;
+  document.getElementById('result-store-name').textContent = currentStoreName;
+  const prev = 78;
+  const diff = totalScore - prev;
+  const changeEl = document.getElementById('result-change');
+  changeEl.textContent = (diff >= 0 ? '+' : '') + diff + 'pt';
+  changeEl.className = diff >= 0 ? 'color-green' : 'color-red';
+
+  // Cat results
+  const catNames = ['Q クオリ', 'S サービス', 'C クレンリ', 'M マニュアル', 'P 収益'];
+  document.getElementById('cat-results').innerHTML = catScores.map((s, i) => {
+    const cls = s >= 85 ? 'fill-green' : s >= 70 ? 'fill-yellow' : 'fill-red';
+    return `<div class="cat-result-row">
+      <div class="cat-result-name">${catNames[i]}</div>
+      <div class="cat-result-bar-wrap"><div class="cat-result-bar"><div class="cat-result-fill ${cls}" style="width:${s}%"></div></div></div>
+      <div class="cat-result-pct">${s}%</div>
+    </div>`;
+  }).join('');
+
+  // NG items
+  const ngItems = [];
+  answers.forEach((cat, ci) => {
+    cat.forEach((a, ii) => {
+      if (a === 'ng') ngItems.push(`${CATEGORIES[ci].name.substring(0,1)} — ${CATEGORIES[ci].items[ii]}`);
+    });
+  });
+  const ngBadge = document.getElementById('ng-count-badge');
+  ngBadge.textContent = ngItems.length + '件';
+  const ngList = document.getElementById('ng-items-list');
+  if (ngItems.length === 0) {
+    ngList.innerHTML = '<div class="text-sm text-center" style="padding:12px 0">NG項目はありません 🎉</div>';
+  } else {
+    ngList.innerHTML = ngItems.map(t => `<div class="ng-item-row"><div class="ng-dot"></div><div>${t}</div></div>`).join('');
+  }
+
+  showScreen('result');
+}
+
+// ======== PHOTO ========
+function addPhoto() {
+  document.getElementById('photo-modal').classList.remove('hidden');
+}
+function closeModal() {
+  document.getElementById('photo-modal').classList.add('hidden');
+}
+function fakePhoto(type) {
+  const labels = {kitchen:'🍳 キッチン',hall:'🪑 ホール',toilet:'🚻 トイレ',entrance:'🚪 入口'};
+  const div = document.createElement('div');
+  div.style.cssText = 'width:70px;height:70px;background:#e0e7ff;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24px;gap:2px;border:1.5px solid #c7d2fe;cursor:pointer';
+  div.innerHTML = `${labels[type].split(' ')[0]}<span style="font-size:9px;color:#6b7280;font-weight:600">${labels[type].split(' ').slice(1).join(' ')}</span>`;
+  document.getElementById('photo-preview').appendChild(div);
+  closeModal();
+}
+
+// ======== INIT ========
+renderCheckItems();
+</script>
+</body>
+</html>

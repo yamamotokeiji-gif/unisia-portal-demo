@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ユニシアHD 統合ポータル｜管理職</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#5B2DE8;--purple-dark:#3D1EAD;--purple-light:#7B4FF0;
+  --purple-bg:#F5F3FF;--purple-bg2:#EDE9FC;
+  --gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;
+  --gray-400:#9CA3AF;--gray-600:#4B5563;--gray-800:#1F2937;
+  --green:#059669;--green-light:#D1FAE5;
+  --red:#DC2626;--red-light:#FEE2E2;
+  --orange:#D97706;--orange-light:#FEF3C7;
+  --blue:#2563EB;--blue-light:#DBEAFE;
+  --teal:#0891B2;--teal-light:#CFFAFE;
+}
+body{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;background:var(--gray-50);color:var(--gray-800);height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+/* LOGIN */
+#screen-login{position:fixed;inset:0;background:linear-gradient(145deg,#2D1A7A 0%,#4A22C4 50%,#6B3FE0 100%);display:flex;align-items:center;justify-content:center;z-index:1000}
+.login-wrap{width:420px}
+.login-logo-area{text-align:center;margin-bottom:36px}
+.logo-badge{width:72px;height:72px;background:rgba(255,255,255,0.15);border-radius:20px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);font-size:32px}
+.login-logo-area h1{color:#fff;font-size:22px;font-weight:800;letter-spacing:0.5px}
+.login-logo-area p{color:rgba(255,255,255,0.7);font-size:13px;margin-top:4px}
+.login-card{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border-radius:20px;padding:40px;box-shadow:0 24px 64px rgba(0,0,0,0.2)}
+.role-badge{display:inline-block;background:#FEF3C7;color:#D97706;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:20px;letter-spacing:0.5px;border:1px solid #FDE68A}
+.login-card h2{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:6px}
+.login-card>p{font-size:13px;color:var(--gray-400);margin-bottom:28px}
+.field-label{font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:6px;display:block}
+.field-input{width:100%;padding:12px 16px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;color:var(--gray-800);background:#fff;outline:none;transition:border-color 0.2s;margin-bottom:16px}
+.field-input:focus{border-color:var(--purple)}
+.field-input.error{border-color:var(--red)}
+.field-error{font-size:11px;color:var(--red);margin-top:-12px;margin-bottom:12px;display:none}
+.field-error.show{display:block}
+.btn-login{width:100%;padding:14px;background:linear-gradient(135deg,#4A22C4,#6B3FE0);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(74,34,196,0.4);transition:opacity 0.2s;margin-top:4px}
+.btn-login:hover{opacity:0.88}
+.login-hint{text-align:center;color:var(--gray-400);font-size:11px;margin-top:16px}
+
+/* MAIN */
+#screen-main{display:none;flex:1;flex-direction:column;height:100vh;overflow:hidden}
+#screen-main.active{display:flex}
+
+/* TOP NAV */
+.top-nav{height:56px;background:linear-gradient(135deg,var(--purple-dark),var(--purple));display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0;box-shadow:0 2px 10px rgba(61,30,173,0.35)}
+.nav-brand{display:flex;align-items:center;gap:10px;flex:1}
+.nav-logo-icon{width:30px;height:30px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-brand-name{color:#fff;font-size:15px;font-weight:800;letter-spacing:0.3px}
+.nav-brand-sub{color:rgba(255,255,255,0.6);font-size:11px;margin-left:4px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-notif{position:relative;cursor:pointer;padding:4px}
+.nav-notif-icon{color:rgba(255,255,255,0.85);font-size:18px}
+.notif-dot{position:absolute;top:2px;right:2px;width:8px;height:8px;background:#EF4444;border-radius:50%;border:1.5px solid var(--purple);transition:opacity 0.2s}
+.notif-dot.hidden{opacity:0}
+.nav-user{display:flex;align-items:center;gap:8px;cursor:pointer;padding:4px 8px;border-radius:8px;transition:background 0.15s}
+.nav-user:hover{background:rgba(255,255,255,0.1)}
+.nav-avatar{width:32px;height:32px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;border:2px solid rgba(255,255,255,0.4)}
+.nav-username{color:rgba(255,255,255,0.95);font-size:13px;font-weight:600}
+.nav-role-pill{background:rgba(253,230,138,0.25);color:#FDE68A;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid rgba(253,230,138,0.4)}
+
+/* LAYOUT */
+.main-layout{display:flex;flex:1;overflow:hidden}
+.side-nav{width:220px;background:#fff;border-right:1px solid var(--gray-200);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.side-section-label{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:1.2px;text-transform:uppercase;padding:20px 20px 8px}
+.side-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;font-size:13px;font-weight:600;color:var(--gray-600);transition:all 0.15s;position:relative}
+.side-item:hover{background:var(--purple-bg);color:var(--purple)}
+.side-item.active{background:var(--purple-bg);color:var(--purple)}
+.side-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--purple);border-radius:0 2px 2px 0}
+.side-item .s-icon{font-size:16px;width:20px;text-align:center}
+.s-badge{margin-left:auto;color:#fff;border-radius:10px;font-size:10px;font-weight:700;padding:1px 7px}
+.s-badge.red{background:var(--red)}
+.s-badge.orange{background:var(--orange)}
+.side-divider{height:1px;background:var(--gray-200);margin:8px 16px}
+.content-area{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.tab-panel{display:none;flex:1;overflow:hidden;flex-direction:column}
+.tab-panel.active{display:flex}
+
+/* DASHBOARD */
+.dash-panel{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:20px}
+.dash-hero{background:linear-gradient(135deg,var(--purple-dark),var(--purple));border-radius:16px;padding:24px 28px;color:#fff;display:flex;align-items:center;justify-content:space-between}
+.dash-hero-left h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.dash-hero-left p{font-size:13px;opacity:0.8}
+.dash-hero-right{text-align:right}
+.dash-date{font-size:13px;opacity:0.7;margin-bottom:2px}
+.dash-greeting{font-size:22px;font-weight:800}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi-card{background:#fff;border-radius:14px;padding:18px 20px;border:1.5px solid var(--gray-200);box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.kpi-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:0.5px;margin-bottom:8px}
+.kpi-value{font-size:28px;font-weight:800;line-height:1}
+.kpi-sub{font-size:11px;color:var(--gray-400);margin-top:6px}
+.kpi-value.purple{color:var(--purple)}
+.kpi-value.red{color:var(--red)}
+.kpi-value.orange{color:var(--orange)}
+.kpi-value.green{color:var(--green)}
+.section-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.alert-list{display:flex;flex-direction:column;gap:10px}
+.alert-card{background:#fff;border-radius:12px;padding:14px 18px;border-left:4px solid var(--red);display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.alert-card.orange{border-color:var(--orange)}
+.alert-card.purple{border-color:var(--purple)}
+.alert-icon{font-size:20px;flex-shrink:0}
+.alert-body{flex:1}
+.alert-title{font-size:13px;font-weight:700;color:var(--gray-800)}
+.alert-desc{font-size:12px;color:var(--gray-400);margin-top:2px}
+.alert-link{font-size:12px;font-weight:700;color:var(--purple);cursor:pointer;white-space:nowrap;background:none;border:none;padding:0;text-decoration:none}
+.alert-link:hover{opacity:0.7}
+
+/* CHAT */
+.chat-shell{display:flex;flex:1;overflow:hidden}
+.chat-list-pane{width:300px;border-right:1px solid var(--gray-200);background:#fff;display:flex;flex-direction:column;flex-shrink:0}
+.chat-list-header{padding:16px 20px 12px;border-bottom:1px solid var(--gray-100)}
+.chat-list-title{font-size:15px;font-weight:800;color:var(--gray-800);margin-bottom:10px}
+.chat-search{width:100%;padding:9px 14px;border:1.5px solid var(--gray-200);border-radius:9px;font-size:13px;outline:none;background:var(--gray-50);color:var(--gray-800)}
+.chat-search:focus{border-color:var(--purple)}
+.ch-tabs{display:flex;border-bottom:1px solid var(--gray-200);padding:0 16px;overflow-x:auto}
+.ch-tab{font-size:12px;font-weight:600;color:var(--gray-400);padding:10px 10px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.15s}
+.ch-tab.active{color:var(--purple);border-color:var(--purple)}
+.chat-list-body{flex:1;overflow-y:auto}
+.chat-item{padding:14px 20px;border-bottom:1px solid var(--gray-100);cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:background 0.1s}
+.chat-item:hover{background:var(--gray-50)}
+.chat-item.active{background:var(--purple-bg)}
+.chat-item.hidden{display:none}
+.ch-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ch-icon.purple{background:var(--purple-bg2)}
+.ch-icon.green{background:var(--green-light)}
+.ch-icon.blue{background:var(--blue-light)}
+.ch-icon.orange{background:var(--orange-light)}
+.ch-icon.red{background:var(--red-light)}
+.chat-item-body{flex:1;min-width:0}
+.chat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px}
+.chat-name{font-size:13px;font-weight:700;color:var(--gray-800)}
+.chat-time{font-size:11px;color:var(--gray-400)}
+.chat-last{font-size:12px;color:var(--gray-400);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-unread{background:var(--purple);color:#fff;border-radius:10px;font-size:10px;font-weight:700;padding:1px 6px;flex-shrink:0;align-self:center}
+.chat-main-pane{flex:1;display:flex;flex-direction:column;background:var(--gray-50)}
+.thread-header{height:56px;background:#fff;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 24px;gap:12px;flex-shrink:0}
+.thread-icon{width:36px;height:36px;border-radius:10px;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:16px}
+.thread-name{font-size:14px;font-weight:800;color:var(--gray-800)}
+.thread-sub{font-size:11px;color:var(--gray-400)}
+.thread-badge{margin-left:auto;background:var(--purple-bg2);color:var(--purple);font-size:11px;font-weight:600;padding:4px 10px;border-radius:8px}
+.chat-messages{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px}
+.msg-row{display:flex;gap:10px;align-items:flex-end}
+.msg-row.mine{flex-direction:row-reverse}
+.msg-avatar{width:32px;height:32px;border-radius:50%;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0}
+.msg-row.mine .msg-avatar{background:var(--purple);color:#fff}
+.msg-content{max-width:60%}
+.msg-sender{font-size:11px;color:var(--gray-400);margin-bottom:4px}
+.msg-row.mine .msg-sender{text-align:right}
+.msg-bubble{padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5}
+.msg-row:not(.mine) .msg-bubble{background:#fff;color:var(--gray-800);border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.07)}
+.msg-row.mine .msg-bubble{background:var(--purple);color:#fff;border-bottom-right-radius:4px}
+.msg-time{font-size:10px;color:var(--gray-400);margin-top:4px}
+.msg-row.mine .msg-time{text-align:right}
+.chat-input-bar{padding:16px 24px;background:#fff;border-top:1px solid var(--gray-200);display:flex;gap:12px;align-items:center}
+.chat-input{flex:1;padding:11px 16px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;outline:none;background:var(--gray-50)}
+.chat-input:focus{border-color:var(--purple);background:#fff}
+.btn-send{padding:10px 20px;background:var(--purple);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity 0.2s;white-space:nowrap}
+.btn-send:hover{opacity:0.88}
+.chat-tools{display:flex;gap:8px}
+.tool-btn{width:36px;height:36px;border:1.5px solid var(--gray-200);border-radius:8px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gray-400);transition:all 0.15s}
+.tool-btn:hover{border-color:var(--purple);color:var(--purple)}
+
+/* 臨店ダッシュボード */
+.rinten-dash{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:20px}
+.rinten-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rinten-kpi{background:#fff;border-radius:14px;padding:18px 20px;border:1.5px solid var(--gray-200);box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.rinten-kpi-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:0.5px;margin-bottom:8px}
+.rinten-kpi-value{font-size:28px;font-weight:800}
+.rinten-kpi-sub{font-size:11px;color:var(--gray-400);margin-top:6px}
+.rinten-table-wrap{background:#fff;border-radius:16px;border:1.5px solid var(--gray-200);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.rinten-table-head{display:grid;grid-template-columns:1fr 110px 110px 90px;padding:12px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:0.5px;text-transform:uppercase}
+.rinten-table-row{display:grid;grid-template-columns:1fr 110px 110px 90px;padding:14px 20px;border-bottom:1px solid var(--gray-100);align-items:center;cursor:pointer;transition:background 0.1s}
+.rinten-table-row:hover{background:var(--gray-50)}
+.rinten-table-row:last-child{border-bottom:none}
+.store-cell{display:flex;align-items:center;gap:12px}
+.store-cell-icon{width:36px;height:36px;border-radius:10px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.store-cell-name{font-size:13px;font-weight:700;color:var(--gray-800)}
+.store-cell-meta{font-size:11px;color:var(--gray-400);margin-top:1px}
+.score-pill{display:inline-block;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:800}
+.score-pill.high{background:var(--green-light);color:var(--green)}
+.score-pill.mid{background:var(--orange-light);color:var(--orange)}
+.score-pill.low{background:var(--red-light);color:var(--red)}
+.score-pill.none{background:var(--gray-100);color:var(--gray-400)}
+.trend-up{color:var(--green);font-size:12px;font-weight:700}
+.trend-dn{color:var(--red);font-size:12px;font-weight:700}
+.trend-fl{color:var(--gray-400);font-size:12px;font-weight:700}
+
+/* ===== ダンドリポータルライク 共通 ===== */
+.dp-content{flex:1;overflow-y:auto;padding:28px 32px;display:flex;flex-direction:column;gap:18px}
+.dp-page-header{display:flex;align-items:flex-start;justify-content:space-between}
+.dp-page-title{font-size:22px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
+.dp-page-sub{font-size:13px;color:var(--gray-400)}
+.dp-btn-primary{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.dp-btn-primary:hover{opacity:.88}
+.dp-btn-secondary{padding:9px 18px;background:#fff;color:var(--gray-600);border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.dp-btn-secondary:hover{background:var(--gray-50)}
+
+/* 統計カード */
+.dp-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.dp-stats-grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.dp-stat-card{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:16px 20px}
+.dp-stat-card.active-border{border-color:var(--blue);border-width:2px}
+.dp-stat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.dp-stat-label{font-size:12px;color:var(--gray-400);font-weight:500}
+.dp-stat-icon{font-size:13px;width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.dp-stat-icon.orange{background:var(--orange-light)}
+.dp-stat-icon.purple{background:var(--purple-bg2)}
+.dp-stat-icon.blue{background:var(--blue-light)}
+.dp-stat-icon.green{background:var(--green-light)}
+.dp-stat-icon.gray{background:var(--gray-100)}
+.dp-stat-icon.red{background:var(--red-light)}
+.dp-stat-icon.teal{background:var(--teal-light)}
+.dp-stat-num{font-size:26px;font-weight:800;line-height:1.1;margin-bottom:4px;color:var(--gray-800)}
+.dp-stat-num.orange{color:var(--orange)}
+.dp-stat-num.purple{color:var(--purple)}
+.dp-stat-num.blue{color:var(--blue)}
+.dp-stat-num.green{color:var(--green)}
+.dp-stat-num.red{color:var(--red)}
+.dp-stat-num.teal{color:var(--teal)}
+.dp-stat-note{font-size:11px;color:var(--gray-400)}
+.dp-stat-bar{height:4px;background:var(--gray-200);border-radius:2px;margin-top:10px}
+.dp-stat-bar-fill{height:100%;border-radius:2px}
+
+/* 検索行 */
+.dp-search-row{display:flex;gap:10px;align-items:center}
+.dp-search-input{flex:1;padding:9px 14px 9px 36px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;outline:none;color:var(--gray-800);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 12px center / 14px #fff}
+.dp-search-input:focus{border-color:var(--purple)}
+.dp-select{padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;color:var(--gray-600);background:#fff;cursor:pointer;outline:none}
+.dp-select:focus{border-color:var(--purple)}
+
+/* DP タブ */
+.dp-wf-tabs{display:flex;border-bottom:1px solid var(--gray-200)}
+.dp-wf-tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--gray-400);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.dp-wf-tab.active{color:var(--purple);border-color:var(--purple)}
+
+/* ワークフロー行 */
+.dp-wf-panel{display:none;background:#fff;border:1px solid var(--gray-200);border-top:none;border-radius:0 0 12px 12px;overflow:hidden}
+.dp-wf-panel.active{display:block}
+.dp-wf-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--gray-100);transition:background .1s}
+.dp-wf-row:last-child{border-bottom:none}
+.dp-wf-row:hover{background:var(--gray-50)}
+.dp-wf-type-icon{width:36px;height:36px;border-radius:9px;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.dp-wf-body{flex:1;min-width:0}
+.dp-wf-title{font-size:13px;font-weight:700;color:var(--gray-800)}
+.dp-wf-meta{font-size:11px;color:var(--gray-400);margin-top:2px}
+.dp-status{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;flex-shrink:0}
+.dp-status.pending{background:var(--orange-light);color:var(--orange)}
+.dp-status.approved{background:var(--green-light);color:var(--green)}
+.dp-status.rejected{background:var(--red-light);color:var(--red)}
+.dp-status.draft{background:var(--gray-100);color:var(--gray-400)}
+.dp-wf-actions{display:flex;gap:6px;flex-shrink:0}
+.dp-btn-approve{padding:6px 14px;background:var(--green);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .15s}
+.dp-btn-approve:hover{opacity:.88}
+.dp-btn-reject{padding:6px 14px;background:#fff;color:var(--red);border:1.5px solid var(--red);border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.dp-btn-reject:hover{background:var(--red-light)}
+
+/* モーダル */
+.dp-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.48);display:flex;align-items:center;justify-content:center;z-index:500;opacity:0;pointer-events:none;transition:opacity .2s}
+.dp-modal-overlay.open{opacity:1;pointer-events:all}
+.dp-modal{background:#fff;border-radius:16px;padding:28px;width:540px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.18)}
+.dp-modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.dp-modal-title{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
+.dp-modal-sub{font-size:13px;color:var(--gray-400)}
+.dp-modal-close{background:none;border:none;font-size:18px;color:var(--gray-400);cursor:pointer;padding:2px 6px;line-height:1;border-radius:6px;transition:background .15s}
+.dp-modal-close:hover{background:var(--gray-100);color:var(--gray-800)}
+.dp-form{display:flex;flex-direction:column;gap:14px}
+.dp-form-group{display:flex;flex-direction:column;gap:5px}
+.dp-form-label{font-size:12px;font-weight:600;color:var(--gray-600)}
+.dp-form-input{padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;color:var(--gray-800);outline:none;font-family:inherit;width:100%}
+.dp-form-input:focus{border-color:var(--purple)}
+textarea.dp-form-input{resize:vertical;min-height:72px}
+.dp-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:8px}
+
+/* メンバー状況 */
+.member-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.member-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s}
+.member-card:hover{border-color:var(--purple);box-shadow:0 2px 12px rgba(91,45,232,0.1)}
+.member-card.alert-overtime{border-color:var(--orange)}
+.member-card.alert-foreign{border-color:var(--teal)}
+.member-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
+.member-avatar.av-purple{background:var(--purple)}
+.member-avatar.av-blue{background:var(--blue)}
+.member-avatar.av-green{background:var(--green)}
+.member-avatar.av-orange{background:var(--orange)}
+.member-avatar.av-red{background:var(--red)}
+.member-avatar.av-teal{background:var(--teal)}
+.member-info{flex:1;min-width:0}
+.member-name{font-size:13px;font-weight:700;color:var(--gray-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.member-id{font-size:10px;color:var(--gray-400);margin-top:1px}
+.member-dept{font-size:11px;color:var(--gray-600);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.member-status-badge{margin-top:5px;display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px}
+.msb-office{background:var(--green-light);color:var(--green)}
+.msb-remote{background:var(--blue-light);color:var(--blue)}
+.msb-leave{background:var(--red-light);color:var(--red)}
+.msb-absent{background:var(--gray-100);color:var(--gray-400)}
+.msb-trip{background:var(--orange-light);color:var(--orange)}
+.msb-training{background:var(--teal-light);color:var(--teal)}
+.member-alert-tag{font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;margin-top:3px;display:inline-block}
+.mat-overtime{background:var(--orange-light);color:var(--orange)}
+.mat-foreign{background:var(--teal-light);color:var(--teal)}
+.dp-last-update{font-size:11px;color:var(--gray-400)}
+
+/* トースト通知 */
+.dp-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--gray-800);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transition:all .25s;z-index:9999;white-space:nowrap;pointer-events:none}
+.dp-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="screen-login">
+  <div class="login-wrap">
+    <div class="login-logo-area">
+      <div class="logo-badge">🏢</div>
+      <h1>UNISIA HD</h1>
+      <p>統合業務ポータル</p>
+    </div>
+    <div class="login-card">
+      <span class="role-badge">👑 管理職</span>
+      <h2>おかえりなさい</h2>
+      <p>アカウント情報を入力してください</p>
+      <form onsubmit="doLogin();return false;">
+        <label class="field-label">メールアドレス</label>
+        <input id="inp-email" class="field-input" type="email" placeholder="sakamoto@unisia-hd.co.jp">
+        <div id="err-email" class="field-error">メールアドレスを入力してください</div>
+        <label class="field-label">パスワード</label>
+        <input id="inp-pass" class="field-input" type="password" placeholder="パスワードを入力">
+        <div id="err-pass" class="field-error">パスワードを入力してください</div>
+        <button type="submit" class="btn-login">ログイン</button>
+      </form>
+      <div class="login-hint">パスワードを忘れた方は IT戦略部へご連絡ください</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="screen-main">
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <div class="nav-logo-icon">🏢</div>
+      <span class="nav-brand-name">UNISIA HD</span>
+      <span class="nav-brand-sub">統合ポータル</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-notif" onclick="dismissNotif(this)" title="通知">
+        <span class="nav-notif-icon">🔔</span>
+        <span class="notif-dot"></span>
+      </div>
+      <div class="nav-user" onclick="doLogout()" title="クリックでログアウト">
+        <div class="nav-avatar">坂</div>
+        <span class="nav-username">坂本 憲介</span>
+        <span class="nav-role-pill">👑 管理職</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-layout">
+    <nav class="side-nav">
+      <div class="side-section-label">管理ダッシュボード</div>
+      <div class="side-item active" onclick="showTab('dashboard',this)">
+        <span class="s-icon">📊</span>ホーム
+        <span class="s-badge red">5</span>
+      </div>
+      <div class="side-divider"></div>
+      <div class="side-section-label">コミュニケーション</div>
+      <div class="side-item" onclick="showTab('chat',this)">
+        <span class="s-icon">💬</span>チャット
+        <span class="s-badge red">7</span>
+      </div>
+      <div class="side-divider"></div>
+      <div class="side-section-label">チーム管理</div>
+      <div class="side-item" onclick="showTab('approval',this)">
+        <span class="s-icon">✅</span>承認待ち
+        <span class="s-badge orange">3</span>
+      </div>
+      <div class="side-item" onclick="showTab('kintai',this)">
+        <span class="s-icon">👥</span>メンバー状況
+        <span class="s-badge red">2</span>
+      </div>
+      <div class="side-divider"></div>
+      <div class="side-section-label">店舗管理</div>
+      <div class="side-item" onclick="showTab('rinten',this)">
+        <span class="s-icon">🏪</span>臨店ダッシュボード
+      </div>
+    </nav>
+
+    <div class="content-area">
+
+      <!-- DASHBOARD -->
+      <div id="tab-dashboard" class="tab-panel active">
+        <div class="dash-panel">
+          <div class="dash-hero">
+            <div class="dash-hero-left">
+              <h2>坂本 憲介 さん</h2>
+              <p>IT戦略部 · 管理職 · 要対応が5件あります</p>
+            </div>
+            <div class="dash-hero-right">
+              <div class="dash-date" id="today-date">—</div>
+              <div class="dash-greeting" id="today-greeting">—</div>
+            </div>
+          </div>
+
+          <div class="kpi-row">
+            <div class="kpi-card">
+              <div class="kpi-label">承認待ち申請</div>
+              <div class="kpi-value orange">3</div>
+              <div class="kpi-sub">有給2件・残業1件</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">残業アラート（45h超）</div>
+              <div class="kpi-value red">2</div>
+              <div class="kpi-sub">今月 対象メンバー</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">外国人就労確認</div>
+              <div class="kpi-value orange">1</div>
+              <div class="kpi-sub">要確認 1名</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">未読チャット</div>
+              <div class="kpi-value purple">7</div>
+              <div class="kpi-sub">4チャンネル</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-label">要対応アラート</div>
+            <div class="alert-list">
+              <div class="alert-card">
+                <span class="alert-icon">⏳</span>
+                <div class="alert-body">
+                  <div class="alert-title">承認待ち申請が3件あります</div>
+                  <div class="alert-desc">山田 太郎: 有給申請（5/10〜5/12）・鈴木: 残業申請（4/30）ほか</div>
+                </div>
+                <button class="alert-link" onclick="jumpTab('approval')">確認する →</button>
+              </div>
+              <div class="alert-card orange">
+                <span class="alert-icon">⚠️</span>
+                <div class="alert-body">
+                  <div class="alert-title">残業45時間超えのメンバーが2名います</div>
+                  <div class="alert-desc">鈴木: 47.5h / 田中: 46.2h（36協定上限: 45h）</div>
+                </div>
+                <button class="alert-link" onclick="jumpTab('kintai')">確認する →</button>
+              </div>
+              <div class="alert-card orange">
+                <span class="alert-icon">🌏</span>
+                <div class="alert-body">
+                  <div class="alert-title">外国人就労時間の確認が必要です</div>
+                  <div class="alert-desc">渡辺: 今月累計 27h / 上限 28h（週4h制限に接近）</div>
+                </div>
+                <button class="alert-link" onclick="jumpTab('kintai')">確認する →</button>
+              </div>
+              <div class="alert-card purple">
+                <span class="alert-icon">🏪</span>
+                <div class="alert-body">
+                  <div class="alert-title">池袋店の臨店スコアが低下しています</div>
+                  <div class="alert-desc">前回: 70点 → 今回: 62点（-8点）QSC衛生管理の項目で減点</div>
+                </div>
+                <button class="alert-link" onclick="jumpTab('rinten')">確認する →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAT -->
+      <div id="tab-chat" class="tab-panel">
+        <div class="chat-shell">
+          <div class="chat-list-pane">
+            <div class="chat-list-header">
+              <div class="chat-list-title">チャット</div>
+              <input class="chat-search" type="text" placeholder="🔍 チャンネルを検索..." oninput="filterChatSearch(this.value)">
+            </div>
+            <div class="ch-tabs">
+              <div class="ch-tab active" onclick="filterChannel('all',this)">すべて</div>
+              <div class="ch-tab" onclick="filterChannel('社内',this)">社内</div>
+              <div class="ch-tab" onclick="filterChannel('FC店舗',this)">FC店舗</div>
+              <div class="ch-tab" onclick="filterChannel('外部',this)">外部</div>
+            </div>
+            <div class="chat-list-body">
+              <div class="chat-item active" data-channel="社内" onclick="selectChat(this,'honsha')">
+                <div class="ch-icon purple">🏢</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">本社 全体連絡</span><span class="chat-time">14:52</span></div>
+                  <div class="chat-last">山田: 有給申請の締め切りも同じ日でよいですか？</div>
+                </div>
+                <span class="chat-unread">3</span>
+              </div>
+              <div class="chat-item" data-channel="社内" onclick="selectChat(this,'it')">
+                <div class="ch-icon blue">💻</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">IT戦略部</span><span class="chat-time">11:20</span></div>
+                  <div class="chat-last">加藤: Gemini Enterprise の件ですが...</div>
+                </div>
+                <span class="chat-unread">2</span>
+              </div>
+              <div class="chat-item" data-channel="FC店舗" onclick="selectChat(this,'fc')">
+                <div class="ch-icon green">🍢</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">FC加盟店グループ</span><span class="chat-time">10:05</span></div>
+                  <div class="chat-last">田中FC: GWのシフト確認をお願いします</div>
+                </div>
+                <span class="chat-unread">2</span>
+              </div>
+              <div class="chat-item" data-channel="外部" onclick="selectChat(this,'chatwork')">
+                <div class="ch-icon orange">🤝</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">外部取引先（Chatwork）</span><span class="chat-time">昨日</span></div>
+                  <div class="chat-last">ダンドリワーク: ご確認いただけますでしょうか</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-main-pane">
+            <div class="thread-header">
+              <div class="thread-icon" id="thread-icon">🏢</div>
+              <div>
+                <div class="thread-name" id="thread-name">本社 全体連絡</div>
+                <div class="thread-sub" id="thread-sub">社内チャット · 本社全員（42名）</div>
+              </div>
+              <div class="thread-badge" id="thread-badge">📡 社内チャット</div>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+              <div class="msg-row mine">
+                <div class="msg-avatar">坂</div>
+                <div class="msg-content">
+                  <div class="msg-sender">坂本 憲介</div>
+                  <div class="msg-bubble">5月の勤怠締め日は5月25日（月）です。今月分の申請を完了させてください。</div>
+                  <div class="msg-time">14:32</div>
+                </div>
+              </div>
+              <div class="msg-row">
+                <div class="msg-avatar">加</div>
+                <div class="msg-content">
+                  <div class="msg-sender">加藤（情報システム課）</div>
+                  <div class="msg-bubble">承知しました。Gemini Enterprise の件は確認でき次第ご連絡します。</div>
+                  <div class="msg-time">14:45</div>
+                </div>
+              </div>
+              <div class="msg-row">
+                <div class="msg-avatar">山</div>
+                <div class="msg-content">
+                  <div class="msg-sender">山田 太郎</div>
+                  <div class="msg-bubble">了解です。有給申請の締め切りも同じ日でよいですか？</div>
+                  <div class="msg-time">14:50</div>
+                </div>
+              </div>
+            </div>
+            <div class="chat-input-bar">
+              <div class="chat-tools">
+                <button class="tool-btn">📎</button>
+                <button class="tool-btn">😊</button>
+              </div>
+              <input class="chat-input" id="chat-input" type="text" placeholder="メッセージを入力..." onkeydown="if(event.key==='Enter')sendMsg()">
+              <button class="btn-send" onclick="sendMsg()">送信</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 承認（管理職・承認者ビュー） -->
+      <div id="tab-approval" class="tab-panel">
+        <div class="dp-content">
+          <div class="dp-page-header">
+            <div>
+              <h1 class="dp-page-title">ワークフロー</h1>
+              <p class="dp-page-sub">部下の申請を確認・承認します</p>
+            </div>
+          </div>
+          <div class="dp-stats-grid">
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">承認待ち</span><div class="dp-stat-icon orange">⏰</div></div>
+              <div class="dp-stat-num orange" id="approval-pending-count">3</div>
+              <div class="dp-stat-note">要対応</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">承認済み（今月）</span><div class="dp-stat-icon green">✅</div></div>
+              <div class="dp-stat-num green">12</div>
+              <div class="dp-stat-note">処理完了</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">却下</span><div class="dp-stat-icon red">✕</div></div>
+              <div class="dp-stat-num red">1</div>
+              <div class="dp-stat-note">今月</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">チームメンバー</span><div class="dp-stat-icon purple">👥</div></div>
+              <div class="dp-stat-num purple">8</div>
+              <div class="dp-stat-note">IT戦略部</div>
+            </div>
+          </div>
+          <div class="dp-search-row">
+            <input type="text" class="dp-search-input" placeholder="申請者名で検索...">
+            <select class="dp-select"><option>すべて</option><option>有給休暇</option><option>残業</option><option>在宅勤務</option><option>出張</option></select>
+          </div>
+          <div>
+            <div class="dp-wf-tabs">
+              <div class="dp-wf-tab active" onclick="switchApprovalTab('pending',this)">⏰ 承認待ち (<span id="tab-pending-badge">3</span>)</div>
+              <div class="dp-wf-tab" onclick="switchApprovalTab('done',this)">✅ 承認済み (12)</div>
+            </div>
+            <div id="approval-panel-pending" class="dp-wf-panel active">
+              <div class="dp-wf-row" id="req-row-1">
+                <div class="dp-wf-type-icon">🌴</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">有給休暇申請 — 5月10日（日）〜12日（火）</div>
+                  <div class="dp-wf-meta">山田 太郎 · 申請日: 2026/05/01 · 3日間</div>
+                </div>
+                <div class="dp-wf-actions">
+                  <button class="dp-btn-approve" onclick="doApprove('req-row-1','山田 太郎の有給申請')">承認</button>
+                  <button class="dp-btn-reject" onclick="doReject('req-row-1','山田 太郎の有給申請')">却下</button>
+                </div>
+              </div>
+              <div class="dp-wf-row" id="req-row-2">
+                <div class="dp-wf-type-icon">🌙</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">残業申請 — 4月30日（水）2時間</div>
+                  <div class="dp-wf-meta">鈴木 一郎 · 申請日: 2026/04/30 · 当月残業: 47.5h ⚠️</div>
+                </div>
+                <div class="dp-wf-actions">
+                  <button class="dp-btn-approve" onclick="doApprove('req-row-2','鈴木の残業申請')">承認</button>
+                  <button class="dp-btn-reject" onclick="doReject('req-row-2','鈴木の残業申請')">却下</button>
+                </div>
+              </div>
+              <div class="dp-wf-row" id="req-row-3">
+                <div class="dp-wf-type-icon">🏠</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">在宅勤務申請 — 5月12日（月）〜16日（金）</div>
+                  <div class="dp-wf-meta">佐藤 次郎 · 申請日: 2026/05/02 · 5日間</div>
+                </div>
+                <div class="dp-wf-actions">
+                  <button class="dp-btn-approve" onclick="doApprove('req-row-3','佐藤の在宅勤務申請')">承認</button>
+                  <button class="dp-btn-reject" onclick="doReject('req-row-3','佐藤の在宅勤務申請')">却下</button>
+                </div>
+              </div>
+              <div id="approval-empty" class="dp-wf-row" style="display:none;justify-content:center;padding:40px;flex-direction:column;align-items:center;gap:8px">
+                <span style="font-size:32px;opacity:.3">✅</span>
+                <span style="font-size:14px;font-weight:700;color:var(--gray-400)">承認待ちの申請はありません</span>
+              </div>
+            </div>
+            <div id="approval-panel-done" class="dp-wf-panel">
+              <div class="dp-wf-row">
+                <div class="dp-wf-type-icon">🌴</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">有給休暇申請 — 4月25日（金）</div>
+                  <div class="dp-wf-meta">山田 太郎 · 承認日: 2026/04/20</div>
+                </div>
+                <div class="dp-status approved">承認済み</div>
+              </div>
+              <div class="dp-wf-row">
+                <div class="dp-wf-type-icon">✈️</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">出張申請 — 大阪 4月22日（火）</div>
+                  <div class="dp-wf-meta">田中 花子 · 承認日: 2026/04/18</div>
+                </div>
+                <div class="dp-status approved">承認済み</div>
+              </div>
+              <div class="dp-wf-row">
+                <div class="dp-wf-type-icon">💰</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">経費申請 — 交通費 3,200円</div>
+                  <div class="dp-wf-meta">木村 四郎 · 承認日: 2026/04/15</div>
+                </div>
+                <div class="dp-status approved">承認済み</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- メンバー状況（ダンドリポータルライク） -->
+      <div id="tab-kintai" class="tab-panel">
+        <div class="dp-content">
+          <div class="dp-page-header">
+            <div>
+              <h1 class="dp-page-title">メンバー状況</h1>
+              <p class="dp-page-sub">メンバーの現在の状況をリアルタイムで確認できます</p>
+            </div>
+            <span class="dp-last-update">最終更新: <span id="member-last-update">--:--</span></span>
+          </div>
+          <div class="dp-stats-grid-6">
+            <div class="dp-stat-card active-border">
+              <div class="dp-stat-header"><span class="dp-stat-label">総メンバー</span><div class="dp-stat-icon blue">👤</div></div>
+              <div class="dp-stat-num blue">8</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">出社</span><div class="dp-stat-icon green">📍</div></div>
+              <div class="dp-stat-num green">4</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">在宅</span><div class="dp-stat-icon blue">🏠</div></div>
+              <div class="dp-stat-num blue">2</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">出張</span><div class="dp-stat-icon orange">✈️</div></div>
+              <div class="dp-stat-num orange">0</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">研修</span><div class="dp-stat-icon teal">📚</div></div>
+              <div class="dp-stat-num teal">0</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">休暇・欠勤</span><div class="dp-stat-icon red">🙏</div></div>
+              <div class="dp-stat-num red">2</div>
+            </div>
+          </div>
+          <div class="dp-search-row">
+            <input type="text" class="dp-search-input" placeholder="メンバー名や部署で検索...">
+            <select class="dp-select"><option>すべて</option><option>出社</option><option>在宅</option><option>出張</option><option>研修</option><option>休暇・欠勤</option><option>未出勤</option></select>
+            <select class="dp-select"><option>全部署</option><option>IT戦略部</option><option>情報システム課</option><option>DX推進課</option></select>
+          </div>
+          <div class="member-grid">
+            <div class="member-card">
+              <div class="member-avatar av-purple">山</div>
+              <div class="member-info">
+                <div class="member-name">山田 太郎</div>
+                <div class="member-id">U001</div>
+                <div class="member-dept">IT戦略部 / メンバー</div>
+                <span class="member-status-badge msb-office">● 出社</span>
+              </div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar av-blue">加</div>
+              <div class="member-info">
+                <div class="member-name">加藤</div>
+                <div class="member-id">U002</div>
+                <div class="member-dept">情報システム課 / 課長</div>
+                <span class="member-status-badge msb-office">● 出社</span>
+              </div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar av-teal">芳</div>
+              <div class="member-info">
+                <div class="member-name">芳野</div>
+                <div class="member-id">U003</div>
+                <div class="member-dept">DX推進課 / メンバー</div>
+                <span class="member-status-badge msb-remote">● 在宅</span>
+              </div>
+            </div>
+            <div class="member-card alert-overtime">
+              <div class="member-avatar av-red">鈴</div>
+              <div class="member-info">
+                <div class="member-name">鈴木 一郎</div>
+                <div class="member-id">U004</div>
+                <div class="member-dept">IT戦略部 / メンバー</div>
+                <span class="member-status-badge msb-office">● 出社</span>
+                <div><span class="member-alert-tag mat-overtime">⚠️ 残業47.5h</span></div>
+              </div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar av-green">田</div>
+              <div class="member-info">
+                <div class="member-name">田中 花子</div>
+                <div class="member-id">U005</div>
+                <div class="member-dept">IT戦略部 / メンバー</div>
+                <span class="member-status-badge msb-leave">● 休暇</span>
+              </div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar av-orange">佐</div>
+              <div class="member-info">
+                <div class="member-name">佐藤 次郎</div>
+                <div class="member-id">U006</div>
+                <div class="member-dept">IT戦略部 / メンバー</div>
+                <span class="member-status-badge msb-remote">● 在宅</span>
+              </div>
+            </div>
+            <div class="member-card alert-foreign">
+              <div class="member-avatar av-teal">渡</div>
+              <div class="member-info">
+                <div class="member-name">渡辺 三郎</div>
+                <div class="member-id">U007</div>
+                <div class="member-dept">IT戦略部 / 担当者</div>
+                <span class="member-status-badge msb-office">● 出社</span>
+                <div><span class="member-alert-tag mat-foreign">🌏 就労27h/28h</span></div>
+              </div>
+            </div>
+            <div class="member-card">
+              <div class="member-avatar av-blue">木</div>
+              <div class="member-info">
+                <div class="member-name">木村 四郎</div>
+                <div class="member-id">U008</div>
+                <div class="member-dept">IT戦略部 / メンバー</div>
+                <span class="member-status-badge msb-leave">● 休暇</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 臨店ダッシュボード -->
+      <div id="tab-rinten" class="tab-panel">
+        <div class="rinten-dash">
+          <div class="rinten-kpi-row">
+            <div class="rinten-kpi">
+              <div class="rinten-kpi-label">全店舗 平均スコア</div>
+              <div class="rinten-kpi-value" style="color:var(--orange)">77.5</div>
+              <div class="rinten-kpi-sub">前月比 -1.2点</div>
+            </div>
+            <div class="rinten-kpi">
+              <div class="rinten-kpi-label">要改善店舗（70点未満）</div>
+              <div class="rinten-kpi-value" style="color:var(--red)">1</div>
+              <div class="rinten-kpi-sub">池袋店: 62点</div>
+            </div>
+            <div class="rinten-kpi">
+              <div class="rinten-kpi-label">今月 実施済み / 全店舗</div>
+              <div class="rinten-kpi-value" style="color:var(--green)">3 / 4</div>
+              <div class="rinten-kpi-sub">ピソラ表参道: 未実施</div>
+            </div>
+          </div>
+          <div>
+            <div class="section-label">全店舗スコア一覧</div>
+            <div class="rinten-table-wrap">
+              <div class="rinten-table-head"><div>店舗名</div><div>スコア</div><div>前回比</div><div>最終臨店</div></div>
+              <div class="rinten-table-row">
+                <div class="store-cell">
+                  <div class="store-cell-icon">🍢</div>
+                  <div><div class="store-cell-name">串カツ田中 新宿東口店</div><div class="store-cell-meta">担当: 山田 太郎</div></div>
+                </div>
+                <div><span class="score-pill high">91点</span></div>
+                <div><span class="trend-up">▲ +3点</span></div>
+                <div style="font-size:12px;color:var(--gray-400)">04/18</div>
+              </div>
+              <div class="rinten-table-row">
+                <div class="store-cell">
+                  <div class="store-cell-icon">🍢</div>
+                  <div><div class="store-cell-name">串カツ田中 渋谷店</div><div class="store-cell-meta">担当: 山田 太郎</div></div>
+                </div>
+                <div><span class="score-pill mid">78点</span></div>
+                <div><span class="trend-fl">▶ 変化なし</span></div>
+                <div style="font-size:12px;color:var(--gray-400)">04/20</div>
+              </div>
+              <div class="rinten-table-row">
+                <div class="store-cell">
+                  <div class="store-cell-icon">🍢</div>
+                  <div><div class="store-cell-name">串カツ田中 池袋店</div><div class="store-cell-meta">担当: 山田 太郎</div></div>
+                </div>
+                <div><span class="score-pill low">62点</span></div>
+                <div><span class="trend-dn">▼ -8点</span></div>
+                <div style="font-size:12px;color:var(--gray-400)">04/10</div>
+              </div>
+              <div class="rinten-table-row">
+                <div class="store-cell">
+                  <div class="store-cell-icon">🍕</div>
+                  <div><div class="store-cell-name">ピソラ 表参道店</div><div class="store-cell-meta">担当: 未配置</div></div>
+                </div>
+                <div><span class="score-pill none">未実施</span></div>
+                <div><span class="trend-fl">—</span></div>
+                <div style="font-size:12px;color:var(--gray-400)">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+var CHATS = {
+  honsha:{icon:'🏢',cls:'purple',name:'本社 全体連絡',sub:'社内チャット · 本社全員（42名）',badge:'📡 社内チャット',
+    messages:[
+      {who:'坂',sender:'坂本 憲介',text:'5月の勤怠締め日は5月25日（月）です。今月分の申請を完了させてください。',time:'14:32',mine:true},
+      {who:'加',sender:'加藤（情報システム課）',text:'承知しました。Gemini Enterprise の件は確認でき次第ご連絡します。',time:'14:45',mine:false},
+      {who:'山',sender:'山田 太郎',text:'了解です。有給申請の締め切りも同じ日でよいですか？',time:'14:50',mine:false}
+    ]},
+  it:{icon:'💻',cls:'blue',name:'IT戦略部',sub:'社内チャット · IT戦略部（8名）',badge:'📡 社内チャット',
+    messages:[
+      {who:'加',sender:'加藤（情報システム課）',text:'Gemini Enterprise の新規ライセンス申請を進めたいです。予算確認をお願いできますか？',time:'11:20',mine:false},
+      {who:'芳',sender:'芳野（DX推進課）',text:'Claude Code の社内展開について相談したいことがあります。',time:'11:35',mine:false}
+    ]},
+  fc:{icon:'🍢',cls:'green',name:'FC加盟店グループ',sub:'FC店舗チャット · 加盟店（14社）',badge:'🍢 FC店舗',
+    messages:[
+      {who:'田',sender:'田中FC（渋谷）',text:'GWのシフト確認をお願いします。5/3〜5/5は臨時スタッフを手配予定です。',time:'10:05',mine:false}
+    ]},
+  chatwork:{icon:'🤝',cls:'orange',name:'外部取引先（Chatwork）',sub:'外部チャット · Chatwork連携',badge:'🤝 Chatwork',
+    messages:[
+      {who:'ダ',sender:'ダンドリワーク 山本',text:'先日ご提案した件についてご確認いただけますでしょうか。',time:'昨日',mine:false}
+    ]}
+};
+var currentChat='honsha';
+
+function doLogin(){
+  document.getElementById('screen-login').style.display='none';
+  document.getElementById('screen-main').classList.add('active');
+  initDashboard();
+  initMemberUpdate();
+}
+
+function doLogout(){
+  document.getElementById('screen-main').classList.remove('active');
+  document.getElementById('screen-login').style.display='flex';
+}
+
+function dismissNotif(el){el.querySelector('.notif-dot').classList.add('hidden');}
+
+function initDashboard(){
+  var now=new Date();
+  var days=['日','月','火','水','木','金','土'];
+  document.getElementById('today-date').textContent=now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日（'+days[now.getDay()]+'）';
+  var h=now.getHours();
+  document.getElementById('today-greeting').textContent=h<12?'☀️ おはようございます':h<18?'🌤 お疲れ様です':'🌙 お疲れ様でした';
+}
+
+function initMemberUpdate(){
+  var now=new Date();
+  document.getElementById('member-last-update').textContent=('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2)+':'+('0'+now.getSeconds()).slice(-2);
+}
+
+function showTab(name,el){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.side-item').forEach(function(i){i.classList.remove('active');});
+  document.getElementById('tab-'+name).classList.add('active');
+  if(el)el.classList.add('active');
+}
+
+function jumpTab(name){
+  var el=document.querySelector('.side-item[onclick*="\''+name+'\'"]');
+  showTab(name,el);
+}
+
+function selectChat(itemEl,chatId){
+  document.querySelectorAll('.chat-item').forEach(function(i){i.classList.remove('active');});
+  itemEl.classList.add('active');
+  currentChat=chatId;
+  var c=CHATS[chatId];
+  document.getElementById('thread-icon').textContent=c.icon;
+  document.getElementById('thread-name').textContent=c.name;
+  document.getElementById('thread-sub').textContent=c.sub;
+  document.getElementById('thread-badge').textContent=c.badge;
+  var box=document.getElementById('chat-messages');
+  box.innerHTML='';
+  c.messages.forEach(function(m){box.appendChild(buildMsg(m));});
+  box.scrollTop=box.scrollHeight;
+}
+
+function buildMsg(m){
+  var row=document.createElement('div');
+  row.className='msg-row'+(m.mine?' mine':'');
+  row.innerHTML='<div class="msg-avatar">'+m.who+'</div><div class="msg-content"><div class="msg-sender">'+m.sender+'</div><div class="msg-bubble">'+m.text+'</div><div class="msg-time">'+m.time+'</div></div>';
+  return row;
+}
+
+function sendMsg(){
+  var inp=document.getElementById('chat-input');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  var now=new Date();
+  var t=now.getHours()+':'+(('0'+now.getMinutes()).slice(-2));
+  CHATS[currentChat].messages.push({who:'坂',sender:'坂本 憲介',text:txt,time:t,mine:true});
+  var box=document.getElementById('chat-messages');
+  box.appendChild(buildMsg(CHATS[currentChat].messages[CHATS[currentChat].messages.length-1]));
+  box.scrollTop=box.scrollHeight;
+  inp.value='';
+}
+
+function filterChannel(ch,tabEl){
+  document.querySelectorAll('.ch-tab').forEach(function(t){t.classList.remove('active');});
+  tabEl.classList.add('active');
+  document.querySelectorAll('.chat-item').forEach(function(item){
+    if(ch==='all'||item.dataset.channel===ch){item.classList.remove('hidden');}
+    else{item.classList.add('hidden');}
+  });
+}
+
+function filterChatSearch(val){
+  var q=val.toLowerCase();
+  document.querySelectorAll('.chat-item').forEach(function(item){
+    var name=item.querySelector('.chat-name').textContent.toLowerCase();
+    var last=item.querySelector('.chat-last')?item.querySelector('.chat-last').textContent.toLowerCase():'';
+    item.classList.toggle('hidden',!name.includes(q)&&!last.includes(q));
+  });
+}
+
+var pendingCount = 3;
+
+function switchApprovalTab(tab, el){
+  el.closest('.dp-wf-tabs').querySelectorAll('.dp-wf-tab').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('approval-panel-pending').classList.remove('active');
+  document.getElementById('approval-panel-done').classList.remove('active');
+  document.getElementById('approval-panel-'+tab).classList.add('active');
+}
+
+function doApprove(rowId, label){
+  var row = document.getElementById(rowId);
+  if(!row) return;
+  row.style.opacity = '0';
+  row.style.transition = 'opacity .3s';
+  setTimeout(function(){
+    row.remove();
+    pendingCount--;
+    updatePendingCount();
+    if(pendingCount === 0){
+      document.getElementById('approval-empty').style.display = 'flex';
+    }
+  }, 300);
+  showToast('✅ '+label+'を承認しました');
+}
+
+function doReject(rowId, label){
+  var row = document.getElementById(rowId);
+  if(!row) return;
+  row.style.opacity = '0';
+  row.style.transition = 'opacity .3s';
+  setTimeout(function(){
+    row.remove();
+    pendingCount--;
+    updatePendingCount();
+    if(pendingCount === 0){
+      document.getElementById('approval-empty').style.display = 'flex';
+    }
+  }, 300);
+  showToast('✕ '+label+'を却下しました');
+}
+
+function updatePendingCount(){
+  document.getElementById('approval-pending-count').textContent = pendingCount;
+  document.getElementById('tab-pending-badge').textContent = pendingCount;
+}
+
+function showToast(msg){
+  var toast=document.createElement('div');
+  toast.className='dp-toast';
+  toast.textContent=msg;
+  document.body.appendChild(toast);
+  setTimeout(function(){toast.classList.add('show');},10);
+  setTimeout(function(){toast.classList.remove('show');setTimeout(function(){toast.remove();},280);},2600);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ユニシアHD 統合ポータル｜一般社員</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#5B2DE8;--purple-dark:#3D1EAD;--purple-light:#7B4FF0;
+  --purple-bg:#F5F3FF;--purple-bg2:#EDE9FC;
+  --gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;
+  --gray-400:#9CA3AF;--gray-600:#4B5563;--gray-800:#1F2937;
+  --green:#059669;--green-light:#D1FAE5;
+  --red:#DC2626;--red-light:#FEE2E2;
+  --orange:#D97706;--orange-light:#FEF3C7;
+  --blue:#2563EB;--blue-light:#DBEAFE;
+}
+body{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;background:var(--gray-50);color:var(--gray-800);height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+/* LOGIN */
+#screen-login{position:fixed;inset:0;background:linear-gradient(145deg,#3D1EAD 0%,#5B2DE8 50%,#7B4FF0 100%);display:flex;align-items:center;justify-content:center;z-index:1000}
+.login-wrap{width:420px}
+.login-logo-area{text-align:center;margin-bottom:36px}
+.logo-badge{width:72px;height:72px;background:rgba(255,255,255,0.15);border-radius:20px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);font-size:32px}
+.login-logo-area h1{color:#fff;font-size:22px;font-weight:800;letter-spacing:0.5px}
+.login-logo-area p{color:rgba(255,255,255,0.7);font-size:13px;margin-top:4px}
+.login-card{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border-radius:20px;padding:40px;box-shadow:0 24px 64px rgba(0,0,0,0.2)}
+.role-badge{display:inline-block;background:var(--purple-bg2);color:var(--purple);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:20px;letter-spacing:0.5px}
+.login-card h2{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:6px}
+.login-card>p{font-size:13px;color:var(--gray-400);margin-bottom:28px}
+.field-label{font-size:12px;font-weight:600;color:var(--gray-600);margin-bottom:6px;display:block}
+.field-input{width:100%;padding:12px 16px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;color:var(--gray-800);background:#fff;outline:none;transition:border-color 0.2s;margin-bottom:16px}
+.field-input:focus{border-color:var(--purple)}
+.field-input.error{border-color:var(--red)}
+.field-error{font-size:11px;color:var(--red);margin-top:-12px;margin-bottom:12px;display:none}
+.field-error.show{display:block}
+.btn-login{width:100%;padding:14px;background:linear-gradient(135deg,var(--purple),var(--purple-light));border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(91,45,232,0.4);transition:opacity 0.2s;margin-top:4px}
+.btn-login:hover{opacity:0.88}
+.login-hint{text-align:center;color:var(--gray-400);font-size:11px;margin-top:16px}
+
+/* MAIN */
+#screen-main{display:none;flex:1;flex-direction:column;height:100vh;overflow:hidden}
+#screen-main.active{display:flex}
+
+/* TOP NAV */
+.top-nav{height:56px;background:var(--purple);display:flex;align-items:center;padding:0 24px;gap:16px;flex-shrink:0;box-shadow:0 2px 8px rgba(91,45,232,0.3)}
+.nav-brand{display:flex;align-items:center;gap:10px;flex:1}
+.nav-logo-icon{width:30px;height:30px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.nav-brand-name{color:#fff;font-size:15px;font-weight:800;letter-spacing:0.3px}
+.nav-brand-sub{color:rgba(255,255,255,0.6);font-size:11px;margin-left:4px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-notif{position:relative;cursor:pointer;padding:4px}
+.nav-notif-icon{color:rgba(255,255,255,0.85);font-size:18px}
+.notif-dot{position:absolute;top:2px;right:2px;width:8px;height:8px;background:#EF4444;border-radius:50%;border:1.5px solid var(--purple);transition:opacity 0.2s}
+.notif-dot.hidden{opacity:0}
+.nav-user{display:flex;align-items:center;gap:8px;cursor:pointer;padding:4px 8px;border-radius:8px;transition:background 0.15s}
+.nav-user:hover{background:rgba(255,255,255,0.1)}
+.nav-avatar{width:32px;height:32px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;border:1.5px solid rgba(255,255,255,0.35)}
+.nav-username{color:rgba(255,255,255,0.9);font-size:13px;font-weight:600}
+.nav-role-pill{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;border:1px solid rgba(255,255,255,0.2)}
+
+/* LAYOUT */
+.main-layout{display:flex;flex:1;overflow:hidden}
+.side-nav{width:220px;background:#fff;border-right:1px solid var(--gray-200);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.side-section-label{font-size:10px;font-weight:700;color:var(--gray-400);letter-spacing:1.2px;text-transform:uppercase;padding:20px 20px 8px}
+.side-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;font-size:13px;font-weight:600;color:var(--gray-600);transition:all 0.15s;position:relative}
+.side-item:hover{background:var(--purple-bg);color:var(--purple)}
+.side-item.active{background:var(--purple-bg);color:var(--purple)}
+.side-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--purple);border-radius:0 2px 2px 0}
+.side-item .s-icon{font-size:16px;width:20px;text-align:center}
+.s-badge{margin-left:auto;color:#fff;border-radius:10px;font-size:10px;font-weight:700;padding:1px 7px}
+.s-badge.red{background:var(--red)}
+.s-badge.orange{background:var(--orange)}
+.side-divider{height:1px;background:var(--gray-200);margin:8px 16px}
+.content-area{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.tab-panel{display:none;flex:1;overflow:hidden;flex-direction:column}
+.tab-panel.active{display:flex}
+
+/* CHAT */
+:root{--line:#06C755;--cw:#E07B39;--gchat:#4285F4}
+.chat-shell{display:flex;flex:1;overflow:hidden}
+.chat-list-pane{width:280px;border-right:1px solid var(--gray-200);background:#fff;display:flex;flex-direction:column;flex-shrink:0}
+.chat-list-header{padding:16px 20px 12px;border-bottom:1px solid var(--gray-100)}
+.chat-list-title{font-size:15px;font-weight:800;color:var(--gray-800);margin-bottom:10px}
+.chat-search{width:100%;padding:9px 14px;border:1.5px solid var(--gray-200);border-radius:9px;font-size:13px;outline:none;background:var(--gray-50);color:var(--gray-800)}
+.chat-search:focus{border-color:var(--purple)}
+.ch-tabs{display:flex;border-bottom:1px solid var(--gray-200);padding:0 12px;overflow-x:auto}
+.ch-tab{font-size:11px;font-weight:600;color:var(--gray-400);padding:9px 8px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.15s}
+.ch-tab.active{color:var(--purple);border-color:var(--purple)}
+.chat-list-body{flex:1;overflow-y:auto}
+.chat-item{padding:12px 16px;border-bottom:1px solid var(--gray-100);cursor:pointer;display:flex;gap:10px;align-items:flex-start;transition:background 0.1s}
+.chat-item:hover{background:var(--gray-50)}
+.chat-item.active{background:var(--purple-bg)}
+.chat-item.hidden{display:none}
+.ch-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ch-icon.purple{background:var(--purple-bg2)}
+.ch-icon.green{background:var(--green-light)}
+.ch-icon.blue{background:var(--blue-light)}
+.ch-icon.orange{background:var(--orange-light)}
+.ch-icon.red{background:var(--red-light)}
+.chat-item-body{flex:1;min-width:0}
+.chat-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.chat-name{font-size:13px;font-weight:700;color:var(--gray-800)}
+.chat-time{font-size:11px;color:var(--gray-400)}
+.chat-last{font-size:12px;color:var(--gray-400);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-unread{background:var(--purple);color:#fff;border-radius:10px;font-size:10px;font-weight:700;padding:1px 6px;flex-shrink:0;align-self:center}
+/* メインペイン */
+.chat-main-pane{flex:1;display:flex;flex-direction:column;background:var(--gray-50)}
+.thread-header{height:52px;background:#fff;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 20px;gap:10px;flex-shrink:0}
+.thread-icon{width:32px;height:32px;border-radius:9px;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:15px}
+.thread-name{font-size:14px;font-weight:800;color:var(--gray-800)}
+.thread-sub{font-size:11px;color:var(--gray-400)}
+.thread-ch-badges{margin-left:auto;display:flex;gap:4px}
+.thread-ch-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px}
+.thread-ch-badge.社内チャット{background:var(--purple-bg2);color:var(--purple)}
+.thread-ch-badge.Google\ Chat{background:#E8F0FE;color:var(--gchat)}
+.thread-ch-badge.Chatwork{background:#FEF3C7;color:var(--cw)}
+.thread-ch-badge.LINE{background:#E8F9EE;color:var(--line)}
+/* メッセージ */
+.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
+.msg-row{display:flex;gap:10px;align-items:flex-end}
+.msg-row.mine{flex-direction:row-reverse}
+.msg-avatar{width:30px;height:30px;border-radius:50%;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--purple);flex-shrink:0}
+.msg-row.mine .msg-avatar{background:var(--purple);color:#fff}
+.msg-content{max-width:62%}
+.msg-meta{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.msg-row.mine .msg-meta{flex-direction:row-reverse}
+.msg-sender{font-size:11px;color:var(--gray-400)}
+.msg-ch-tag{font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px}
+.msg-ch-tag.社内チャット{background:var(--purple-bg2);color:var(--purple)}
+.msg-ch-tag.Google\ Chat{background:#E8F0FE;color:var(--gchat)}
+.msg-ch-tag.Chatwork{background:#FEF3C7;color:var(--cw)}
+.msg-ch-tag.LINE{background:#E8F9EE;color:var(--line)}
+.msg-bubble{padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5}
+.msg-row:not(.mine) .msg-bubble{background:#fff;color:var(--gray-800);border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.07)}
+.msg-row.mine .msg-bubble{background:var(--purple);color:#fff;border-bottom-right-radius:4px}
+.msg-row.mine .msg-bubble.via-line{background:var(--line)}
+.msg-row.mine .msg-bubble.via-cw{background:var(--cw)}
+.msg-row.mine .msg-bubble.via-sms{background:var(--blue)}
+.msg-time{font-size:10px;color:var(--gray-400);margin-top:4px}
+.msg-row.mine .msg-time{text-align:right}
+/* DRMスタイル入力エリア */
+.chat-input-area{background:#fff;border-top:1px solid var(--gray-200);flex-shrink:0}
+.send-ch-tabs{display:flex;gap:0;padding:10px 16px 0;border-bottom:1px solid var(--gray-100)}
+.send-ch-tab{display:flex;align-items:center;gap:5px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;border-radius:8px 8px 0 0;border:1.5px solid transparent;border-bottom:none;color:var(--gray-400);transition:all 0.15s;margin-bottom:-1px}
+.send-ch-tab:hover{background:var(--gray-50)}
+.send-ch-tab.active{background:#fff;border-color:var(--gray-200);border-bottom-color:#fff;color:var(--gray-800)}
+.send-ch-tab.active.t-社内チャット{color:var(--purple)}
+.send-ch-tab.active.t-Google\ Chat{color:var(--gchat)}
+.send-ch-tab.active.t-Chatwork{color:var(--cw)}
+.send-ch-tab.active.t-LINE{color:var(--line)}
+.send-ch-dot{width:8px;height:8px;border-radius:50%}
+.t-社内チャット .send-ch-dot{background:var(--purple)}
+.t-Google\ Chat .send-ch-dot{background:var(--gchat)}
+.t-Chatwork .send-ch-dot{background:var(--cw)}
+.t-LINE .send-ch-dot{background:var(--line)}
+.send-ch-body{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.chat-input{flex:1;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13px;outline:none;background:var(--gray-50)}
+.chat-input:focus{border-color:var(--purple);background:#fff}
+.btn-send{padding:10px 18px;background:var(--purple);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:background 0.2s;white-space:nowrap}
+.btn-send:hover{opacity:0.88}
+.btn-send.s-gchat{background:var(--gchat)}
+.btn-send.s-cw{background:var(--cw)}
+.btn-send.s-line{background:var(--line)}
+.chat-tools{display:flex;gap:6px}
+.tool-btn{width:34px;height:34px;border:1.5px solid var(--gray-200);border-radius:8px;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gray-400);transition:all 0.15s}
+.tool-btn:hover{border-color:var(--purple);color:var(--purple)}
+
+/* 申請・勤怠パネル共通 */
+.service-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.service-header{padding:16px 24px;background:#fff;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.service-header-icon{width:36px;height:36px;border-radius:10px;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:16px}
+.service-header-title{font-size:15px;font-weight:800;color:var(--gray-800)}
+.service-header-sub{font-size:12px;color:var(--gray-400)}
+.service-powered{margin-left:auto;background:var(--purple-bg2);color:var(--purple);font-size:11px;font-weight:700;padding:4px 12px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block}
+.service-powered:hover{opacity:0.8}
+.service-body{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px}
+
+/* 申請カード */
+.req-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.req-card{background:#fff;border-radius:14px;padding:16px 20px;border:1.5px solid var(--gray-200);text-align:center}
+.req-card .rc-num{font-size:28px;font-weight:800;margin-bottom:4px}
+.req-card .rc-label{font-size:12px;color:var(--gray-400)}
+.rc-num.pending{color:var(--orange)}
+.rc-num.approved{color:var(--green)}
+.rc-num.done{color:var(--gray-400)}
+.req-list-section{background:#fff;border-radius:14px;border:1.5px solid var(--gray-200);overflow:hidden}
+.req-list-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--gray-100)}
+.req-list-head h3{font-size:14px;font-weight:800;color:var(--gray-800)}
+.btn-new-req{padding:8px 16px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
+.req-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--gray-100)}
+.req-row:last-child{border-bottom:none}
+.req-type-icon{width:36px;height:36px;border-radius:10px;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.req-body{flex:1}
+.req-title{font-size:13px;font-weight:700;color:var(--gray-800)}
+.req-meta{font-size:11px;color:var(--gray-400);margin-top:2px}
+.req-status{padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700;flex-shrink:0}
+.req-status.pending{background:var(--orange-light);color:var(--orange)}
+.req-status.approved{background:var(--green-light);color:var(--green)}
+.req-status.rejected{background:var(--red-light);color:var(--red)}
+.req-status.draft{background:var(--gray-100);color:var(--gray-400)}
+
+/* 勤怠 */
+.kintai-top{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kintai-clock-card{background:linear-gradient(135deg,var(--purple),var(--purple-light));border-radius:16px;padding:24px;color:#fff;display:flex;flex-direction:column;gap:8px}
+.kintai-clock-card .kc-label{font-size:12px;opacity:0.8}
+.kintai-clock-card .kc-time{font-size:36px;font-weight:800;letter-spacing:1px}
+.kintai-clock-card .kc-date{font-size:13px;opacity:0.75}
+.btn-打刻{padding:12px 0;background:rgba(255,255,255,0.2);color:#fff;border:1.5px solid rgba(255,255,255,0.4);border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;width:100%;margin-top:4px;transition:background 0.2s}
+.btn-打刻:hover{background:rgba(255,255,255,0.3)}
+.kintai-month-card{background:#fff;border-radius:16px;padding:20px;border:1.5px solid var(--gray-200)}
+.kintai-month-card h3{font-size:13px;font-weight:700;color:var(--gray-600);margin-bottom:12px}
+.kintai-stat{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--gray-100)}
+.kintai-stat:last-child{border-bottom:none}
+.kintai-stat .ks-label{font-size:12px;color:var(--gray-400)}
+.kintai-stat .ks-val{font-size:14px;font-weight:700;color:var(--gray-800)}
+.kintai-stat .ks-val.warn{color:var(--orange)}
+.kintai-alert-card{background:var(--orange-light);border:1.5px solid var(--orange);border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.kintai-log{background:#fff;border-radius:14px;border:1.5px solid var(--gray-200);overflow:hidden}
+.kintai-log-head{padding:12px 20px;border-bottom:1px solid var(--gray-100);font-size:13px;font-weight:700;color:var(--gray-800)}
+.kintai-log-row{display:grid;grid-template-columns:80px 1fr 1fr 1fr 80px;gap:8px;padding:10px 20px;border-bottom:1px solid var(--gray-100);font-size:12px;align-items:center}
+.kintai-log-row:last-child{border-bottom:none}
+.kintai-log-row.head{background:var(--gray-50);font-weight:700;color:var(--gray-600)}
+
+/* ===== ダンドリポータルライク 共通 ===== */
+.dp-content{flex:1;overflow-y:auto;padding:28px 32px;display:flex;flex-direction:column;gap:18px}
+.dp-page-header{display:flex;align-items:flex-start;justify-content:space-between}
+.dp-page-title{font-size:22px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
+.dp-page-sub{font-size:13px;color:var(--gray-400)}
+.dp-btn-primary{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.dp-btn-primary:hover{opacity:.88}
+.dp-btn-secondary{padding:9px 18px;background:#fff;color:var(--gray-600);border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.dp-btn-secondary:hover{background:var(--gray-50)}
+
+/* 統計カード */
+.dp-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.dp-stat-card{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:16px 20px}
+.dp-stat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.dp-stat-label{font-size:12px;color:var(--gray-400);font-weight:500}
+.dp-stat-icon{font-size:13px;width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.dp-stat-icon.orange{background:var(--orange-light)}
+.dp-stat-icon.purple{background:var(--purple-bg2)}
+.dp-stat-icon.blue{background:var(--blue-light)}
+.dp-stat-icon.green{background:var(--green-light)}
+.dp-stat-icon.gray{background:var(--gray-100)}
+.dp-stat-num{font-size:26px;font-weight:800;line-height:1.1;margin-bottom:4px;color:var(--gray-800)}
+.dp-stat-num.orange{color:var(--orange)}
+.dp-stat-num.purple{color:var(--purple)}
+.dp-stat-num.blue{color:var(--blue)}
+.dp-stat-num.green{color:var(--green)}
+.dp-stat-note{font-size:11px;color:var(--gray-400)}
+.dp-stat-bar{height:4px;background:var(--gray-200);border-radius:2px;margin-top:10px}
+.dp-stat-bar-fill{height:100%;border-radius:2px}
+
+/* 検索行 */
+.dp-search-row{display:flex;gap:10px;align-items:center}
+.dp-search-input{flex:1;padding:9px 14px 9px 36px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;outline:none;color:var(--gray-800);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 12px center / 14px #fff}
+.dp-search-input:focus{border-color:var(--purple)}
+.dp-select{padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:13px;color:var(--gray-600);background:#fff;cursor:pointer;outline:none}
+.dp-select:focus{border-color:var(--purple)}
+
+/* DP タブ */
+.dp-wf-tabs{display:flex;border-bottom:1px solid var(--gray-200)}
+.dp-wf-tab{padding:10px 20px;font-size:13px;font-weight:600;color:var(--gray-400);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.dp-wf-tab.active{color:var(--purple);border-color:var(--purple)}
+
+/* ワークフローパネル・行 */
+.dp-wf-panel{display:none;background:#fff;border:1px solid var(--gray-200);border-top:none;border-radius:0 0 12px 12px;overflow:hidden}
+.dp-wf-panel.active{display:block}
+.dp-wf-row{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--gray-100);transition:background .1s}
+.dp-wf-row:last-child{border-bottom:none}
+.dp-wf-row:hover{background:var(--gray-50)}
+.dp-wf-type-icon{width:36px;height:36px;border-radius:9px;background:var(--purple-bg2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.dp-wf-body{flex:1;min-width:0}
+.dp-wf-title{font-size:13px;font-weight:700;color:var(--gray-800)}
+.dp-wf-meta{font-size:11px;color:var(--gray-400);margin-top:2px}
+.dp-status{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;flex-shrink:0}
+.dp-status.pending{background:var(--orange-light);color:var(--orange)}
+.dp-status.approved{background:var(--green-light);color:var(--green)}
+.dp-status.rejected{background:var(--red-light);color:var(--red)}
+.dp-status.draft{background:var(--gray-100);color:var(--gray-400)}
+.dp-wf-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 20px;gap:10px}
+.dp-wf-empty-icon{font-size:36px;opacity:.35}
+.dp-wf-empty-text{font-size:14px;font-weight:700;color:var(--gray-400)}
+.dp-wf-empty-sub{font-size:12px;color:var(--gray-400)}
+
+/* モーダル */
+.dp-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.48);display:flex;align-items:center;justify-content:center;z-index:500;opacity:0;pointer-events:none;transition:opacity .2s}
+.dp-modal-overlay.open{opacity:1;pointer-events:all}
+.dp-modal{background:#fff;border-radius:16px;padding:28px;width:540px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.18)}
+.dp-modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.dp-modal-title{font-size:18px;font-weight:800;color:var(--gray-800);margin-bottom:4px}
+.dp-modal-sub{font-size:13px;color:var(--gray-400)}
+.dp-modal-close{background:none;border:none;font-size:18px;color:var(--gray-400);cursor:pointer;padding:2px 6px;line-height:1;border-radius:6px;transition:background .15s}
+.dp-modal-close:hover{background:var(--gray-100);color:var(--gray-800)}
+
+/* 申請種類グリッド */
+.dp-app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dp-app-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 12px;border:1.5px solid var(--gray-200);border-radius:12px;cursor:pointer;transition:all .15s}
+.dp-app-card:hover{border-color:var(--purple);background:var(--purple-bg)}
+.dp-app-icon{font-size:22px;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.dp-app-icon.blue{background:var(--blue-light)}
+.dp-app-icon.green{background:var(--green-light)}
+.dp-app-icon.orange{background:var(--orange-light)}
+.dp-app-icon.purple{background:var(--purple-bg2)}
+.dp-app-icon.gray{background:var(--gray-100)}
+.dp-app-label{font-size:12px;font-weight:700;color:var(--gray-700)}
+
+/* 申請フォーム */
+.dp-form{display:flex;flex-direction:column;gap:14px}
+.dp-form-group{display:flex;flex-direction:column;gap:5px}
+.dp-form-label{font-size:12px;font-weight:600;color:var(--gray-600)}
+.dp-form-input{padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:8px;font-size:13px;color:var(--gray-800);outline:none;font-family:inherit;width:100%}
+.dp-form-input:focus{border-color:var(--purple)}
+textarea.dp-form-input{resize:vertical;min-height:72px}
+.dp-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:8px}
+
+/* 勤怠打刻エリア */
+.dp-punch-card{background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:32px 28px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.dp-punch-time{font-size:48px;font-weight:800;color:var(--gray-800);letter-spacing:3px;font-variant-numeric:tabular-nums;line-height:1}
+.dp-punch-date{font-size:13px;color:var(--gray-400);margin-top:-2px}
+.dp-punch-btns{display:flex;gap:10px;margin-top:12px}
+.dp-punch-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:14px 22px;border:1.5px solid var(--gray-200);border-radius:10px;background:#fff;cursor:pointer;font-size:12px;font-weight:700;color:var(--gray-400);transition:all .2s;min-width:88px}
+.dp-punch-btn.ready{background:var(--green);color:#fff;border-color:var(--green)}
+.dp-punch-btn.done{background:var(--purple-bg);color:var(--purple);border-color:var(--purple-bg2)}
+.dp-punch-btn:disabled{opacity:.38;cursor:default}
+.dpb-icon{font-size:20px;line-height:1}
+.dp-punch-record{display:flex;gap:64px;margin-top:8px}
+.dp-punch-record>div{display:flex;flex-direction:column;align-items:center;gap:3px}
+.dp-punch-record span:first-child{font-size:11px;color:var(--gray-400)}
+.dp-punch-record span.pr-time{font-size:16px;font-weight:800;color:var(--gray-800)}
+
+/* 勤怠ログ */
+.dp-kintai-log-head{display:grid;grid-template-columns:90px 80px 80px 100px 80px 70px;padding:10px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200);font-size:11px;font-weight:700;color:var(--gray-400)}
+.dp-kintai-log-row{display:grid;grid-template-columns:90px 80px 80px 100px 80px 70px;padding:12px 20px;border-bottom:1px solid var(--gray-100);font-size:12px;color:var(--gray-800);align-items:center;transition:background .1s}
+.dp-kintai-log-row:last-child{border-bottom:none}
+.dp-kintai-log-row:hover{background:var(--gray-50)}
+
+/* トースト通知 */
+.dp-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--gray-800);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transition:all .25s;z-index:9999;white-space:nowrap;pointer-events:none}
+.dp-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* 臨店 */
+.rinten-panel{flex:1;overflow-y:auto;padding:24px}
+.rinten-hero{background:linear-gradient(135deg,var(--green),#34D399);border-radius:16px;padding:24px;color:#fff;margin-bottom:20px}
+.rinten-hero h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.rinten-hero p{font-size:13px;opacity:0.85}
+.section-label{font-size:11px;font-weight:700;color:var(--gray-400);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.store-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.store-card{background:#fff;border-radius:14px;padding:16px 20px;border:1.5px solid var(--gray-200);display:flex;align-items:center;gap:16px;cursor:pointer;transition:all 0.15s;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.store-card:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(5,150,105,0.12)}
+.store-icon{width:44px;height:44px;background:var(--green-light);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.store-body{flex:1}
+.store-name{font-size:14px;font-weight:700;color:var(--gray-800)}
+.store-meta{font-size:12px;color:var(--gray-400);margin-top:2px}
+.score-pill{padding:6px 12px;border-radius:10px;font-size:14px;font-weight:800;flex-shrink:0}
+.score-pill.high{background:var(--green-light);color:var(--green)}
+.score-pill.mid{background:var(--orange-light);color:var(--orange)}
+.score-pill.low{background:var(--red-light);color:var(--red)}
+.score-pill.none{background:var(--gray-100);color:var(--gray-400)}
+.btn-green{width:100%;padding:14px;background:linear-gradient(135deg,var(--green),#34D399);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(5,150,105,0.3);transition:opacity 0.2s}
+.btn-green:hover{opacity:0.88}
+
+/* ===== 臨店報告書オーバーレイ ===== */
+#rinten-overlay{display:none;position:fixed;inset:0;z-index:1000;background:#f0f2f5;overflow-y:auto;font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',sans-serif}
+.rt-nav{background:#1a1a5e;color:#fff;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:10;flex-shrink:0}
+.rt-back{background:rgba(255,255,255,0.12);border:none;color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px}
+.rt-submit{background:#4f9cf9;border:none;color:#fff;padding:6px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700}
+.rt-content{padding:16px;max-width:640px;margin:0 auto}
+.rt-check-header{background:linear-gradient(135deg,#1a1a5e,#4f9cf9);padding:20px;color:#fff;border-radius:16px;margin-bottom:14px}
+.rt-check-store{font-size:17px;font-weight:800}
+.rt-check-date{font-size:12px;opacity:0.8;margin-top:3px}
+.rt-progress-wrap{margin-top:12px}
+.rt-progress-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;opacity:0.9}
+.rt-progress-bar{background:rgba(255,255,255,0.25);border-radius:10px;height:8px}
+.rt-progress-fill{background:#fff;border-radius:10px;height:8px;transition:width 0.4s}
+.rt-cat-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+.rt-cat-tabs::-webkit-scrollbar{display:none}
+.rt-cat-tab{flex-shrink:0;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all 0.2s;white-space:nowrap;background:#fff;color:#6b7280;border-color:#e5e7eb}
+.rt-cat-tab.active{background:#1a1a5e;color:#fff;border-color:#1a1a5e}
+.rt-check-item{display:flex;align-items:center;gap:12px;padding:13px;background:#fff;border-radius:12px;margin-bottom:8px;border:1.5px solid #f3f4f6;transition:border-color 0.2s}
+.rt-check-item.answered{border-color:#d1fae5}
+.rt-check-item.ng{border-color:#fee2e2}
+.rt-item-num{width:24px;height:24px;background:#f3f4f6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#6b7280;flex-shrink:0}
+.rt-item-text{flex:1;font-size:13px;color:#374151;line-height:1.4}
+.rt-options{display:flex;gap:6px;flex-shrink:0}
+.rt-opt{width:36px;height:36px;border-radius:8px;border:1.5px solid #e5e7eb;background:#fff;cursor:pointer;font-size:11px;font-weight:700;transition:all 0.15s;color:#6b7280}
+.rt-opt.ok.sel{background:#059669;border-color:#059669;color:#fff}
+.rt-opt.ng.sel{background:#dc2626;border-color:#dc2626;color:#fff}
+.rt-opt.na.sel{background:#9ca3af;border-color:#9ca3af;color:#fff}
+.rt-photo-zone{border:2px dashed #d1d5db;border-radius:12px;padding:20px;text-align:center;cursor:pointer;margin-top:12px;transition:border-color 0.2s}
+.rt-photo-zone:hover{border-color:#4f9cf9}
+.rt-comment{width:100%;padding:12px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:13px;resize:vertical;min-height:80px;outline:none;font-family:inherit;margin-top:8px;box-sizing:border-box}
+.rt-comment:focus{border-color:#4f9cf9}
+.rt-card{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.rt-card-title{font-size:13px;font-weight:700;margin-bottom:10px;color:#374151}
+.rt-btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,#4f9cf9,#3b82f6);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;transition:opacity 0.2s}
+.rt-btn-primary:hover{opacity:0.9}
+/* result */
+.rt-result-hero{background:linear-gradient(135deg,#1a1a5e,#4f9cf9);padding:32px 20px;text-align:center;color:#fff;border-radius:16px;margin-bottom:14px}
+.rt-score-ring{width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,0.15);border:4px solid rgba(255,255,255,0.4);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px}
+.rt-score-num{font-size:30px;font-weight:900}
+.rt-score-sub{font-size:11px;opacity:0.8}
+.rt-result-store{font-size:15px;font-weight:700}
+.rt-result-date{font-size:12px;opacity:0.8;margin-top:4px}
+.rt-cat-result-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f3f4f6}
+.rt-cat-result-row:last-child{border-bottom:none}
+.rt-cat-name{width:84px;font-size:12px;color:#6b7280;font-weight:600}
+.rt-cat-bar-wrap{flex:1}
+.rt-cat-bar{height:8px;background:#e5e7eb;border-radius:10px}
+.rt-cat-fill{height:8px;border-radius:10px;transition:width 0.6s}
+.rt-fill-green{background:linear-gradient(90deg,#10b981,#34d399)}
+.rt-fill-yellow{background:linear-gradient(90deg,#f59e0b,#fcd34d)}
+.rt-fill-red{background:linear-gradient(90deg,#ef4444,#f87171)}
+.rt-cat-pct{width:36px;text-align:right;font-size:13px;font-weight:700;color:#374151}
+.rt-ng-list{background:#fff8f8;border:1.5px solid #fee2e2;border-radius:12px;padding:14px}
+.rt-ng-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid #fee2e2;font-size:12px;color:#374151}
+.rt-ng-row:last-child{border-bottom:none}
+.rt-ng-dot{width:6px;height:6px;background:#ef4444;border-radius:50%;margin-top:5px;flex-shrink:0}
+.rt-compare-wrap{display:flex;align-items:center;gap:16px;padding:8px 0}
+.rt-compare-box{text-align:center;flex:1}
+.rt-compare-label{font-size:11px;color:#9ca3af}
+.rt-compare-val{font-size:26px;font-weight:900;margin-top:4px}
+.rt-green{color:#059669}.rt-orange{color:#d97706}.rt-red{color:#dc2626}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="screen-login">
+  <div class="login-wrap">
+    <div class="login-logo-area">
+      <div class="logo-badge">🏢</div>
+      <h1>UNISIA HD</h1>
+      <p>統合業務ポータル</p>
+    </div>
+    <div class="login-card">
+      <span class="role-badge">👤 一般社員</span>
+      <h2>おかえりなさい</h2>
+      <p>アカウント情報を入力してください</p>
+      <form onsubmit="doLogin();return false;">
+        <label class="field-label">メールアドレス</label>
+        <input id="inp-email" class="field-input" type="email" placeholder="yamada@unisia-hd.co.jp">
+        <div id="err-email" class="field-error">メールアドレスを入力してください</div>
+        <label class="field-label">パスワード</label>
+        <input id="inp-pass" class="field-input" type="password" placeholder="パスワードを入力">
+        <div id="err-pass" class="field-error">パスワードを入力してください</div>
+        <button type="submit" class="btn-login">ログイン</button>
+      </form>
+      <div class="login-hint">パスワードを忘れた方は IT戦略部へご連絡ください</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="screen-main">
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <div class="nav-logo-icon">🏢</div>
+      <span class="nav-brand-name">UNISIA HD</span>
+      <span class="nav-brand-sub">統合ポータル</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-notif" onclick="dismissNotif(this)" title="通知">
+        <span class="nav-notif-icon">🔔</span>
+        <span class="notif-dot"></span>
+      </div>
+      <div class="nav-user" onclick="doLogout()" title="クリックでログアウト">
+        <div class="nav-avatar">山</div>
+        <span class="nav-username">山田 太郎</span>
+        <span class="nav-role-pill">一般社員</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-layout">
+    <nav class="side-nav">
+      <div class="side-section-label">メイン</div>
+      <div class="side-item active" onclick="showTab('chat',this)">
+        <span class="s-icon">💬</span>チャット
+        <span class="s-badge red">7</span>
+      </div>
+      <div class="side-item" onclick="showTab('shinsei',this)">
+        <span class="s-icon">📋</span>申請・承認
+        <span class="s-badge orange">3</span>
+      </div>
+      <div class="side-item" onclick="showTab('kintai',this)">
+        <span class="s-icon">⏱️</span>勤怠管理
+      </div>
+      <div class="side-divider"></div>
+      <div class="side-section-label">店舗業務</div>
+      <div class="side-item" onclick="showTab('rinten',this)">
+        <span class="s-icon">🏪</span>臨店報告書
+      </div>
+    </nav>
+
+    <div class="content-area">
+
+      <!-- CHAT -->
+      <div id="tab-chat" class="tab-panel active">
+        <div class="chat-shell">
+          <div class="chat-list-pane">
+            <div class="chat-list-header">
+              <div class="chat-list-title">メッセージ</div>
+              <input class="chat-search" id="chat-search" type="text" placeholder="🔍 検索..." oninput="filterChatSearch(this.value)">
+            </div>
+            <div class="ch-tabs">
+              <div class="ch-tab active" onclick="filterChannel('all',this)">すべて</div>
+              <div class="ch-tab" onclick="filterChannel('社内チャット',this)">社内チャット</div>
+              <div class="ch-tab" onclick="filterChannel('Google Chat',this)">Google Chat</div>
+              <div class="ch-tab" onclick="filterChannel('Chatwork',this)">Chatwork</div>
+              <div class="ch-tab" onclick="filterChannel('LINE',this)">LINE</div>
+            </div>
+            <div class="chat-list-body" id="chat-list-body">
+              <div class="chat-item active" data-channel="社内チャット" onclick="selectChat(this,'honsha')">
+                <div class="ch-icon purple">🏢</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">本社 全体連絡</span><span class="chat-time">14:52</span></div>
+                  <div class="chat-last">坂本: ポータルから申請できます</div>
+                </div>
+                <span class="chat-unread">3</span>
+              </div>
+              <div class="chat-item" data-channel="社内チャット" onclick="selectChat(this,'fc')">
+                <div class="ch-icon green">🍢</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">渋谷FC 田中オーナー</span><span class="chat-time">10:30</span></div>
+                  <div class="chat-last">山田: 5/4シフト表を今日中に共有します</div>
+                </div>
+                <span class="chat-unread">2</span>
+              </div>
+              <div class="chat-item" data-channel="Google Chat" onclick="selectChat(this,'it')">
+                <div class="ch-icon blue">💻</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">IT戦略部</span><span class="chat-time">11:35</span></div>
+                  <div class="chat-last">芳野: Claude Code の社内展開の件...</div>
+                </div>
+                <span class="chat-unread">2</span>
+              </div>
+              <div class="chat-item" data-channel="Chatwork" onclick="selectChat(this,'chatwork')">
+                <div class="ch-icon orange">🤝</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">ダンドリワーク 山本</span><span class="chat-time">昨日</span></div>
+                  <div class="chat-last">ダンドリワーク: ご確認いただけますでしょうか</div>
+                </div>
+              </div>
+              <div class="chat-item" data-channel="LINE" onclick="selectChat(this,'line')">
+                <div class="ch-icon red">📱</div>
+                <div class="chat-item-body">
+                  <div class="chat-row"><span class="chat-name">渋谷店 田中（バイト）</span><span class="chat-time">月曜</span></div>
+                  <div class="chat-last">田中: 明日の仕込み時間について確認です</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-main-pane">
+            <div class="thread-header" id="thread-header">
+              <div class="thread-icon" id="thread-icon">🏢</div>
+              <div>
+                <div class="thread-name" id="thread-name">本社 全体連絡</div>
+                <div class="thread-sub" id="thread-sub">本社全員 · 14名</div>
+              </div>
+              <div class="thread-ch-badges" id="thread-ch-badges">
+                <span class="thread-ch-badge 社内">社内チャット</span>
+              </div>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-area">
+              <div class="send-ch-tabs" id="send-ch-tabs"></div>
+              <div class="send-ch-body">
+                <div class="chat-tools">
+                  <button class="tool-btn" title="添付">📎</button>
+                  <button class="tool-btn" title="絵文字">😊</button>
+                </div>
+                <input class="chat-input" id="chat-input" type="text" placeholder="メッセージを入力..." onkeydown="if(event.key==='Enter')sendMsg()">
+                <button class="btn-send" id="btn-send" onclick="sendMsg()">送信</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 申請 -->
+      <div id="tab-shinsei" class="tab-panel">
+        <div class="dp-content">
+          <div class="dp-page-header">
+            <div>
+              <h1 class="dp-page-title">ワークフロー</h1>
+              <p class="dp-page-sub">申請の作成・承認・進捗管理を行います</p>
+            </div>
+            <button class="dp-btn-primary" onclick="openNewReqModal()">＋ 新規申請</button>
+          </div>
+          <div class="dp-stats-grid">
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">承認待ち</span><div class="dp-stat-icon orange">⏰</div></div>
+              <div class="dp-stat-num orange">1</div>
+              <div class="dp-stat-note">要対応</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">代理承認</span><div class="dp-stat-icon purple">👥</div></div>
+              <div class="dp-stat-num purple">0</div>
+              <div class="dp-stat-note">委任済み</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">申請中</span><div class="dp-stat-icon blue">📋</div></div>
+              <div class="dp-stat-num blue">2</div>
+              <div class="dp-stat-note">処理中</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">承認済み</span><div class="dp-stat-icon green">✅</div></div>
+              <div class="dp-stat-num green">1</div>
+              <div class="dp-stat-note">完了</div>
+            </div>
+          </div>
+          <div class="dp-search-row">
+            <input type="text" class="dp-search-input" placeholder="申請者名で検索...">
+            <select class="dp-select"><option>すべて</option><option>有給休暇</option><option>残業</option><option>在宅勤務</option><option>出張</option></select>
+            <select class="dp-select"><option>すべて</option><option>承認待ち</option><option>承認済み</option><option>却下</option></select>
+          </div>
+          <div>
+            <div class="dp-wf-tabs">
+              <div class="dp-wf-tab active" onclick="switchWfTab('pending',this)">⏰ 承認待ち (1)</div>
+              <div class="dp-wf-tab" onclick="switchWfTab('mine',this)">👤 自分の申請 (3)</div>
+            </div>
+            <div id="wf-panel-pending" class="dp-wf-panel active">
+              <div class="dp-wf-row">
+                <div class="dp-wf-type-icon">🌴</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">有給休暇申請 — 5月15日（木）</div>
+                  <div class="dp-wf-meta">山田 太郎 · 申請日: 2026/05/01 · 承認者: 坂本 憲介</div>
+                </div>
+                <div class="dp-status pending">承認待ち</div>
+              </div>
+            </div>
+            <div id="wf-panel-mine" class="dp-wf-panel">
+              <div class="dp-wf-row">
+                <div class="dp-wf-type-icon">🌴</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">有給休暇申請 — 5月15日（木）</div>
+                  <div class="dp-wf-meta">申請日: 2026/05/01 · 承認者: 坂本 憲介</div>
+                </div>
+                <div class="dp-status pending">承認待ち</div>
+              </div>
+              <div class="dp-wf-row">
+                <div class="dp-wf-type-icon">🌙</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">残業申請 — 4月30日 2時間</div>
+                  <div class="dp-wf-meta">申請日: 2026/04/30 · 承認者: 坂本 憲介</div>
+                </div>
+                <div class="dp-status approved">承認済み</div>
+              </div>
+              <div class="dp-wf-row">
+                <div class="dp-wf-type-icon">🏠</div>
+                <div class="dp-wf-body">
+                  <div class="dp-wf-title">在宅勤務申請 — 5月12日〜16日</div>
+                  <div class="dp-wf-meta">申請日: 2026/05/01 · 承認者: 坂本 憲介</div>
+                </div>
+                <div class="dp-status pending">承認待ち</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 新規申請モーダル（種類選択） -->
+        <div id="req-modal" class="dp-modal-overlay" onclick="closeReqModal(event)">
+          <div class="dp-modal">
+            <div class="dp-modal-header">
+              <div>
+                <h2 class="dp-modal-title">新規申請を作成</h2>
+                <p class="dp-modal-sub">作成する申請の種類を選択してください</p>
+              </div>
+              <button class="dp-modal-close" onclick="closeReqModal()">✕</button>
+            </div>
+            <div class="dp-app-grid">
+              <div class="dp-app-card" onclick="openReqForm('休暇申請')"><div class="dp-app-icon blue">🗓️</div><span class="dp-app-label">休暇申請</span></div>
+              <div class="dp-app-card" onclick="openReqForm('残業申請')"><div class="dp-app-icon orange">🌙</div><span class="dp-app-label">残業申請</span></div>
+              <div class="dp-app-card" onclick="openReqForm('リモートワーク')"><div class="dp-app-icon purple">🏠</div><span class="dp-app-label">リモートワーク</span></div>
+              <div class="dp-app-card" onclick="openReqForm('出張申請')"><div class="dp-app-icon blue">✈️</div><span class="dp-app-label">出張申請</span></div>
+              <div class="dp-app-card" onclick="openReqForm('経費申請')"><div class="dp-app-icon green">💰</div><span class="dp-app-label">経費申請</span></div>
+              <div class="dp-app-card" onclick="openReqForm('各種変更')"><div class="dp-app-icon gray">📝</div><span class="dp-app-label">各種変更</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 申請フォームモーダル -->
+        <div id="req-form-modal" class="dp-modal-overlay" onclick="closeReqFormModal(event)">
+          <div class="dp-modal">
+            <div class="dp-modal-header">
+              <div>
+                <h2 class="dp-modal-title" id="req-form-title">申請フォーム</h2>
+                <p class="dp-modal-sub">必要事項を入力して申請してください</p>
+              </div>
+              <button class="dp-modal-close" onclick="closeReqFormModal()">✕</button>
+            </div>
+            <div class="dp-form">
+              <div class="dp-form-group">
+                <label class="dp-form-label">申請日</label>
+                <input type="date" class="dp-form-input" value="2026-05-03">
+              </div>
+              <div class="dp-form-group">
+                <label class="dp-form-label">対象日</label>
+                <input type="date" class="dp-form-input">
+              </div>
+              <div class="dp-form-group">
+                <label class="dp-form-label">承認者</label>
+                <select class="dp-form-input dp-select"><option>坂本 憲介（IT戦略部）</option><option>加藤（情報システム課）</option></select>
+              </div>
+              <div class="dp-form-group">
+                <label class="dp-form-label">理由・備考</label>
+                <textarea class="dp-form-input" rows="3" placeholder="理由を入力してください..."></textarea>
+              </div>
+            </div>
+            <div class="dp-form-actions">
+              <button class="dp-btn-secondary" onclick="closeReqFormModal()">キャンセル</button>
+              <button class="dp-btn-primary" onclick="submitReq()">申請する</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 勤怠 -->
+      <div id="tab-kintai" class="tab-panel">
+        <div class="dp-content">
+          <div class="dp-page-header">
+            <div>
+              <h1 class="dp-page-title">勤怠管理</h1>
+              <p class="dp-page-sub">勤怠記録の打刻と管理を行います</p>
+            </div>
+            <span style="font-size:11px;color:var(--gray-400)">最終更新: <span id="kintai-last-update">--:--</span></span>
+          </div>
+          <div class="dp-stats-grid">
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">月間実勤時間</span><div class="dp-stat-icon gray">⏱</div></div>
+              <div class="dp-stat-num">112.0h</div>
+              <div class="dp-stat-note">標準: 168h</div>
+              <div class="dp-stat-bar"><div class="dp-stat-bar-fill" style="width:67%;background:var(--purple)"></div></div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">残業時間</span><div class="dp-stat-icon orange">⚠️</div></div>
+              <div class="dp-stat-num orange">18.0h</div>
+              <div class="dp-stat-note">36協定上限: 45h</div>
+              <div class="dp-stat-bar"><div class="dp-stat-bar-fill" style="width:40%;background:var(--orange)"></div></div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">有給残日数</span><div class="dp-stat-icon blue">🗓️</div></div>
+              <div class="dp-stat-num blue">8日</div>
+              <div class="dp-stat-note">今月取得 → 休暇管理へ</div>
+            </div>
+            <div class="dp-stat-card">
+              <div class="dp-stat-header"><span class="dp-stat-label">在宅勤務</span><div class="dp-stat-icon purple">🏠</div></div>
+              <div class="dp-stat-num purple">3日</div>
+              <div class="dp-stat-note">今月在宅勤務</div>
+            </div>
+          </div>
+          <div class="dp-punch-card">
+            <div class="dp-punch-time" id="kintai-clock">--:--:--</div>
+            <div class="dp-punch-date" id="kintai-date">読み込み中...</div>
+            <div class="dp-punch-btns">
+              <button class="dp-punch-btn ready" id="btn-syukkin" onclick="doPunchV2('出勤',this)">
+                <span class="dpb-icon">↪</span>出勤
+              </button>
+              <button class="dp-punch-btn" id="btn-kyukei-s" onclick="doPunchV2('休憩開始',this)" disabled>
+                <span class="dpb-icon">⏸</span>休憩開始
+              </button>
+              <button class="dp-punch-btn" id="btn-kyukei-e" onclick="doPunchV2('休憩終了',this)" disabled>
+                <span class="dpb-icon">▶</span>休憩終了
+              </button>
+              <button class="dp-punch-btn" id="btn-taikin" onclick="doPunchV2('退勤',this)" disabled>
+                <span class="dpb-icon">↩</span>退勤
+              </button>
+            </div>
+            <div class="dp-punch-record">
+              <div><span>出勤</span><span class="pr-time" id="syukkin-time">--:--</span></div>
+              <div><span>退勤</span><span class="pr-time" id="taikin-time">--:--</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="dp-wf-tabs">
+              <div class="dp-wf-tab active">⏱ 勤怠一覧</div>
+              <div class="dp-wf-tab">📊 勤怠集計</div>
+              <div class="dp-wf-tab">📅 シフト</div>
+            </div>
+            <div class="dp-wf-panel active" style="border-radius:0 0 12px 12px">
+              <div class="dp-kintai-log-head">
+                <span>日付</span><span>出勤</span><span>退勤</span><span>労働時間</span><span>残業</span><span>状態</span>
+              </div>
+              <div class="dp-kintai-log-row">
+                <span>5/1（木）</span><span>09:02</span><span>19:15</span><span>9h 13m</span><span>1h 13m</span>
+                <span class="dp-status approved" style="font-size:10px;padding:2px 8px">確定</span>
+              </div>
+              <div class="dp-kintai-log-row">
+                <span>4/30（水）</span><span>09:00</span><span>21:00</span><span>11h 00m</span>
+                <span style="color:var(--orange);font-weight:700">3h 00m</span>
+                <span class="dp-status approved" style="font-size:10px;padding:2px 8px">確定</span>
+              </div>
+              <div class="dp-kintai-log-row">
+                <span>4/29（火）</span><span>09:05</span><span>18:30</span><span>8h 25m</span><span>—</span>
+                <span class="dp-status approved" style="font-size:10px;padding:2px 8px">確定</span>
+              </div>
+              <div class="dp-kintai-log-row">
+                <span>4/28（月）</span><span>08:58</span><span>19:45</span><span>9h 47m</span>
+                <span style="color:var(--orange);font-weight:700">1h 47m</span>
+                <span class="dp-status approved" style="font-size:10px;padding:2px 8px">確定</span>
+              </div>
+              <div class="dp-kintai-log-row">
+                <span>4/25（金）</span><span>09:10</span><span>18:00</span><span>7h 50m</span><span>—</span>
+                <span class="dp-status approved" style="font-size:10px;padding:2px 8px">確定</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 臨店 -->
+      <div id="tab-rinten" class="tab-panel">
+        <div class="rinten-panel">
+          <div class="rinten-hero">
+            <h2>🏪 臨店報告書</h2>
+            <p>QSCチェック100項目・写真付き・AI改善提案・本部ダッシュボード連携</p>
+          </div>
+          <div class="section-label">担当店舗一覧</div>
+          <div class="store-list">
+            <div class="store-card" onclick="openRintenModal('串カツ田中 渋谷店')">
+              <div class="store-icon">🍢</div>
+              <div class="store-body">
+                <div class="store-name">串カツ田中 渋谷店</div>
+                <div class="store-meta">前回臨店: 2026/04/20 · 担当: 山田 太郎</div>
+              </div>
+              <div class="score-pill mid">78点</div>
+            </div>
+            <div class="store-card" onclick="openRintenModal('串カツ田中 新宿東口店')">
+              <div class="store-icon">🍢</div>
+              <div class="store-body">
+                <div class="store-name">串カツ田中 新宿東口店</div>
+                <div class="store-meta">前回臨店: 2026/04/18 · 担当: 山田 太郎</div>
+              </div>
+              <div class="score-pill high">91点</div>
+            </div>
+            <div class="store-card" onclick="openRintenModal('串カツ田中 池袋店')">
+              <div class="store-icon">🍢</div>
+              <div class="store-body">
+                <div class="store-name">串カツ田中 池袋店</div>
+                <div class="store-meta">前回臨店: 2026/04/10 · 担当: 山田 太郎</div>
+              </div>
+              <div class="score-pill low">62点</div>
+            </div>
+            <div class="store-card" onclick="openRintenModal('ピソラ 表参道店')">
+              <div class="store-icon">🍕</div>
+              <div class="store-body">
+                <div class="store-name">ピソラ 表参道店</div>
+                <div class="store-meta">未実施 — 新規報告書を作成</div>
+              </div>
+              <div class="score-pill none">—</div>
+            </div>
+          </div>
+          <button class="btn-green" onclick="openRintenModal('新規店舗')">＋ 新規臨店報告書を作成</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== チャンネル定義（ユニシアHD実使用ツール）=====
+var SEND_CHANNELS = [
+  {id:'社内チャット',  label:'社内チャット',  dot:'var(--purple)', btnCls:'',       placeholder:'社内チャットで送信...'},
+  {id:'Google Chat', label:'Google Chat', dot:'#4285F4',       btnCls:'s-gchat', placeholder:'Google Chatで送信...'},
+  {id:'Chatwork',    label:'Chatwork',    dot:'var(--cw)',     btnCls:'s-cw',    placeholder:'Chatworkで送信（外部取引先）...'},
+  {id:'LINE',        label:'LINE',        dot:'var(--line)',   btnCls:'s-line',  placeholder:'LINEで送信（店舗スタッフ · LINE公式アカウント）...'}
+];
+var currentSendCh = '社内チャット';
+
+// ===== チャットデータ =====
+var CHATS = {
+  honsha: {icon:'🏢',cls:'purple',name:'本社 全体連絡',sub:'本社全員 · 14名',channels:['社内チャット'],
+    messages:[
+      {who:'坂',sender:'坂本 憲介（IT戦略部）',text:'5月の勤怠締め日は5月25日（月）です。今月分の申請を完了させてください。',time:'14:32',mine:false,ch:'社内チャット'},
+      {who:'加',sender:'加藤（情報システム課）',text:'承知しました。Gemini Enterprise の件は確認でき次第ご連絡します。',time:'14:45',mine:false,ch:'社内チャット'},
+      {who:'山',sender:'山田 太郎',text:'了解です。有給申請の締め切りも同じ日でよいですか？',time:'14:50',mine:true,ch:'社内チャット'},
+      {who:'坂',sender:'坂本 憲介（IT戦略部）',text:'はい、同じ日程でお願いします。ポータルから申請できます。',time:'14:52',mine:false,ch:'社内チャット'}
+    ]},
+  fc: {icon:'🍢',cls:'green',name:'渋谷FC 田中オーナー',sub:'FC加盟店 · 社内チャット',channels:['社内チャット'],
+    messages:[
+      {who:'田',sender:'田中オーナー（渋谷FC）',text:'GWのシフト確認をお願いします。5/3〜5/5は臨時スタッフを手配予定です。',time:'10:05',mine:false,ch:'社内チャット'},
+      {who:'山',sender:'山田 太郎',text:'確認しました。5/4分のシフト表を今日中に共有します。',time:'10:30',mine:true,ch:'社内チャット'},
+      {who:'田',sender:'田中オーナー（渋谷FC）',text:'ありがとうございます。よろしくお願いします。',time:'10:45',mine:false,ch:'社内チャット'}
+    ]},
+  it: {icon:'💻',cls:'blue',name:'IT戦略部',sub:'本社 · Google Chat',channels:['Google Chat'],
+    messages:[
+      {who:'加',sender:'加藤（情報システム課）',text:'Gemini Enterprise の新規ライセンス申請を進めたいです。予算確認をお願いできますか？',time:'11:20',mine:false,ch:'Google Chat'},
+      {who:'芳',sender:'芳野（DX推進課）',text:'Claude Code の社内展開について坂本さんに相談したいことがあります。',time:'11:35',mine:false,ch:'Google Chat'}
+    ]},
+  chatwork: {icon:'🤝',cls:'orange',name:'ダンドリワーク 山本',sub:'外部取引先 · Chatwork',channels:['Chatwork'],
+    messages:[
+      {who:'ダ',sender:'ダンドリワーク 山本',text:'先日ご提案した件についてご確認いただけますでしょうか。',time:'昨日',mine:false,ch:'Chatwork'}
+    ]},
+  line: {icon:'📱',cls:'red',name:'渋谷店 田中（バイト）',sub:'店舗スタッフ · LINE',channels:['LINE'],
+    messages:[
+      {who:'田',sender:'田中（渋谷店）',text:'明日の仕込み時間について確認です。いつもより1時間早めてもいいですか？',time:'月曜',mine:false,ch:'LINE'},
+      {who:'山',sender:'山田 太郎',text:'大丈夫です。17時スタートでお願いします。',time:'月曜',mine:true,ch:'LINE'}
+    ]}
+};
+
+var currentChat = 'honsha';
+
+function doLogin(){
+  document.getElementById('screen-login').style.display='none';
+  document.getElementById('screen-main').classList.add('active');
+  loadIframes();
+  selectChat(document.querySelector('.chat-item.active'), 'honsha');
+}
+
+function setErr(f,show){
+  var inp = document.getElementById('inp-'+f);
+  var err = document.getElementById('err-'+f);
+  inp.classList.toggle('error',show);
+  err.classList.toggle('show',show);
+}
+
+function doLogout(){
+  document.getElementById('screen-main').classList.remove('active');
+  document.getElementById('screen-login').style.display='flex';
+}
+
+function dismissNotif(el){ el.querySelector('.notif-dot').classList.add('hidden'); }
+
+function showTab(name,el){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.side-item').forEach(function(i){i.classList.remove('active');});
+  document.getElementById('tab-'+name).classList.add('active');
+  if(el) el.classList.add('active');
+}
+
+// ===== チャット機能 =====
+function selectChat(itemEl, chatId){
+  document.querySelectorAll('.chat-item').forEach(function(i){i.classList.remove('active');});
+  if(itemEl) itemEl.classList.add('active');
+  currentChat = chatId;
+  var c = CHATS[chatId];
+  document.getElementById('thread-icon').textContent = c.icon;
+  document.getElementById('thread-name').textContent = c.name;
+  document.getElementById('thread-sub').textContent  = c.sub;
+  // チャンネルバッジ更新
+  var badges = document.getElementById('thread-ch-badges');
+  badges.innerHTML = c.channels.map(function(ch){
+    return '<span class="thread-ch-badge '+ch+'">'+ch+'</span>';
+  }).join('');
+  // メッセージ描画
+  var box = document.getElementById('chat-messages');
+  box.innerHTML = '';
+  c.messages.forEach(function(m){ box.appendChild(buildMsg(m)); });
+  box.scrollTop = box.scrollHeight;
+  // 送信チャンネルタブを対象チャットの利用チャンネルに絞る
+  buildSendTabs(c.channels);
+}
+
+function buildMsg(m){
+  var row = document.createElement('div');
+  row.className = 'msg-row' + (m.mine?' mine':'');
+  var chTag = '<span class="msg-ch-tag '+m.ch+'">'+m.ch+'</span>';
+  row.innerHTML =
+    '<div class="msg-avatar">'+m.who+'</div>'+
+    '<div class="msg-content">'+
+      '<div class="msg-meta">'+
+        (m.mine ? chTag+'<span class="msg-sender">'+m.sender+'</span>'
+                : '<span class="msg-sender">'+m.sender+'</span>'+chTag)+
+      '</div>'+
+      '<div class="msg-bubble'+(m.mine?' via-'+m.ch.toLowerCase():'')+'">'+m.text+'</div>'+
+      '<div class="msg-time">'+m.time+'</div>'+
+    '</div>';
+  return row;
+}
+
+function buildSendTabs(channels){
+  var tabs = document.getElementById('send-ch-tabs');
+  tabs.innerHTML = '';
+  // 対象チャットで使えるチャンネルだけ表示、なければ全チャンネル
+  var list = channels && channels.length ? SEND_CHANNELS.filter(function(s){ return channels.indexOf(s.id)>=0; }) : SEND_CHANNELS;
+  list.forEach(function(s, i){
+    var tab = document.createElement('div');
+    tab.className = 'send-ch-tab t-'+s.id + (i===0?' active':'');
+    tab.innerHTML = '<span class="send-ch-dot"></span>'+s.label;
+    tab.onclick = function(){ selectSendCh(s.id, tab, s.placeholder, s.btnCls); };
+    tabs.appendChild(tab);
+  });
+  if(list.length) selectSendCh(list[0].id, tabs.firstChild, list[0].placeholder, list[0].btnCls);
+}
+
+function selectSendCh(chId, tabEl, placeholder, btnCls){
+  currentSendCh = chId;
+  document.querySelectorAll('.send-ch-tab').forEach(function(t){ t.classList.remove('active'); });
+  tabEl.classList.add('active');
+  document.getElementById('chat-input').placeholder = placeholder;
+  var btn = document.getElementById('btn-send');
+  btn.className = 'btn-send' + (btnCls?' '+btnCls:'');
+}
+
+function sendMsg(){
+  var inp = document.getElementById('chat-input');
+  var txt = inp.value.trim();
+  if(!txt) return;
+  var c = CHATS[currentChat];
+  var now = new Date();
+  var t = now.getHours()+':'+(('0'+now.getMinutes()).slice(-2));
+  var msg = {who:'山',sender:'山田 太郎',text:txt,time:t,mine:true,ch:currentSendCh};
+  c.messages.push(msg);
+  var box = document.getElementById('chat-messages');
+  box.appendChild(buildMsg(msg));
+  box.scrollTop = box.scrollHeight;
+  inp.value='';
+}
+
+function filterChannel(ch, tabEl){
+  document.querySelectorAll('.ch-tab').forEach(function(t){t.classList.remove('active');});
+  tabEl.classList.add('active');
+  document.querySelectorAll('.chat-item').forEach(function(item){
+    if(ch==='all' || item.dataset.channel===ch){ item.classList.remove('hidden'); }
+    else { item.classList.add('hidden'); }
+  });
+}
+
+function filterChatSearch(val){
+  var q = val.toLowerCase();
+  document.querySelectorAll('.chat-item').forEach(function(item){
+    var name = item.querySelector('.chat-name').textContent.toLowerCase();
+    var last = item.querySelector('.chat-last') ? item.querySelector('.chat-last').textContent.toLowerCase() : '';
+    item.classList.toggle('hidden', !name.includes(q) && !last.includes(q));
+  });
+}
+
+// ===== 勤怠（ダンドリポータルライク）=====
+function loadIframes(){
+  var now = new Date();
+  var days = ['日','月','火','水','木','金','土'];
+  document.getElementById('kintai-date').textContent =
+    now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日（'+days[now.getDay()]+'）';
+  var lu = document.getElementById('kintai-last-update');
+  if(lu) lu.textContent = ('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+  setInterval(function(){
+    var n = new Date();
+    document.getElementById('kintai-clock').textContent =
+      ('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2)+':'+('0'+n.getSeconds()).slice(-2);
+  }, 1000);
+}
+
+function doPunchV2(type, btnEl){
+  var now = new Date();
+  var t = ('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
+  if(type==='出勤'){
+    document.getElementById('syukkin-time').textContent = t;
+    btnEl.classList.remove('ready');
+    btnEl.classList.add('done');
+    btnEl.disabled = true;
+    document.getElementById('btn-kyukei-s').disabled = false;
+    document.getElementById('btn-kyukei-s').classList.add('ready');
+    document.getElementById('btn-taikin').disabled = false;
+  } else if(type==='休憩開始'){
+    btnEl.classList.remove('ready');
+    btnEl.classList.add('done');
+    btnEl.disabled = true;
+    document.getElementById('btn-kyukei-e').disabled = false;
+    document.getElementById('btn-kyukei-e').classList.add('ready');
+  } else if(type==='休憩終了'){
+    btnEl.classList.remove('ready');
+    btnEl.classList.add('done');
+    btnEl.disabled = true;
+    document.getElementById('btn-kyukei-s').disabled = false;
+    document.getElementById('btn-kyukei-s').classList.remove('done');
+    document.getElementById('btn-kyukei-s').classList.add('ready');
+  } else if(type==='退勤'){
+    document.getElementById('taikin-time').textContent = t;
+    btnEl.classList.remove('ready');
+    btnEl.classList.add('done');
+    btnEl.disabled = true;
+    document.getElementById('btn-kyukei-s').disabled = true;
+    document.getElementById('btn-kyukei-e').disabled = true;
+  }
+  showToast(type+'打刻しました（'+t+'）');
+}
+
+// ===== ワークフロー =====
+function openNewReqModal(){
+  document.getElementById('req-modal').classList.add('open');
+}
+function closeReqModal(e){
+  if(!e || e.target===document.getElementById('req-modal')){
+    document.getElementById('req-modal').classList.remove('open');
+  }
+}
+function openReqForm(name){
+  document.getElementById('req-modal').classList.remove('open');
+  document.getElementById('req-form-title').textContent = name;
+  document.getElementById('req-form-modal').classList.add('open');
+}
+function closeReqFormModal(e){
+  if(!e || e.target===document.getElementById('req-form-modal')){
+    document.getElementById('req-form-modal').classList.remove('open');
+  }
+}
+function submitReq(){
+  document.getElementById('req-form-modal').classList.remove('open');
+  showToast('申請を提出しました');
+}
+function switchWfTab(tab, el){
+  el.closest('.dp-wf-tabs').querySelectorAll('.dp-wf-tab').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('wf-panel-pending').classList.remove('active');
+  document.getElementById('wf-panel-mine').classList.remove('active');
+  document.getElementById('wf-panel-'+tab).classList.add('active');
+}
+
+// ===== トースト =====
+function showToast(msg){
+  var toast = document.createElement('div');
+  toast.className = 'dp-toast';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(function(){ toast.classList.add('show'); }, 10);
+  setTimeout(function(){ toast.classList.remove('show'); setTimeout(function(){ toast.remove(); }, 280); }, 2600);
+}
+
+function doPunch(){ doPunchV2('出勤', document.getElementById('btn-syukkin')); }
+
+// ===== 臨店報告書モーダル =====
+var RT_CATEGORIES = [
+  { name: 'Q クオリティ', icon: '🍖', short: 'Q クオリ', items: [
+    '食材の鮮度・品質が基準を満たしている','調理手順がマニュアル通りに実施されている','盛り付けが基準通りである','提供温度が適切である','量・サイズが規定通りである',
+    '食材の保管温度が基準を満たしている','賞味期限の管理が適切である','アレルゲン情報の管理が適切である','調理器具の衛生管理が適切である','フライ油の交換・管理が適切である',
+    '仕込み量が適切である','廃棄管理が適切である','ドリンクの品質・提供が基準通りである','食器・カトラリーに汚れや欠けがない','提供速度が基準を満たしている',
+    'テイクアウト対応が適切である','アレルギー対応の手順が徹底されている','食材発注量が適切である','ポーションコントロールが適切である','調理スタッフのユニフォーム・衛生が基準通りである'
+  ]},
+  { name: 'S サービス', icon: '😊', short: 'S サービス', items: [
+    '入店時の挨拶・笑顔が適切である','注文取り時の説明・提案が適切である','配膳のタイミング・対応が適切である','テーブルクリアリングが適切に行われている','お会計時の対応が適切である',
+    '退店時の見送りが適切である','スタッフの身だしなみが基準を満たしている','クレーム対応の手順が徹底されている','リピーター対応が適切である','呼び出しへの応答速度が基準以内である',
+    'メニュー説明・提案ができるスタッフが配置されている','繁忙時の対応フローが機能している','待ち時間の声かけが適切に行われている','子ども・高齢者への配慮が適切である','スタッフ間の連携が適切に行われている',
+    '電話対応が適切である','SNS・口コミ対応の意識がある','スタッフの接客訓練が定期実施されている','ホールスタッフの配置が適切である','サービス品質の自己チェックが実施されている'
+  ]},
+  { name: 'C クレンリネス', icon: '🧹', short: 'C クレンリ', items: [
+    '入口・外観が清潔である','客席の清掃状態が基準を満たしている','テーブル・椅子に汚れや破損がない','トイレの清掃・補充が基準通りである','キッチンの清掃状態が基準を満たしている',
+    '冷蔵庫・冷凍庫の清掃が適切である','排水溝・ゴミ箱の管理が適切である','窓・壁・床の清潔状態が基準通りである','調理器具の洗浄・保管が適切である','食器の洗浄・保管が適切である',
+    '消毒液・除菌スプレーが適切に配備されている','害虫・ネズミ対策が実施されている','換気扇・空調の清潔状態が適切である','ゴミの分別・廃棄が適切に行われている','スタッフの手洗い・消毒が徹底されている',
+    '店舗外（駐車場等）の清掃状態が適切である','メニュー・POPの清潔状態が適切である','ゴミ収集場所の管理が適切である','害虫防除記録が最新の状態である','清掃マニュアルが最新版で掲示されている'
+  ]},
+  { name: 'M マニュアル', icon: '📋', short: 'M マニュアル', items: [
+    'シフト管理が適切に行われている','教育・研修計画が実施されている','重要連絡事項の周知が適切に行われている','開店・閉店チェックリストが実施されている','設備点検が定期的に行われている',
+    '緊急対応マニュアルが周知されている','法令遵守（食品衛生法等）が徹底されている','アルバイトの労働時間管理が適切である','マニュアルが最新版に更新されている','ロールプレイ・OJTが実施されている',
+    '売上・在庫の日次確認が行われている','スタッフのコンプライアンス教育が実施されている','顧客情報の取り扱いが適切である','火災・避難訓練が実施されている','設備の修繕・メンテナンスが適切に行われている',
+    '損益計算が定期的に確認されている','ブランドガイドラインが遵守されている','競合店調査が定期的に行われている','顧客満足度調査が実施されている','キャンペーン・フェアの実施状況が適切である'
+  ]},
+  { name: 'P 収益管理', icon: '💰', short: 'P 収益管理', items: [
+    'FLコスト（Food + Labor）が目標範囲内である','食材廃棄率が基準以内である','発注量が適切（過剰・不足なし）である','在庫管理が適切に行われている','売上目標の進捗が把握されている',
+    '客単価向上のための取り組みが行われている','客数増加の取り組みが行われている','ランチ・ディナーの売上比率が把握されている','テイクアウト・デリバリー売上が把握されている','省エネ・光熱費管理が適切である',
+    '人件費の時間帯別管理が適切である','繁忙期・閑散期の対応計画がある','食材仕入れコストの見直しが行われている','メニューミックスの分析が行われている','キャッシュフローの管理が適切である',
+    '損益分岐点の把握と対策が取られている','デジタル決済・キャッシュレス対応が適切である','売上データの活用・分析が行われている','予実管理が適切に行われている','収益改善のPDCAが回されている'
+  ]}
+];
+
+var rtAnswers = [];
+var rtCurrentCat = 0;
+var rtStoreName = '';
+
+function openRintenModal(storeName) {
+  rtStoreName = storeName;
+  rtAnswers = RT_CATEGORIES.map(function(c){ return c.items.map(function(){ return null; }); });
+  rtCurrentCat = 0;
+  document.getElementById('rinten-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  var now = new Date();
+  var days = ['日','月','火','水','木','金','土'];
+  document.getElementById('rt-store-title').textContent = storeName;
+  document.getElementById('rt-check-store').textContent = storeName;
+  document.getElementById('rt-check-date').textContent =
+    now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日（'+days[now.getDay()]+'）';
+  document.getElementById('rt-check-screen').style.display = 'block';
+  document.getElementById('rt-result-screen').style.display = 'none';
+  document.getElementById('rt-submit-btn').style.display = 'inline-block';
+  rtRenderCatTabs();
+  rtRenderItems();
+  rtUpdateProgress();
+  document.getElementById('rinten-overlay').scrollTop = 0;
+}
+
+function closeRinten() {
+  document.getElementById('rinten-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function rtRenderCatTabs() {
+  var tabs = document.querySelectorAll('.rt-cat-tab');
+  tabs.forEach(function(t, i){ t.classList.toggle('active', i === rtCurrentCat); });
+}
+
+function rtSwitchCat(idx) {
+  rtCurrentCat = idx;
+  rtRenderCatTabs();
+  rtRenderItems();
+}
+
+function rtRenderItems() {
+  var wrap = document.getElementById('rt-items-wrap');
+  var cat = RT_CATEGORIES[rtCurrentCat];
+  wrap.innerHTML = cat.items.map(function(item, i) {
+    var ans = rtAnswers[rtCurrentCat][i];
+    return '<div class="rt-check-item '+(ans==='ok'?'answered':ans==='ng'?'ng':'')+'">' +
+      '<div class="rt-item-num">'+(i+1)+'</div>' +
+      '<div class="rt-item-text">'+item+'</div>' +
+      '<div class="rt-options">' +
+        '<button class="rt-opt ok '+(ans==='ok'?'sel':'')+'" onclick="rtSetAnswer('+rtCurrentCat+','+i+',\'ok\')">OK</button>' +
+        '<button class="rt-opt ng '+(ans==='ng'?'sel':'')+'" onclick="rtSetAnswer('+rtCurrentCat+','+i+',\'ng\')">NG</button>' +
+        '<button class="rt-opt na '+(ans==='na'?'sel':'')+'" onclick="rtSetAnswer('+rtCurrentCat+','+i+',\'na\')">N/A</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function rtSetAnswer(catIdx, itemIdx, val) {
+  rtAnswers[catIdx][itemIdx] = val;
+  rtRenderItems();
+  rtUpdateProgress();
+}
+
+function rtUpdateProgress() {
+  var total = 0, done = 0;
+  rtAnswers.forEach(function(cat){ cat.forEach(function(a){ total++; if(a!==null) done++; }); });
+  document.getElementById('rt-progress-text').textContent = done+' / '+total+'項目';
+  document.getElementById('rt-progress-fill').style.width = (done/total*100)+'%';
+}
+
+function submitRinten() {
+  // 未回答をランダム補完（デモ用）
+  rtAnswers = rtAnswers.map(function(cat){
+    return cat.map(function(a){
+      if(a!==null) return a;
+      var r = Math.random();
+      return r < 0.82 ? 'ok' : r < 0.92 ? 'ng' : 'na';
+    });
+  });
+
+  var catScores = rtAnswers.map(function(cat){
+    var applicable = cat.filter(function(a){ return a!=='na'; });
+    var ok = cat.filter(function(a){ return a==='ok'; }).length;
+    return applicable.length > 0 ? Math.round(ok/applicable.length*100) : 100;
+  });
+  var total = Math.round(catScores.reduce(function(s,v){ return s+v; }, 0) / catScores.length);
+
+  document.getElementById('rt-result-score').textContent = total;
+  document.getElementById('rt-result-store').textContent = rtStoreName;
+  var now = new Date();
+  document.getElementById('rt-result-date').textContent =
+    now.getFullYear()+'年'+(now.getMonth()+1)+'月'+now.getDate()+'日 '+
+    ('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2)+' 提出';
+
+  // カテゴリ別スコア
+  document.getElementById('rt-cat-results').innerHTML = catScores.map(function(s, i){
+    var cls = s>=85?'rt-fill-green':s>=70?'rt-fill-yellow':'rt-fill-red';
+    return '<div class="rt-cat-result-row">' +
+      '<div class="rt-cat-name">'+RT_CATEGORIES[i].short+'</div>' +
+      '<div class="rt-cat-bar-wrap"><div class="rt-cat-bar"><div class="rt-cat-fill '+cls+'" style="width:'+s+'%"></div></div></div>' +
+      '<div class="rt-cat-pct">'+s+'%</div>' +
+    '</div>';
+  }).join('');
+
+  // NG項目
+  var ngItems = [];
+  rtAnswers.forEach(function(cat, ci){
+    cat.forEach(function(a, ii){
+      if(a==='ng') ngItems.push(RT_CATEGORIES[ci].short+' — '+RT_CATEGORIES[ci].items[ii]);
+    });
+  });
+  var ngBadge = document.getElementById('rt-ng-badge');
+  ngBadge.textContent = ngItems.length+'件';
+  ngBadge.style.background = ngItems.length>0?'#fee2e2':'#d1fae5';
+  ngBadge.style.color = ngItems.length>0?'#dc2626':'#059669';
+  document.getElementById('rt-ng-list').innerHTML = ngItems.length===0
+    ? '<div style="text-align:center;padding:12px 0;font-size:13px;color:#9ca3af">NG項目はありません 🎉</div>'
+    : ngItems.map(function(t){ return '<div class="rt-ng-row"><div class="rt-ng-dot"></div><div>'+t+'</div></div>'; }).join('');
+
+  // 前回比
+  var prev = 78;
+  var diff = total - prev;
+  document.getElementById('rt-compare-prev').textContent = prev;
+  document.getElementById('rt-compare-now').textContent = total;
+  document.getElementById('rt-compare-now').className = 'rt-compare-val '+(total>=85?'rt-green':total>=70?'rt-orange':'rt-red');
+  var changeEl = document.getElementById('rt-compare-diff');
+  changeEl.textContent = (diff>=0?'+':'')+diff+'pt';
+  changeEl.className = 'rt-compare-val '+(diff>=0?'rt-green':'rt-red');
+
+  document.getElementById('rt-check-screen').style.display = 'none';
+  document.getElementById('rt-result-screen').style.display = 'block';
+  document.getElementById('rt-submit-btn').style.display = 'none';
+  document.getElementById('rinten-overlay').scrollTop = 0;
+}
+</script>
+
+<!-- 臨店報告書オーバーレイ -->
+<div id="rinten-overlay">
+  <div class="rt-nav">
+    <button class="rt-back" onclick="closeRinten()">← 戻る</button>
+    <span id="rt-store-title" style="font-weight:700;font-size:14px;max-width:200px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis"></span>
+    <button class="rt-submit" id="rt-submit-btn" onclick="submitRinten()">提出</button>
+  </div>
+
+  <!-- チェック画面 -->
+  <div id="rt-check-screen" class="rt-content">
+    <div class="rt-check-header">
+      <div class="rt-check-store" id="rt-check-store">店舗名</div>
+      <div class="rt-check-date" id="rt-check-date"></div>
+      <div class="rt-progress-wrap">
+        <div class="rt-progress-label"><span>進捗</span><span id="rt-progress-text">0 / 100項目</span></div>
+        <div class="rt-progress-bar"><div class="rt-progress-fill" id="rt-progress-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="rt-cat-tabs">
+      <div class="rt-cat-tab active" onclick="rtSwitchCat(0)">🍖 Q クオリティ</div>
+      <div class="rt-cat-tab" onclick="rtSwitchCat(1)">😊 S サービス</div>
+      <div class="rt-cat-tab" onclick="rtSwitchCat(2)">🧹 C クレンリネス</div>
+      <div class="rt-cat-tab" onclick="rtSwitchCat(3)">📋 M マニュアル</div>
+      <div class="rt-cat-tab" onclick="rtSwitchCat(4)">💰 P 収益管理</div>
+    </div>
+
+    <div id="rt-items-wrap"></div>
+
+    <div class="rt-card" style="margin-top:12px">
+      <div class="rt-card-title">📷 写真添付</div>
+      <div class="rt-photo-zone" onclick="showToast('写真添付機能（実装予定）')">
+        <div style="font-size:28px;margin-bottom:6px">📷</div>
+        <div style="font-size:13px;color:#9ca3af">タップして写真を追加</div>
+        <div style="font-size:11px;color:#9ca3af;margin-top:4px">NG箇所・気になる点の記録</div>
+      </div>
+    </div>
+
+    <div class="rt-card">
+      <div class="rt-card-title">📝 総評コメント</div>
+      <textarea class="rt-comment" placeholder="全体的な所感・店長へのメッセージ・特記事項を入力..."></textarea>
+    </div>
+
+    <button class="rt-btn-primary" onclick="submitRinten()">✓ チェックを提出してスコアを確認</button>
+    <div style="height:32px"></div>
+  </div>
+
+  <!-- 結果画面 -->
+  <div id="rt-result-screen" class="rt-content" style="display:none">
+    <div class="rt-result-hero">
+      <div class="rt-score-ring">
+        <div class="rt-score-num" id="rt-result-score">--</div>
+        <div class="rt-score-sub">/ 100点</div>
+      </div>
+      <div class="rt-result-store" id="rt-result-store">店舗名</div>
+      <div class="rt-result-date" id="rt-result-date"></div>
+    </div>
+
+    <div class="rt-card">
+      <div class="rt-card-title">カテゴリ別スコア</div>
+      <div id="rt-cat-results"></div>
+    </div>
+
+    <div class="rt-card">
+      <div class="rt-card-title">❌ NG項目一覧 <span id="rt-ng-badge" style="font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600;margin-left:6px">-件</span></div>
+      <div class="rt-ng-list" id="rt-ng-list"></div>
+    </div>
+
+    <div class="rt-card">
+      <div class="rt-card-title">前回比較</div>
+      <div class="rt-compare-wrap">
+        <div class="rt-compare-box">
+          <div class="rt-compare-label">前回（4/20）</div>
+          <div class="rt-compare-val rt-orange" id="rt-compare-prev">78</div>
+        </div>
+        <div style="font-size:22px;color:#d1d5db">→</div>
+        <div class="rt-compare-box">
+          <div class="rt-compare-label">今回</div>
+          <div class="rt-compare-val rt-green" id="rt-compare-now">--</div>
+        </div>
+        <div class="rt-compare-box">
+          <div class="rt-compare-label">変化</div>
+          <div class="rt-compare-val" id="rt-compare-diff">--</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="rt-btn-primary" onclick="closeRinten()">← ポータルに戻る</button>
+    <div style="height:32px"></div>
+  </div>
+</div>
+
+</body>
+</html>
