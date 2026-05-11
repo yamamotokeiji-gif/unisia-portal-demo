@@ -1,0 +1,34 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e8]:
+    - img "DRM - Dandori Relation Management" [ref=e11]
+    - generic [ref=e13]:
+      - heading "ようこそ" [level=2] [ref=e14]
+      - paragraph [ref=e15]: アカウントにログインしてください
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]: メールアドレス
+          - generic [ref=e19]:
+            - img [ref=e20]
+            - textbox "example@company.com" [ref=e23]
+        - generic [ref=e24]:
+          - generic [ref=e25]: パスワード
+          - generic [ref=e26]:
+            - img [ref=e27]
+            - textbox "••••••••" [ref=e30]
+            - button [ref=e31] [cursor=pointer]:
+              - img [ref=e32]
+        - button "パスワードを忘れた方" [ref=e36] [cursor=pointer]
+        - button "ログイン" [ref=e37] [cursor=pointer]
+    - generic [ref=e38]:
+      - paragraph [ref=e39]: © 2026 DRM - Powered by Dandori Work
+      - generic [ref=e40]:
+        - link "利用規約" [ref=e41] [cursor=pointer]:
+          - /url: "#"
+        - generic [ref=e42]: "|"
+        - link "プライバシーポリシー" [ref=e43] [cursor=pointer]:
+          - /url: "#"
+        - generic [ref=e44]: "|"
+        - link "ヘルプ" [ref=e45] [cursor=pointer]:
+          - /url: "#"
+  - region "Notifications alt+T"
+  - alert [ref=e46]

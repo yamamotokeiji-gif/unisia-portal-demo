@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ユニシアHD提案_印刷用</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#1B2740;--blue:#1B8FCE;--blue2:#0D5F8F;
+  --bg:#EEF2F7;--cream:#F8F5EE;--dark:#1A1A2E;
+  --gray:#888;--mid:#555;--light:#aaa;
+  --border:#D0D8E4;--red:#C0392B;--red-l:#FFF0EE;
+  --green:#1E7E4A;--green-l:#EAF7EF;
+  --org:#D46B08;--org-l:#FEF3E2;
+}
+
+/* 1ページ = 1280×720px (16:9) — ブラウザ「横向きA4」でほぼ同比率になる */
+@page { size: 1280px 720px; margin: 0; }
+
+html, body { margin: 0; padding: 0; background: white; }
+
+.slide-wrap {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+}
+.slide-wrap:last-child { page-break-after: avoid; break-after: avoid; }
+
+/* 画面表示用 */
+@media screen {
+  body { background: #222; padding: 20px; }
+  .slide-wrap {
+    margin: 20px auto;
+    box-shadow: 0 4px 32px rgba(0,0,0,.5);
+  }
+}
+
+/* SLIDE共通スタイル */
+.sl {
+  width: 1280px;
+  height: 720px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Meiryo","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  position: relative;
+}
+
+.hd{padding:32px 56px 0;}
+.hd-main{font-size:36px;font-weight:900;color:var(--dark);line-height:1.2;}
+.hd-sub{font-size:14px;color:var(--gray);margin-top:7px;}
+.hd-rule{height:2px;background:var(--border);margin:14px 56px 0;}
+
+.ft{position:absolute;bottom:0;left:0;right:0;height:30px;display:flex;align-items:center;padding:0 56px;}
+.ft-l{font-size:9px;color:var(--light);font-family:"Calibri",sans-serif;letter-spacing:1px;}
+.ft-r{margin-left:auto;font-size:9px;color:var(--light);font-family:"Calibri",sans-serif;}
+
+.body{flex:1;padding:16px 56px 36px;display:flex;flex-direction:column;}
+
+.cream-card{background:var(--cream);border:1px solid #E0D8CC;padding:20px 22px;}
+.white-card{background:white;border:1px solid var(--border);padding:20px 22px;box-shadow:0 2px 10px rgba(27,39,64,.06);}
+.navy-card{background:var(--navy);color:white;padding:20px 22px;}
+.blue-card{background:var(--blue);color:white;padding:20px 22px;}
+.risk{background:var(--red-l);border-left:3px solid var(--red);padding:8px 12px;font-size:11.5px;color:var(--red);font-weight:700;margin-top:8px;}
+.quote{background:var(--bg);border-left:3px solid var(--blue);padding:10px 14px;font-size:12px;color:var(--mid);font-style:italic;line-height:1.6;margin-top:8px;}
+.num-big{font-family:"Calibri",sans-serif;font-size:56px;font-weight:700;color:var(--blue);line-height:1;}
+.tag{font-size:10px;font-weight:700;letter-spacing:2px;font-family:"Calibri",sans-serif;}
+.cdiv{height:1px;background:var(--border);margin:10px 0;}
+.cbody{font-size:12px;color:var(--mid);line-height:1.75;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ S1 TITLE ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:white;">
+  <div style="padding:36px 56px 0;display:flex;flex-direction:column;height:100%;">
+    <div style="font-family:'Calibri',sans-serif;font-size:11px;font-weight:700;color:var(--blue);letter-spacing:3px;margin-bottom:28px;">UNISIA HOLDINGS — SYSTEM DEVELOPMENT PROPOSAL</div>
+    <div style="font-size:50px;font-weight:900;color:var(--dark);line-height:1.15;margin-bottom:16px;">ユニシアホールディングス様への<br>DX推進提案</div>
+    <div style="font-size:18px;font-weight:700;color:var(--blue);margin-bottom:36px;">グループSaaS最適化・出店AI・データ基盤 ── 4つのテーマと進め方</div>
+    <div style="height:2px;background:var(--border);margin-bottom:32px;"></div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex:1;padding-bottom:36px;">
+      <div style="font-size:14px;color:var(--mid);line-height:2.1;">
+        提案先：ユニシアホールディングス　大須賀 伸博 副社長<br>
+        作成日：2026年4月<br>
+        提案者：株式会社ダンドリワーク　山本 啓司
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Calibri',sans-serif;font-size:20px;font-weight:900;color:var(--navy);">&#9670; ダンドリワーク</div>
+        <div style="font-size:10px;color:var(--light);margin-top:4px;font-family:'Calibri',sans-serif;">dandori work</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work  CONFIDENTIAL</div><div class="ft-r">1</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S2 前回MTGの課題 ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:white;">
+  <div class="hd">
+    <div class="hd-main">前回MTGで確認した、4つの課題</div>
+    <div class="hd-sub">2026年4月2日 キックオフMTGでの御社発言をもとに整理しました</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:16px;padding-top:18px;align-items:stretch;">
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px;">
+      <div class="white-card" style="flex:1;">
+        <div class="tag" style="color:var(--red);margin-bottom:8px;">課題 01 ／ SaaSコスト</div>
+        <div style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px;">年間数千万規模の<br>SaaS費用が膨張している</div>
+        <div class="quote">「物によっては年間数千万の契約になっている。コストに見合っていない領域がある」</div>
+      </div>
+      <div class="white-card" style="flex:1;">
+        <div class="tag" style="color:var(--red);margin-bottom:8px;">課題 02 ／ データ分散</div>
+        <div style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px;">情報が各所に散らばり<br>経営判断が遅い</div>
+        <div class="quote">「飲食店の情報がいろんなところに散らばっている。集約した上で判断できる環境が欲しい」</div>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px;">
+      <div class="white-card" style="flex:1;">
+        <div class="tag" style="color:var(--red);margin-bottom:8px;">課題 03 ／ 出店精度</div>
+        <div style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px;">出店判断の精度が<br>上げられていない</div>
+        <div class="quote">「重回帰分析はやっているが、当たらない。AIで精度を上げていきたい」</div>
+      </div>
+      <div class="white-card" style="flex:1;">
+        <div class="tag" style="color:var(--red);margin-bottom:8px;">課題 04 ／ AI活用</div>
+        <div style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px;">AI活用が個人レベルに<br>とどまっている</div>
+        <div class="quote">「会社全体としてAIをどう活用するかというフェーズまではまだいけていない」</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">2</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S3 全体マップ ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:var(--bg);">
+  <div class="hd">
+    <div class="hd-main">ダンドリワークにできること ── 4つのテーマ</div>
+    <div class="hd-sub">御社の課題に対応する4領域をご提案します。本日はどこから始めるかを一緒に決めましょう。</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:16px;padding-top:18px;align-items:stretch;">
+    <div style="flex:1;background:white;border:1px solid var(--border);display:flex;flex-direction:column;box-shadow:0 2px 12px rgba(27,39,64,.07);">
+      <div style="background:var(--org);padding:14px 18px;">
+        <div style="font-family:'Calibri',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:2px;margin-bottom:4px;">THEME 01</div>
+        <div style="font-size:15px;font-weight:700;color:white;">SaaSコスト削減<br>内製化</div>
+      </div>
+      <div style="padding:14px 18px;flex:1;">
+        <div style="font-size:11.5px;color:var(--mid);line-height:1.8;">年間数千万のSaaS費用を<br><strong style="color:var(--dark);">1/2以下</strong>に削減。<br>必要機能を自社資産として内製化。</div>
+      </div>
+      <div style="padding:0 18px 14px;font-size:11px;color:var(--gray);">→ 課題01に対応</div>
+    </div>
+    <div style="flex:1;background:white;border:1px solid var(--border);display:flex;flex-direction:column;box-shadow:0 2px 12px rgba(27,39,64,.07);">
+      <div style="background:var(--blue);padding:14px 18px;">
+        <div style="font-family:'Calibri',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:2px;margin-bottom:4px;">THEME 02</div>
+        <div style="font-size:15px;font-weight:700;color:white;">出店シミュレーション<br>AI</div>
+      </div>
+      <div style="padding:14px 18px;flex:1;">
+        <div style="font-size:11.5px;color:var(--mid);line-height:1.8;">重回帰分析からAIへ。<br>立地・競合・人流を統合し、<br><strong style="color:var(--dark);">出店精度を劇的向上。</strong></div>
+      </div>
+      <div style="padding:0 18px 14px;font-size:11px;color:var(--gray);">→ 課題03に対応</div>
+    </div>
+    <div style="flex:1;background:white;border:1px solid var(--border);display:flex;flex-direction:column;box-shadow:0 2px 12px rgba(27,39,64,.07);">
+      <div style="background:var(--green);padding:14px 18px;">
+        <div style="font-family:'Calibri',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:2px;margin-bottom:4px;">THEME 03</div>
+        <div style="font-size:15px;font-weight:700;color:white;">グループ<br>データ基盤</div>
+      </div>
+      <div style="padding:14px 18px;flex:1;">
+        <div style="font-size:11.5px;color:var(--mid);line-height:1.8;">バラバラのデータを一元化。<br>グループ横断の<br><strong style="color:var(--dark);">リアルタイム経営判断</strong>を実現。</div>
+      </div>
+      <div style="padding:0 18px 14px;font-size:11px;color:var(--gray);">→ 課題02に対応</div>
+    </div>
+    <div style="flex:1;background:white;border:1px solid var(--border);display:flex;flex-direction:column;box-shadow:0 2px 12px rgba(27,39,64,.07);">
+      <div style="background:var(--navy);padding:14px 18px;">
+        <div style="font-family:'Calibri',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.8);letter-spacing:2px;margin-bottom:4px;">THEME 04</div>
+        <div style="font-size:15px;font-weight:700;color:white;">AI活用推進<br>支援</div>
+      </div>
+      <div style="padding:14px 18px;flex:1;">
+        <div style="font-size:11.5px;color:var(--mid);line-height:1.8;">個人レベルから組織全体へ。<br>幹部教育〜内製化まで。<br><strong style="color:var(--dark);">「卒業プラン」</strong>付き。</div>
+      </div>
+      <div style="padding:0 18px 14px;font-size:11px;color:var(--gray);">→ 課題04に対応</div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">3</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S4 テーマ① SaaSコスト ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:white;">
+  <div class="hd">
+    <div class="hd-main">テーマ① ── SaaSコスト削減・内製化</div>
+    <div class="hd-sub">年間数千万のSaaS費用を、自社資産に転換する</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:28px;padding-top:18px;">
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:2px;">現状の課題</div>
+      <div style="background:var(--red-l);border:1px solid #F5C6C2;padding:16px 18px;">
+        <div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:8px;">SaaSが乱立し、コストが積み上がる一方</div>
+        <div style="font-size:12px;color:var(--mid);line-height:1.8;">・シフト管理：1店舗あたり数万円 × 170店舗<br>・発注管理・HR系・CRM…と複数が並立<br>・ベンダーロックインで乗り換えもできない<br>・それぞれのデータが連携されていない</div>
+      </div>
+      <div style="background:var(--navy);color:white;padding:12px 18px;font-size:13px;font-weight:700;text-align:center;">→ 同じ機能を、1/2以下のコストで自社に</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:2px;">ダンドリワークの解決策</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:var(--bg);border:1px solid var(--border);padding:14px 16px;display:flex;gap:12px;">
+          <div style="width:4px;background:var(--org);flex-shrink:0;"></div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:3px;">対象SaaSを内製化</div>
+            <div style="font-size:11.5px;color:var(--mid);">シフト管理 / 発注・在庫 / HR・給与 / FC店舗コミュニケーション</div>
+          </div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);padding:14px 16px;display:flex;gap:12px;">
+          <div style="width:4px;background:var(--blue);flex-shrink:0;"></div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:3px;">スイッチングコストを最小化</div>
+            <div style="font-size:11.5px;color:var(--mid);">AIエージェントで既存SaaSからデータを自動移行。切り替えの痛みをなくす。</div>
+          </div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);padding:14px 16px;display:flex;gap:12px;">
+          <div style="width:4px;background:var(--green);flex-shrink:0;"></div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:3px;">まず1機能・1ブランドで試せる</div>
+            <div style="font-size:11.5px;color:var(--mid);">テストケースから始め、成果を確認してから全体展開。リスクを最小化。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">4</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S5 テーマ② 出店AI ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:var(--bg);">
+  <div class="hd">
+    <div class="hd-main">テーマ② ── 出店シミュレーションAI</div>
+    <div class="hd-sub">「当たらない重回帰分析」を、精度の高いAI判断に変える</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:20px;padding-top:18px;align-items:stretch;">
+    <div style="flex:1;background:white;border:1px solid var(--border);padding:20px 22px;display:flex;flex-direction:column;">
+      <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:14px;">✕ 現在の出店判断</div>
+      <div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:12px;">重回帰分析ベースの予測</div>
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
+        <div style="font-size:12px;color:var(--mid);padding:8px 12px;background:var(--red-l);border-left:3px solid var(--red);">当たらない（担当者も認識済み）</div>
+        <div style="font-size:12px;color:var(--mid);padding:8px 12px;background:var(--red-l);border-left:3px solid var(--red);">開発担当者の属人的判断に依存</div>
+        <div style="font-size:12px;color:var(--mid);padding:8px 12px;background:var(--red-l);border-left:3px solid var(--red);">撤退物件情報を不動産屋に先取りされる</div>
+        <div style="font-size:12px;color:var(--mid);padding:8px 12px;background:var(--red-l);border-left:3px solid var(--red);">「良い場所」に出して他エリアが出せなくなる</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;flex-shrink:0;">
+      <div style="font-size:28px;color:var(--blue);font-weight:700;">→</div>
+    </div>
+    <div style="flex:1;background:var(--navy);padding:20px 22px;display:flex;flex-direction:column;">
+      <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:14px;">✓ AIによる出店判断</div>
+      <div style="font-size:14px;font-weight:700;color:white;margin-bottom:12px;">データ統合 × AI スコアリング</div>
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
+        <div style="font-size:12px;color:rgba(255,255,255,.85);padding:8px 12px;background:rgba(255,255,255,.08);border-left:3px solid var(--blue);">立地・競合・昼夜間人口・通行量を統合分析</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.85);padding:8px 12px;background:rgba(255,255,255,.08);border-left:3px solid var(--blue);">中立AIによる自動スコアリング（バイアスなし）</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.85);padding:8px 12px;background:rgba(255,255,255,.08);border-left:3px solid var(--blue);">「Aに出したらBは出せなくなる」シミュレーション</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.85);padding:8px 12px;background:rgba(255,255,255,.08);border-left:3px solid var(--blue);">撤退物件情報の先行取得システム</div>
+      </div>
+      <div style="margin-top:14px;background:var(--blue);color:white;padding:10px;font-size:12px;font-weight:700;text-align:center;">まずピソラで実証 → グループ全体へ展開</div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">5</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S6 テーマ③ データ基盤 ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:white;">
+  <div class="hd">
+    <div class="hd-main">テーマ③ ── グループデータ基盤構築</div>
+    <div class="hd-sub">バラバラのデータを一元化し、リアルタイムで経営判断できる環境へ</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:20px;padding-top:18px;align-items:stretch;">
+    <div style="flex:1;background:var(--bg);border:1px solid var(--border);padding:22px 24px;display:flex;flex-direction:column;">
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:16px;">現在の状態</div>
+      <div style="display:flex;flex-direction:column;gap:10px;flex:1;">
+        <div style="background:white;border:1px solid var(--border);padding:12px 14px;">
+          <div style="font-size:12.5px;font-weight:700;color:var(--dark);margin-bottom:3px;">各ブランドのシステムがバラバラ</div>
+          <div style="font-size:11px;color:var(--mid);">ピソラ / 串カツ田中 / その他ブランドのデータが連携していない</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);padding:12px 14px;">
+          <div style="font-size:12.5px;font-weight:700;color:var(--dark);margin-bottom:3px;">POSレジ以外の情報が取れていない</div>
+          <div style="font-size:11px;color:var(--mid);">センサー / 人流 / SNS / 競合データが未活用</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);padding:12px 14px;">
+          <div style="font-size:12.5px;font-weight:700;color:var(--dark);margin-bottom:3px;">グループ横断での比較・分析ができない</div>
+          <div style="font-size:11px;color:var(--mid);">グループシナジーが発揮できていない</div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:1;background:var(--navy);padding:22px 24px;display:flex;flex-direction:column;">
+      <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:16px;">データ基盤を作ると、こうなる</div>
+      <div style="display:flex;flex-direction:column;gap:10px;flex:1;">
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:12px 14px;">
+          <div style="font-size:12.5px;font-weight:700;color:white;margin-bottom:3px;">グループ横断のリアルタイムダッシュボード</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.7);">全ブランドの売上・KPIを一画面でリアルタイム把握</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:12px 14px;">
+          <div style="font-size:12.5px;font-weight:700;color:white;margin-bottom:3px;">各SaaSとのAPI連携で自動集約</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.7);">既存システムを活かしながら、データだけ統合できる</div>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:12px 14px;">
+          <div style="font-size:12.5px;font-weight:700;color:white;margin-bottom:3px;">ブランド間ベンチマーク・成功事例の横展開</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.7);">どのブランドの何が効いているかが一目でわかる</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:var(--blue);color:white;padding:10px;font-size:12px;font-weight:700;text-align:center;">データが揃えば、出店AIの精度も上がる</div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">6</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S7 テーマ④ AI活用 ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:var(--bg);">
+  <div class="hd">
+    <div class="hd-main">テーマ④ ── AI活用推進支援</div>
+    <div class="hd-sub">個人レベルのAI活用を、組織全体の競争力に変える</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:20px;padding-top:18px;align-items:stretch;">
+    <div style="flex:1;background:white;border:1px solid var(--border);padding:22px 24px;display:flex;flex-direction:column;">
+      <div style="font-family:'Calibri',sans-serif;font-size:28px;font-weight:700;color:var(--blue);line-height:1;margin-bottom:10px;">STEP 1</div>
+      <div style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;">現状把握・ロードマップ策定</div>
+      <div class="cdiv"></div>
+      <div class="cbody">「何をどこに依頼すればいいかわからない」を解消。<br><br>現在の業務・SaaS・AI活用状況をヒアリングし、グループ全体のAI活用ロードマップを設計。</div>
+    </div>
+    <div style="flex:1;background:white;border:1px solid var(--border);padding:22px 24px;display:flex;flex-direction:column;">
+      <div style="font-family:'Calibri',sans-serif;font-size:28px;font-weight:700;color:var(--blue);line-height:1;margin-bottom:10px;">STEP 2</div>
+      <div style="font-size:15px;font-weight:700;color:var(--dark);margin-bottom:10px;">業務別AIエージェント導入</div>
+      <div class="cdiv"></div>
+      <div class="cbody">メール・報告書・データ集計・顧客対応…<br>各業務に合わせたAIエージェントを順番に導入。<br><br>担当者の作業時間を大幅に削減。</div>
+    </div>
+    <div style="flex:1;background:var(--navy);padding:22px 24px;display:flex;flex-direction:column;">
+      <div style="font-family:'Calibri',sans-serif;font-size:28px;font-weight:700;color:var(--blue);line-height:1;margin-bottom:10px;">STEP 3</div>
+      <div style="font-size:15px;font-weight:700;color:white;margin-bottom:10px;">内製化支援「卒業プラン」</div>
+      <div style="height:1px;background:rgba(255,255,255,.2);margin:10px 0;"></div>
+      <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.75;">幹部・担当者がAI開発を自ら行えるレベルまで支援。<br><br>「ダンドリワークに頼らなくてもいい状態」を最終ゴールとして、依存関係を作らない。<br><br><strong style="color:var(--blue);">自社でできるようになった時が、本当の勝利。</strong></div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">7</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S8 進め方 ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:white;">
+  <div class="hd">
+    <div class="hd-main">進め方 ── まず1テーマ、小さく始める</div>
+    <div class="hd-sub">リスクを最小化しながら、確実に成果を出す。成果が出てから全体へ。</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:20px;padding-top:18px;align-items:stretch;">
+    <div style="flex:1.2;display:flex;flex-direction:column;gap:14px;">
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:2px;">ビジネスモデル ── 3つの選択肢</div>
+      <div style="border:2px solid var(--navy);display:flex;flex-direction:column;">
+        <div style="background:var(--navy);color:white;padding:10px 16px;font-size:13px;font-weight:700;">Plan A ── 成果報酬型</div>
+        <div style="padding:12px 16px;font-size:12px;color:var(--mid);line-height:1.7;">初期投資ゼロ。成果が出た分をともに分かち合う方式。御社のリスクは完全にゼロ。</div>
+      </div>
+      <div style="border:1px solid var(--border);display:flex;flex-direction:column;">
+        <div style="background:#F4F6F9;border-bottom:1px solid var(--border);padding:10px 16px;font-size:13px;font-weight:700;color:var(--dark);">Plan B ── ハイブリッド型</div>
+        <div style="padding:12px 16px;font-size:12px;color:var(--mid);line-height:1.7;">一部を先行投資し、継続サポートを受けながら進める方式。</div>
+      </div>
+      <div style="border:1px solid var(--border);display:flex;flex-direction:column;">
+        <div style="background:#F4F6F9;border-bottom:1px solid var(--border);padding:10px 16px;font-size:13px;font-weight:700;color:var(--dark);">Plan C ── フル依頼型</div>
+        <div style="padding:12px 16px;font-size:12px;color:var(--mid);line-height:1.7;">開発費を先行投資し、システムを自社資産として完全に保有する方式。</div>
+      </div>
+      <div style="font-size:10.5px;color:var(--light);">※ 詳細条件はヒアリング後にご提案します</div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+      <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:2px;">推奨ステップ</div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Calibri',sans-serif;font-size:14px;font-weight:700;color:white;flex-shrink:0;">1</div>
+        <div style="font-size:12.5px;color:var(--dark);line-height:1.6;"><strong>本日：テーマと対象ブランドを決める</strong><br>4テーマのどこから始めるかを選択</div>
+      </div>
+      <div style="width:1px;height:14px;background:var(--border);margin-left:16px;"></div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Calibri',sans-serif;font-size:14px;font-weight:700;color:white;flex-shrink:0;">2</div>
+        <div style="font-size:12.5px;color:var(--dark);line-height:1.6;"><strong>ヒアリングMTG（1〜2週間後）</strong><br>現状システム・データ・要件の詳細ヒアリング</div>
+      </div>
+      <div style="width:1px;height:14px;background:var(--border);margin-left:16px;"></div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Calibri',sans-serif;font-size:14px;font-weight:700;color:white;flex-shrink:0;">3</div>
+        <div style="font-size:12.5px;color:var(--dark);line-height:1.6;"><strong>テストケース開発（数週間〜）</strong><br>1機能・1ブランドで成果を実証</div>
+      </div>
+      <div style="width:1px;height:14px;background:var(--border);margin-left:16px;"></div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:32px;height:32px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Calibri',sans-serif;font-size:14px;font-weight:700;color:white;flex-shrink:0;">4</div>
+        <div style="font-size:12.5px;color:var(--dark);line-height:1.6;"><strong>グループ全体へ展開</strong><br>成果確認後、他ブランド・他テーマへ横展開</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">8</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S9 なぜダンドリワークか ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:var(--bg);">
+  <div class="hd">
+    <div class="hd-main">なぜ、ダンドリワークか</div>
+    <div class="hd-sub">スピード・価格・伴走力。AI開発で日本トップクラスの実績</div>
+  </div>
+  <div class="hd-rule"></div>
+  <div class="body" style="flex-direction:row;gap:20px;padding-top:18px;align-items:stretch;">
+    <div style="flex:1;background:white;border:1px solid var(--border);padding:24px;display:flex;flex-direction:column;">
+      <div style="font-size:10px;font-weight:700;color:var(--gray);margin-bottom:12px;font-family:'Calibri',sans-serif;letter-spacing:1px;">01 ｜ 圧倒的な実績</div>
+      <div style="display:flex;gap:16px;margin-bottom:12px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Calibri',sans-serif;font-size:40px;font-weight:700;color:var(--blue);line-height:1;">10万</div>
+          <div style="font-size:11px;color:var(--mid);">社の課題解決</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Calibri',sans-serif;font-size:40px;font-weight:700;color:var(--navy);line-height:1;">17万</div>
+          <div style="font-size:11px;color:var(--mid);">人のユーザー</div>
+        </div>
+      </div>
+      <div class="cdiv"></div>
+      <div class="cbody">建築・医療・芸能・出版…多業界で実績。「ツールを売る会社」ではなく「課題を一緒に解く会社」として11年間、伴走してきた。</div>
+    </div>
+    <div style="flex:1;background:white;border:1px solid var(--border);padding:24px;display:flex;flex-direction:column;">
+      <div style="font-size:10px;font-weight:700;color:var(--gray);margin-bottom:12px;font-family:'Calibri',sans-serif;letter-spacing:1px;">02 ｜ 開発スピードとコスト</div>
+      <div style="margin-bottom:12px;">
+        <div style="font-family:'Calibri',sans-serif;font-size:18px;font-weight:700;color:var(--blue);margin-bottom:4px;">1年かかるシステム → 2〜3ヶ月</div>
+        <div style="font-family:'Calibri',sans-serif;font-size:18px;font-weight:700;color:var(--navy);">開発コスト → 従来比1/2以下</div>
+      </div>
+      <div class="cdiv"></div>
+      <div class="cbody">AI開発（Claude Code等）を全社で実践。幹部10人全員が自らサービスを開発できる体制。稟議・縦割りなし。決断が速く、動きが柔軟。</div>
+    </div>
+    <div style="flex:1;background:white;border:1px solid var(--border);padding:24px;display:flex;flex-direction:column;">
+      <div style="font-size:10px;font-weight:700;color:var(--gray);margin-bottom:12px;font-family:'Calibri',sans-serif;letter-spacing:1px;">03 ｜ 卒業プランあり</div>
+      <div style="font-family:'Calibri',sans-serif;font-size:26px;font-weight:700;color:var(--blue);line-height:1.2;margin-bottom:12px;">依存させない。<br>自走させる。</div>
+      <div class="cdiv"></div>
+      <div class="cbody">最終的に御社が自分たちでAI開発・運用できるように支援する「卒業プラン」を提供。ベンダーロックインを作らない。これが他社との最大の違い。</div>
+    </div>
+  </div>
+  <div class="ft"><div class="ft-l">dandori work</div><div class="ft-r">9</div></div>
+</div>
+</div>
+
+<!-- ══════════════ S10 クロージング ══════════════ -->
+<div class="slide-wrap">
+<div class="sl" style="background:var(--navy);">
+  <div style="height:4px;background:var(--blue);"></div>
+  <div style="flex:1;display:flex;padding:36px 56px 0;gap:40px;">
+    <div style="flex:1;display:flex;flex-direction:column;">
+      <div style="font-family:'Calibri',sans-serif;font-size:10px;font-weight:700;color:var(--blue);letter-spacing:3px;margin-bottom:10px;">TODAY'S AGENDA</div>
+      <div style="font-size:32px;font-weight:900;color:white;line-height:1.2;margin-bottom:24px;">本日、一緒に決めたいこと</div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:36px;height:36px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Calibri',sans-serif;font-size:16px;font-weight:700;color:white;flex-shrink:0;">1</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:white;margin-bottom:4px;">どのテーマから始めるか</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.65);">4テーマの優先順位を一緒に整理する</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:36px;height:36px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Calibri',sans-serif;font-size:16px;font-weight:700;color:white;flex-shrink:0;">2</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:white;margin-bottom:4px;">テストケースはどのブランド・領域か</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.65);">まず動かせる範囲を決める</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:36px;height:36px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Calibri',sans-serif;font-size:16px;font-weight:700;color:white;flex-shrink:0;">3</div>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:white;margin-bottom:4px;">ヒアリングMTGの日程設定</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.65);">詳細ヒアリングのスケジュールを決める</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="width:260px;display:flex;flex-direction:column;gap:14px;padding-top:40px;">
+      <div style="background:var(--red);padding:16px 18px;">
+        <div style="font-size:13px;font-weight:700;color:white;line-height:1.6;">⚡ 動き出しが遅れるほど、<br>競合との差が広がる。<br>今日、最初の一歩を決めましょう。</div>
+      </div>
+      <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:20px 18px;">
+        <div style="font-family:'Calibri',sans-serif;font-size:9px;font-weight:700;color:var(--blue);letter-spacing:2px;margin-bottom:12px;">CONTACT</div>
+        <div style="font-size:16px;font-weight:700;color:white;margin-bottom:10px;">山本 啓司</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:2.0;">📞 080-3814-5443<br>✉ yamamoto.keiji@<br>　dandori-work.com</div>
+        <div style="margin-top:14px;background:var(--blue);color:white;font-size:12px;font-weight:700;padding:10px;text-align:center;">ご質問はいつでも</div>
+      </div>
+    </div>
+  </div>
+  <div style="padding:12px 56px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;margin-top:auto;">
+    <div style="font-family:'Calibri',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:1.5px;">dandori work  CONFIDENTIAL</div>
+    <div style="margin-left:auto;font-family:'Calibri',sans-serif;font-size:9px;color:rgba(255,255,255,.3);">10</div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

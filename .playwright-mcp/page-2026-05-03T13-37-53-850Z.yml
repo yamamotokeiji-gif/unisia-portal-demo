@@ -1,0 +1,16 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]: 🏢
+    - heading "UNISIA HD" [level=1] [ref=e6]
+    - paragraph [ref=e7]: 統合業務ポータル
+  - generic [ref=e8]:
+    - generic [ref=e9]: 👤 一般社員
+    - heading "おかえりなさい" [level=2] [ref=e10]
+    - paragraph [ref=e11]: アカウント情報を入力してください
+    - generic [ref=e12]:
+      - generic [ref=e13]: メールアドレス
+      - textbox "yamada@unisia-hd.co.jp" [ref=e14]
+      - generic [ref=e15]: パスワード
+      - textbox "パスワードを入力" [ref=e16]
+      - button "ログイン" [ref=e17] [cursor=pointer]
+    - generic [ref=e18]: パスワードを忘れた方は IT戦略部へご連絡ください

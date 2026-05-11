@@ -1,0 +1,89 @@
+- generic [ref=e19]:
+  - navigation [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]: 🏢
+      - generic [ref=e23]: UNISIA HD
+      - generic [ref=e24]: 統合ポータル
+    - generic [ref=e25]:
+      - generic "通知" [ref=e26] [cursor=pointer]: 🔔
+      - generic "クリックでログアウト" [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]: 坂
+        - generic [ref=e30]: 坂本 憲介
+        - generic [ref=e31]: 👑 管理職
+  - generic [ref=e32]:
+    - navigation [ref=e33]:
+      - generic [ref=e34]: 管理ダッシュボード
+      - generic [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: 📊
+        - text: ホーム
+        - generic [ref=e37]: "5"
+      - generic [ref=e39]: コミュニケーション
+      - generic [ref=e40] [cursor=pointer]:
+        - generic [ref=e41]: 💬
+        - text: チャット
+        - generic [ref=e42]: "7"
+      - generic [ref=e44]: チーム管理
+      - generic [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]: ✅
+        - text: 承認待ち
+        - generic [ref=e47]: "3"
+      - generic [ref=e48] [cursor=pointer]:
+        - generic [ref=e49]: 👥
+        - text: メンバー状況
+        - generic [ref=e50]: "2"
+      - generic [ref=e52]: 店舗管理
+      - generic [ref=e53] [cursor=pointer]:
+        - generic [ref=e54]: 🏪
+        - text: 臨店ダッシュボード
+    - generic [ref=e57]:
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - heading "坂本 憲介 さん" [level=2] [ref=e60]
+          - paragraph [ref=e61]: IT戦略部 · 管理職 · 要対応が5件あります
+        - generic [ref=e62]:
+          - generic [ref=e63]: 2026年5月3日（日）
+          - generic [ref=e64]: 🌙 お疲れ様でした
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e67]: 承認待ち申請
+          - generic [ref=e68]: "3"
+          - generic [ref=e69]: 有給2件・残業1件
+        - generic [ref=e70]:
+          - generic [ref=e71]: 残業アラート（45h超）
+          - generic [ref=e72]: "2"
+          - generic [ref=e73]: 今月 対象メンバー
+        - generic [ref=e74]:
+          - generic [ref=e75]: 外国人就労確認
+          - generic [ref=e76]: "1"
+          - generic [ref=e77]: 要確認 1名
+        - generic [ref=e78]:
+          - generic [ref=e79]: 未読チャット
+          - generic [ref=e80]: "7"
+          - generic [ref=e81]: 4チャンネル
+      - generic [ref=e82]:
+        - generic [ref=e83]: 要対応アラート
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]: ⏳
+            - generic [ref=e87]:
+              - generic [ref=e88]: 承認待ち申請が3件あります
+              - generic [ref=e89]: "山田 太郎: 有給申請（5/10〜5/12）・鈴木: 残業申請（4/30）ほか"
+            - button "確認する →" [ref=e90] [cursor=pointer]
+          - generic [ref=e91]:
+            - generic [ref=e92]: ⚠️
+            - generic [ref=e93]:
+              - generic [ref=e94]: 残業45時間超えのメンバーが2名います
+              - generic [ref=e95]: "鈴木: 47.5h / 田中: 46.2h（36協定上限: 45h）"
+            - button "確認する →" [ref=e96] [cursor=pointer]
+          - generic [ref=e97]:
+            - generic [ref=e98]: 🌏
+            - generic [ref=e99]:
+              - generic [ref=e100]: 外国人就労時間の確認が必要です
+              - generic [ref=e101]: "渡辺: 今月累計 27h / 上限 28h（週4h制限に接近）"
+            - button "確認する →" [ref=e102] [cursor=pointer]
+          - generic [ref=e103]:
+            - generic [ref=e104]: 🏪
+            - generic [ref=e105]:
+              - generic [ref=e106]: 池袋店の臨店スコアが低下しています
+              - generic [ref=e107]: "前回: 70点 → 今回: 62点（-8点）QSC衛生管理の項目で減点"
+            - button "確認する →" [ref=e108] [cursor=pointer]

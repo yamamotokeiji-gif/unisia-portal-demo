@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ユニシアHD 統合ポータル</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;background:#f5f3ff;color:#1a1033;min-height:100vh}
+.screen{display:none}
+.screen.active{display:flex;flex-direction:column;min-height:100vh}
+
+/* ===== LOGIN ===== */
+#screen-login{background:linear-gradient(160deg,#3D1EAD 0%,#5B2DE8 55%,#7B4FF0 100%);align-items:center;justify-content:center;padding:40px 24px}
+.login-card{background:#fff;border-radius:24px;padding:48px 36px;width:100%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(91,45,232,0.35)}
+.login-logo-wrap img{height:60px;object-fit:contain}
+.login-tagline{color:#5B2DE8;font-size:11px;font-weight:700;letter-spacing:1.5px;margin-top:6px;margin-bottom:28px}
+.login-title{font-size:16px;font-weight:700;color:#374151;margin-bottom:24px}
+.login-label{text-align:left;font-size:12px;font-weight:600;color:#6b7280;margin-bottom:4px;display:block}
+.login-input{width:100%;padding:13px 16px;border:1.5px solid #e5e0f5;border-radius:10px;font-size:14px;margin-bottom:16px;outline:none;transition:border-color 0.2s;background:#faf9ff;color:#1a1033}
+.login-input:focus{border-color:#5B2DE8}
+.btn-login{width:100%;padding:15px;background:linear-gradient(135deg,#5B2DE8,#7B4FF0);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;letter-spacing:0.5px;transition:opacity 0.2s;box-shadow:0 4px 16px rgba(91,45,232,0.4)}
+.btn-login:hover{opacity:0.88}
+.login-link{color:#5B2DE8;font-size:12px;margin-top:14px;cursor:pointer}
+.login-footer{color:#d1d5db;font-size:11px;margin-top:20px}
+
+/* ===== MAIN LAYOUT ===== */
+#screen-main{background:#f5f3ff}
+.top-nav{background:#5B2DE8;color:#fff;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:100;flex-shrink:0;box-shadow:0 2px 8px rgba(91,45,232,0.3)}
+.nav-left{display:flex;align-items:center;gap:12px}
+.nav-logo{height:26px;object-fit:contain;filter:brightness(0) invert(1)}
+.nav-title{font-weight:700;font-size:16px;letter-spacing:0.3px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-bell{font-size:20px;cursor:pointer;position:relative}
+.nav-badge-dot{position:absolute;top:-3px;right:-3px;background:#ef4444;border-radius:50%;width:8px;height:8px}
+.nav-avatar{width:34px;height:34px;background:rgba(255,255,255,0.22);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;border:2px solid rgba(255,255,255,0.35)}
+
+/* ===== TAB CONTENT ===== */
+.tab-content{display:none;flex:1;overflow-y:auto}
+.tab-content.active{display:block}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{background:#fff;border-top:1px solid #ede9fc;display:flex;justify-content:space-around;padding:10px 0 14px;position:sticky;bottom:0;flex-shrink:0;box-shadow:0 -2px 8px rgba(91,45,232,0.08)}
+.bnav-item{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:4px 16px;border-radius:10px;transition:background 0.15s;position:relative}
+.bnav-item:hover{background:#f5f3ff}
+.bnav-icon{font-size:22px}
+.bnav-label{font-size:10px;color:#9ca3af;font-weight:600}
+.bnav-item.active .bnav-label{color:#5B2DE8;font-weight:700}
+.bnav-badge{position:absolute;top:2px;right:10px;background:#ef4444;color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+/* ===== CHAT TAB ===== */
+.chat-tab{padding:0}
+.chat-search{padding:12px 16px;background:#fff;border-bottom:1px solid #ede9fc}
+.search-box{background:#f5f3ff;border:none;border-radius:10px;padding:10px 16px;width:100%;font-size:14px;color:#1a1033;outline:none}
+.search-box::placeholder{color:#9ca3af}
+
+.channel-section-title{font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;padding:14px 16px 8px}
+.channel-list{background:#fff;border-top:1px solid #f0edfb;border-bottom:1px solid #f0edfb}
+.channel-item{padding:14px 16px;border-bottom:1px solid #f5f3ff;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background 0.12s}
+.channel-item:last-child{border-bottom:none}
+.channel-item:hover{background:#faf9ff}
+.ch-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ch-purple{background:#f0edfb}
+.ch-green{background:#dcfce7}
+.ch-blue{background:#dbeafe}
+.ch-orange{background:#fef3c7}
+.ch-red{background:#fee2e2}
+.ch-body{flex:1;min-width:0}
+.ch-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.ch-name{font-size:14px;font-weight:700;color:#1a1033}
+.ch-time{font-size:11px;color:#9ca3af}
+.ch-last{font-size:12px;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-badge{background:#5B2DE8;color:#fff;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ch-badge.gray{background:#e5e7eb;color:#9ca3af}
+
+.drm-info{margin:16px;background:#fff;border-radius:16px;padding:16px 18px;border:1.5px solid #ede9fc}
+.drm-info-title{font-size:12px;font-weight:700;color:#5B2DE8;margin-bottom:6px}
+.drm-info-text{font-size:12px;color:#6b7280;line-height:1.6}
+.drm-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.drm-chip{background:#f0edfb;color:#5B2DE8;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px}
+
+/* ===== 申請 TAB ===== */
+.tab-header{background:linear-gradient(135deg,#5B2DE8,#7B4FF0);padding:20px 20px 28px;color:#fff}
+.tab-header-eyebrow{font-size:11px;opacity:0.75;margin-bottom:4px;letter-spacing:0.5px}
+.tab-header-title{font-size:20px;font-weight:800}
+.tab-header-sub{font-size:12px;opacity:0.82;margin-top:6px;line-height:1.5}
+.tab-header-badge{display:inline-block;margin-top:10px;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700}
+
+.tab-body{padding:16px;margin-top:-12px}
+
+.alert-card{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;border-left:4px solid #ef4444;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.alert-icon{font-size:22px;flex-shrink:0}
+.alert-text{font-size:13px;color:#374151;font-weight:600}
+.alert-sub{font-size:11px;color:#9ca3af;margin-top:2px}
+
+.section-label{font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.app-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.app-tile{background:#fff;border-radius:14px;padding:18px 14px;text-align:center;cursor:pointer;box-shadow:0 2px 8px rgba(91,45,232,0.07);border:1.5px solid #f0edfb;transition:transform 0.15s}
+.app-tile:hover{transform:translateY(-2px)}
+.app-tile-icon{font-size:30px;margin-bottom:8px}
+.app-tile-label{font-size:13px;font-weight:700;color:#1a1033;margin-bottom:3px}
+.app-tile-sub{font-size:11px;color:#9ca3af}
+.tile-badge{color:#dc2626;font-weight:700}
+
+/* ===== 勤怠 TAB ===== */
+.status-card{background:#fff;border-radius:16px;padding:4px 18px;box-shadow:0 2px 8px rgba(91,45,232,0.07);margin-bottom:12px;border:1.5px solid #f0edfb}
+.status-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #f5f3ff}
+.status-row:last-child{border-bottom:none}
+.status-label{font-size:13px;color:#374151;font-weight:600}
+.status-val{font-size:13px;font-weight:700}
+.c-green{color:#16a34a}
+.c-orange{color:#d97706}
+.c-purple{color:#5B2DE8}
+.c-red{color:#dc2626}
+
+.month-bar{background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(91,45,232,0.07);margin-bottom:12px;border:1.5px solid #f0edfb}
+.bar-label{display:flex;justify-content:space-between;font-size:12px;color:#6b7280;margin-bottom:6px;font-weight:600}
+.bar-track{background:#f0edfb;border-radius:99px;height:10px;overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#5B2DE8,#7B4FF0)}
+.bar-fill.orange{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.bar-fill.green{background:linear-gradient(90deg,#10b981,#34d399)}
+
+/* ===== 臨店 TAB ===== */
+.rinten-header{background:linear-gradient(135deg,#059669,#34d399);padding:20px 20px 28px;color:#fff}
+.rinten-header-title{font-size:20px;font-weight:800;margin-bottom:6px}
+.rinten-header-sub{font-size:12px;opacity:0.85;line-height:1.5}
+
+.store-list{background:#fff;border-radius:16px;overflow:hidden;border:1.5px solid #f0edfb;box-shadow:0 2px 8px rgba(91,45,232,0.07);margin-bottom:12px}
+.store-item{padding:14px 18px;border-bottom:1px solid #f5f3ff;display:flex;align-items:center;gap:14px;cursor:pointer}
+.store-item:last-child{border-bottom:none}
+.store-item:hover{background:#fafffe}
+.store-icon{width:44px;height:44px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.store-body{flex:1}
+.store-name{font-size:14px;font-weight:700;color:#1a1033}
+.store-meta{font-size:11px;color:#9ca3af;margin-top:2px}
+.score-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.score-high{background:#dcfce7;color:#059669}
+.score-mid{background:#fef3c7;color:#d97706}
+.score-low{background:#fee2e2;color:#dc2626}
+.score-none{background:#f3f4f6;color:#9ca3af}
+
+.btn-primary{background:linear-gradient(135deg,#5B2DE8,#7B4FF0);color:#fff;border:none;border-radius:12px;padding:14px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%;letter-spacing:0.3px;transition:opacity 0.2s;box-shadow:0 4px 12px rgba(91,45,232,0.3)}
+.btn-primary:hover{opacity:0.88}
+.btn-green{background:linear-gradient(135deg,#059669,#34d399);color:#fff;border:none;border-radius:12px;padding:14px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%;letter-spacing:0.3px;transition:opacity 0.2s;box-shadow:0 4px 12px rgba(5,150,105,0.3)}
+.btn-green:hover{opacity:0.88}
+</style>
+</head>
+<body>
+
+<!-- ========== ログイン ========== -->
+<div id="screen-login" class="screen active">
+  <div class="login-card">
+    <div class="login-logo-wrap">
+      <img src="logo_unisia.png" alt="UNISIA HOLDINGS">
+    </div>
+    <div class="login-tagline">統合ポータルシステム</div>
+    <div class="login-title">アカウントにログイン</div>
+    <label class="login-label">メールアドレス</label>
+    <input class="login-input" type="email" placeholder="example@unisia-hd.co.jp">
+    <label class="login-label">パスワード</label>
+    <input class="login-input" type="password" placeholder="••••••••">
+    <button class="btn-login" onclick="go('main')">ログイン</button>
+    <div class="login-link">パスワードを忘れた方はこちら</div>
+    <div class="login-footer">© 2026 UNISIA HOLDINGS. All Rights Reserved.</div>
+  </div>
+</div>
+
+<!-- ========== MAIN ========== -->
+<div id="screen-main" class="screen">
+  <nav class="top-nav">
+    <div class="nav-left">
+      <img src="logo_unisia.png" class="nav-logo" alt="UNISIA">
+      <span class="nav-title">統合ポータル</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-bell" style="position:relative">🔔<div class="nav-badge-dot"></div></div>
+      <div class="nav-avatar">坂</div>
+    </div>
+  </nav>
+
+  <!-- チャット -->
+  <div id="tab-chat" class="tab-content active">
+    <div class="chat-search">
+      <input class="search-box" type="text" placeholder="🔍  チャンネルを検索...">
+    </div>
+
+    <div class="channel-section-title">すべてのチャンネル</div>
+    <div class="channel-list">
+      <div class="channel-item">
+        <div class="ch-icon ch-purple">🏢</div>
+        <div class="ch-body">
+          <div class="ch-row">
+            <div class="ch-name">本社 全体連絡</div>
+            <div class="ch-time">14:32</div>
+          </div>
+          <div class="ch-last">坂本: 5月の勤怠締め日について確認...</div>
+        </div>
+        <div class="ch-badge">3</div>
+      </div>
+      <div class="channel-item">
+        <div class="ch-icon ch-green">🍢</div>
+        <div class="ch-body">
+          <div class="ch-row">
+            <div class="ch-name">FC加盟店グループ</div>
+            <div class="ch-time">11:15</div>
+          </div>
+          <div class="ch-last">田中FC: GWのシフト確認をお願いします</div>
+        </div>
+        <div class="ch-badge">7</div>
+      </div>
+      <div class="channel-item">
+        <div class="ch-icon ch-blue">💼</div>
+        <div class="ch-body">
+          <div class="ch-row">
+            <div class="ch-name">IT戦略部</div>
+            <div class="ch-time">昨日</div>
+          </div>
+          <div class="ch-last">加藤: Gemini Enterprise の件ですが...</div>
+        </div>
+        <div class="ch-badge gray">2</div>
+      </div>
+      <div class="channel-item">
+        <div class="ch-icon ch-orange">🤝</div>
+        <div class="ch-body">
+          <div class="ch-row">
+            <div class="ch-name">外部取引先（Chatwork）</div>
+            <div class="ch-time">昨日</div>
+          </div>
+          <div class="ch-last">ダンドリワーク: ポータルの件でご確認...</div>
+        </div>
+        <div class="ch-badge gray" style="background:transparent;color:#d1d5db;font-size:18px">›</div>
+      </div>
+      <div class="channel-item">
+        <div class="ch-icon ch-red">📱</div>
+        <div class="ch-body">
+          <div class="ch-row">
+            <div class="ch-name">店舗アルバイト（LINE連携）</div>
+            <div class="ch-time">月曜</div>
+          </div>
+          <div class="ch-last">渋谷店: 明日の仕込み時間について...</div>
+        </div>
+        <div class="ch-badge gray" style="background:transparent;color:#d1d5db;font-size:18px">›</div>
+      </div>
+    </div>
+
+    <div class="drm-info">
+      <div class="drm-info-title">📡 マルチチャネル統合チャット</div>
+      <div class="drm-info-text">複数ツールのメッセージをこの1画面に集約。どのチャネルへの返信もポータル内から行えます。</div>
+      <div class="drm-chips">
+        <span class="drm-chip">社内チャット</span>
+        <span class="drm-chip">Googleチャット</span>
+        <span class="drm-chip">Chatwork</span>
+        <span class="drm-chip">LINE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 申請 -->
+  <div id="tab-shinsei" class="tab-content">
+    <div class="tab-header">
+      <div class="tab-header-eyebrow">Powered by ダンドリポータル</div>
+      <div class="tab-header-title">各種申請</div>
+      <div class="tab-header-sub">申請承認 → 勤怠システムへ自動連携。二度手間なし。</div>
+      <span class="tab-header-badge">✓ ユニシアHD 専用環境</span>
+    </div>
+    <div class="tab-body">
+      <div class="alert-card">
+        <div class="alert-icon">⏳</div>
+        <div>
+          <div class="alert-text">承認待ちの申請が 3件 あります</div>
+          <div class="alert-sub">有給申請 2件・残業申請 1件</div>
+        </div>
+      </div>
+      <div class="section-label">申請メニュー</div>
+      <div class="app-grid">
+        <div class="app-tile">
+          <div class="app-tile-icon">🏖️</div>
+          <div class="app-tile-label">有給申請</div>
+          <div class="app-tile-sub">残 8日</div>
+        </div>
+        <div class="app-tile">
+          <div class="app-tile-icon">🌙</div>
+          <div class="app-tile-label">残業申請</div>
+          <div class="app-tile-sub">今月 12h</div>
+        </div>
+        <div class="app-tile">
+          <div class="app-tile-icon">🔄</div>
+          <div class="app-tile-label">振替申請</div>
+          <div class="app-tile-sub">未処理 0件</div>
+        </div>
+        <div class="app-tile">
+          <div class="app-tile-icon">📝</div>
+          <div class="app-tile-label">各種届出</div>
+          <div class="app-tile-sub">住所変更 等</div>
+        </div>
+        <div class="app-tile">
+          <div class="app-tile-icon">✅</div>
+          <div class="app-tile-label">承認待ち</div>
+          <div class="app-tile-sub tile-badge">3件</div>
+        </div>
+        <div class="app-tile">
+          <div class="app-tile-icon">📋</div>
+          <div class="app-tile-label">申請履歴</div>
+          <div class="app-tile-sub">過去の申請</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 勤怠 -->
+  <div id="tab-kintai" class="tab-content">
+    <div class="tab-header">
+      <div class="tab-header-eyebrow">Powered by ダンドリポータル</div>
+      <div class="tab-header-title">勤怠管理</div>
+      <div class="tab-header-sub">36協定・残業アラート・勤怠システム自動連携</div>
+      <span class="tab-header-badge">✓ ユニシアHD 専用環境</span>
+    </div>
+    <div class="tab-body">
+      <div class="section-label">2026年4月 サマリー</div>
+      <div class="status-card">
+        <div class="status-row">
+          <div class="status-label">出勤日数</div>
+          <div class="status-val c-purple">18日 / 22日</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label">残業時間</div>
+          <div class="status-val c-orange">12h / 45h上限</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label">有給残日数</div>
+          <div class="status-val c-green">8日</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label">勤怠システム連携</div>
+          <div class="status-val c-green">✓ 自動連携済み</div>
+        </div>
+      </div>
+
+      <div class="section-label">進捗バー</div>
+      <div class="month-bar">
+        <div class="bar-label"><span>出勤日数</span><span>18 / 22日</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+      </div>
+      <div class="month-bar">
+        <div class="bar-label"><span>残業時間</span><span>12h / 45h</span></div>
+        <div class="bar-track"><div class="bar-fill orange" style="width:27%"></div></div>
+      </div>
+      <div class="month-bar">
+        <div class="bar-label"><span>有給取得</span><span>2日 / 10日</span></div>
+        <div class="bar-track"><div class="bar-fill green" style="width:20%"></div></div>
+      </div>
+
+      <div class="section-label" style="margin-top:4px">チームの勤怠状況（管理者向け）</div>
+      <div class="status-card">
+        <div class="status-row">
+          <div class="status-label">残業45h超え警告</div>
+          <div class="status-val c-red">2名</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label">外国人就労時間確認</div>
+          <div class="status-val c-orange">要確認 1名</div>
+        </div>
+        <div class="status-row">
+          <div class="status-label">未申請の欠勤</div>
+          <div class="status-val c-green">なし</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 臨店 -->
+  <div id="tab-rinten" class="tab-content">
+    <div class="rinten-header">
+      <div class="rinten-header-title">臨店報告書</div>
+      <div class="rinten-header-sub">QSCチェック100項目・AI改善提案・本部ダッシュボード</div>
+    </div>
+    <div class="tab-body" style="margin-top:-12px">
+      <div class="section-label">担当店舗一覧</div>
+      <div class="store-list">
+        <div class="store-item">
+          <div class="store-icon">🍢</div>
+          <div class="store-body">
+            <div class="store-name">串カツ田中 渋谷店</div>
+            <div class="store-meta">前回臨店: 2026/04/20</div>
+          </div>
+          <div class="score-circle score-mid">78</div>
+        </div>
+        <div class="store-item">
+          <div class="store-icon">🍢</div>
+          <div class="store-body">
+            <div class="store-name">串カツ田中 新宿東口店</div>
+            <div class="store-meta">前回臨店: 2026/04/18</div>
+          </div>
+          <div class="score-circle score-high">91</div>
+        </div>
+        <div class="store-item">
+          <div class="store-icon">🍢</div>
+          <div class="store-body">
+            <div class="store-name">串カツ田中 池袋店</div>
+            <div class="store-meta">前回臨店: 2026/04/10</div>
+          </div>
+          <div class="score-circle score-low">62</div>
+        </div>
+        <div class="store-item">
+          <div class="store-icon">🍕</div>
+          <div class="store-body">
+            <div class="store-name">ピソラ 表参道店</div>
+            <div class="store-meta">未実施</div>
+          </div>
+          <div class="score-circle score-none">—</div>
+        </div>
+      </div>
+      <button class="btn-green" onclick="window.open('臨店報告書モック.html','_blank')">臨店報告書システムを開く →</button>
+    </div>
+  </div>
+
+  <!-- ボトムナビ -->
+  <nav class="bottom-nav">
+    <div class="bnav-item active" id="bnav-chat" onclick="switchTab('chat')">
+      <div class="bnav-icon">💬</div>
+      <div class="bnav-label">チャット</div>
+      <div class="bnav-badge">10</div>
+    </div>
+    <div class="bnav-item" id="bnav-shinsei" onclick="switchTab('shinsei')">
+      <div class="bnav-icon">📋</div>
+      <div class="bnav-label">申請</div>
+      <div class="bnav-badge">3</div>
+    </div>
+    <div class="bnav-item" id="bnav-kintai" onclick="switchTab('kintai')">
+      <div class="bnav-icon">📊</div>
+      <div class="bnav-label">勤怠</div>
+    </div>
+    <div class="bnav-item" id="bnav-rinten" onclick="switchTab('rinten')">
+      <div class="bnav-icon">🏪</div>
+      <div class="bnav-label">臨店</div>
+    </div>
+  </nav>
+</div>
+
+<script>
+function go(screen) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + screen).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('bnav-' + tab).classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>

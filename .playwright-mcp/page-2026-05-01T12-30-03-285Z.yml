@@ -1,0 +1,64 @@
+- generic [active] [ref=e1]:
+  - button "メニューを開く" [ref=e691] [cursor=pointer]:
+    - img [ref=e692]
+  - generic [ref=e693]:
+    - banner [ref=e694]:
+      - generic [ref=e695]:
+        - generic [ref=e697]:
+          - button "顧客名・電話番号で検索..." [ref=e698] [cursor=pointer]:
+            - img [ref=e699]
+            - generic [ref=e702]: 顧客名・電話番号で検索...
+          - button "⌘K" [ref=e703] [cursor=pointer]:
+            - generic [ref=e704]: ⌘K
+        - generic [ref=e705]: 2026年5月1日 金曜日
+        - generic [ref=e706]:
+          - button "クイック登録" [ref=e707] [cursor=pointer]:
+            - img [ref=e708]
+          - button "工数登録" [ref=e710] [cursor=pointer]:
+            - img [ref=e711]
+          - button "ご意見・ご要望" [ref=e714] [cursor=pointer]:
+            - img [ref=e715]
+          - button "通知" [ref=e717] [cursor=pointer]:
+            - img [ref=e718]
+          - button "設定" [ref=e721] [cursor=pointer]:
+            - img [ref=e722]
+    - generic [ref=e725]:
+      - generic [ref=e726]:
+        - generic [ref=e727]:
+          - generic [ref=e729]:
+            - button "受信トレイ" [ref=e730] [cursor=pointer]
+            - button "LINE OA" [ref=e731] [cursor=pointer]:
+              - img [ref=e732]
+              - text: LINE OA
+            - button "分析" [ref=e734] [cursor=pointer]
+          - generic [ref=e735]:
+            - img [ref=e736]
+            - textbox "顧客名で検索..." [ref=e739]
+          - generic [ref=e740]:
+            - button "未読" [ref=e741] [cursor=pointer]:
+              - img [ref=e742]
+              - text: 未読
+            - button "メール" [ref=e745] [cursor=pointer]:
+              - img [ref=e746]
+              - text: メール
+            - button "SMS" [ref=e749] [cursor=pointer]:
+              - img [ref=e750]
+              - text: SMS
+            - button "担当" [ref=e752] [cursor=pointer]:
+              - img [ref=e753]
+              - text: 担当
+        - generic [ref=e757]:
+          - img [ref=e758]
+          - paragraph [ref=e761]: メッセージはありません
+      - generic [ref=e763]:
+        - img [ref=e764]
+        - paragraph [ref=e767]: 受信トレイ
+        - paragraph [ref=e768]: 左の会話リストから顧客を選択してください
+  - button "ご意見・ご要望を送る" [ref=e10] [cursor=pointer]:
+    - img [ref=e11]
+  - button "RAGアシスタントを開く" [ref=e17] [cursor=pointer]:
+    - img [ref=e19]
+    - paragraph [ref=e22]: RAG
+    - paragraph [ref=e23]: ask me anything
+  - region "Notifications alt+T"
+  - alert [ref=e380]: DRM Suite

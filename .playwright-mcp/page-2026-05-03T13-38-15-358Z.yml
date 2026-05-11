@@ -1,0 +1,128 @@
+- generic [ref=e19]:
+  - navigation [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]: 🏢
+      - generic [ref=e23]: UNISIA HD
+      - generic [ref=e24]: 統合ポータル
+    - generic [ref=e25]:
+      - generic "通知" [ref=e26] [cursor=pointer]: 🔔
+      - generic "クリックでログアウト" [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]: 山
+        - generic [ref=e30]: 山田 太郎
+        - generic [ref=e31]: 一般社員
+  - generic [ref=e32]:
+    - navigation [ref=e33]:
+      - generic [ref=e34]: メイン
+      - generic [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: 💬
+        - text: チャット
+        - generic [ref=e37]: "7"
+      - generic [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: 📋
+        - text: 申請・承認
+        - generic [ref=e40]: "3"
+      - generic [ref=e41] [cursor=pointer]:
+        - generic [ref=e42]: ⏱️
+        - text: 勤怠管理
+      - generic [ref=e44]: 店舗業務
+      - generic [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]: 🏪
+        - text: 臨店報告書
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: メッセージ
+          - textbox "🔍 検索..." [ref=e53]
+        - generic [ref=e54]:
+          - generic [ref=e55] [cursor=pointer]: すべて
+          - generic [ref=e56] [cursor=pointer]: 社内チャット
+          - generic [ref=e57] [cursor=pointer]: Google Chat
+          - generic [ref=e58] [cursor=pointer]: Chatwork
+          - generic [ref=e59] [cursor=pointer]: LINE
+        - generic [ref=e60]:
+          - generic [ref=e61] [cursor=pointer]:
+            - generic [ref=e62]: 🏢
+            - generic [ref=e63]:
+              - generic [ref=e64]:
+                - generic [ref=e65]: 本社 全体連絡
+                - generic [ref=e66]: 14:52
+              - generic [ref=e67]: "坂本: ポータルから申請できます"
+            - generic [ref=e68]: "3"
+          - generic [ref=e69] [cursor=pointer]:
+            - generic [ref=e70]: 🍢
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - generic [ref=e73]: 渋谷FC 田中オーナー
+                - generic [ref=e74]: 10:30
+              - generic [ref=e75]: "山田: 5/4シフト表を今日中に共有します"
+            - generic [ref=e76]: "2"
+          - generic [ref=e77] [cursor=pointer]:
+            - generic [ref=e78]: 💻
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - generic [ref=e81]: IT戦略部
+                - generic [ref=e82]: 11:35
+              - generic [ref=e83]: "芳野: Claude Code の社内展開の件..."
+            - generic [ref=e84]: "2"
+          - generic [ref=e85] [cursor=pointer]:
+            - generic [ref=e86]: 🤝
+            - generic [ref=e87]:
+              - generic [ref=e88]:
+                - generic [ref=e89]: ダンドリワーク 山本
+                - generic [ref=e90]: 昨日
+              - generic [ref=e91]: "ダンドリワーク: ご確認いただけますでしょうか"
+          - generic [ref=e92] [cursor=pointer]:
+            - generic [ref=e93]: 📱
+            - generic [ref=e94]:
+              - generic [ref=e95]:
+                - generic [ref=e96]: 渋谷店 田中（バイト）
+                - generic [ref=e97]: 月曜
+              - generic [ref=e98]: "田中: 明日の仕込み時間について確認です"
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - generic [ref=e101]: 🏢
+          - generic [ref=e102]:
+            - generic [ref=e103]: 本社 全体連絡
+            - generic [ref=e104]: 本社全員 · 14名
+          - generic [ref=e106]: 社内チャット
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - generic [ref=e109]: 坂
+            - generic [ref=e110]:
+              - generic [ref=e111]:
+                - generic [ref=e112]: 坂本 憲介（IT戦略部）
+                - generic [ref=e113]: 社内チャット
+              - generic [ref=e114]: 5月の勤怠締め日は5月25日（月）です。今月分の申請を完了させてください。
+              - generic [ref=e115]: 14:32
+          - generic [ref=e116]:
+            - generic [ref=e117]: 加
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - generic [ref=e120]: 加藤（情報システム課）
+                - generic [ref=e121]: 社内チャット
+              - generic [ref=e122]: 承知しました。Gemini Enterprise の件は確認でき次第ご連絡します。
+              - generic [ref=e123]: 14:45
+          - generic [ref=e124]:
+            - generic [ref=e125]: 山
+            - generic [ref=e126]:
+              - generic [ref=e127]:
+                - generic [ref=e128]: 社内チャット
+                - generic [ref=e129]: 山田 太郎
+              - generic [ref=e130]: 了解です。有給申請の締め切りも同じ日でよいですか？
+              - generic [ref=e131]: 14:50
+          - generic [ref=e132]:
+            - generic [ref=e133]: 坂
+            - generic [ref=e134]:
+              - generic [ref=e135]:
+                - generic [ref=e136]: 坂本 憲介（IT戦略部）
+                - generic [ref=e137]: 社内チャット
+              - generic [ref=e138]: はい、同じ日程でお願いします。ポータルから申請できます。
+              - generic [ref=e139]: 14:52
+        - generic [ref=e140]:
+          - generic [ref=e142] [cursor=pointer]: 社内チャット
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - button "📎" [ref=e146] [cursor=pointer]
+              - button "😊" [ref=e147] [cursor=pointer]
+            - textbox "社内チャットで送信..." [ref=e148]
+            - button "送信" [ref=e149] [cursor=pointer]

@@ -1,0 +1,494 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e382]:
+    - generic [ref=e384]:
+      - button "山 山本啓司 代表取締役 権限Lv.10 (代表取締役)" [ref=e385] [cursor=pointer]:
+        - generic [ref=e387]: 山
+        - generic [ref=e388]:
+          - generic [ref=e389]: 山本啓司
+          - generic [ref=e390]: 代表取締役
+          - generic [ref=e391]: 権限Lv.10 (代表取締役)
+      - button [ref=e392] [cursor=pointer]:
+        - img [ref=e393]
+    - generic [ref=e396]:
+      - generic [ref=e397]:
+        - button "ダッシュボード" [ref=e398] [cursor=pointer]:
+          - generic [ref=e399]:
+            - img [ref=e400]
+            - text: ダッシュボード
+          - img [ref=e402]
+        - generic [ref=e405]:
+          - button "営業" [ref=e406] [cursor=pointer]:
+            - img [ref=e407]
+            - generic [ref=e410]: 営業
+            - img [ref=e411]
+          - button "支店長" [ref=e413] [cursor=pointer]:
+            - img [ref=e414]
+            - generic [ref=e419]: 支店長
+          - button "経営" [ref=e420] [cursor=pointer]:
+            - img [ref=e421]
+            - generic [ref=e423]: 経営
+          - button "マーケティング" [ref=e425] [cursor=pointer]:
+            - img [ref=e426]
+            - generic [ref=e430]: マーケティング
+          - button "経理" [ref=e431] [cursor=pointer]:
+            - img [ref=e432]
+            - generic [ref=e434]: 経理
+          - button "施工" [ref=e435] [cursor=pointer]:
+            - img [ref=e436]
+            - generic [ref=e441]: 施工
+          - button "事務" [ref=e442] [cursor=pointer]:
+            - img [ref=e443]
+            - generic [ref=e447]: 事務
+      - generic [ref=e448]:
+        - button "BI分析" [ref=e449] [cursor=pointer]:
+          - generic [ref=e450]:
+            - img [ref=e451]
+            - text: BI分析
+          - img [ref=e454]
+        - button "BIダッシュボード" [ref=e457] [cursor=pointer]:
+          - img [ref=e458]
+          - generic [ref=e463]: BIダッシュボード
+      - generic [ref=e464]:
+        - button "経営ダッシュボード" [ref=e465] [cursor=pointer]:
+          - generic [ref=e466]:
+            - img [ref=e467]
+            - text: 経営ダッシュボード
+          - img [ref=e469]
+        - generic [ref=e471]:
+          - button "経営コックピット" [ref=e472] [cursor=pointer]:
+            - img [ref=e473]
+            - generic [ref=e476]: 経営コックピット
+          - button "粗利一覧表" [ref=e477] [cursor=pointer]:
+            - img [ref=e478]
+            - generic [ref=e480]: 粗利一覧表
+          - button "工数・生産性" [ref=e481] [cursor=pointer]:
+            - img [ref=e482]
+            - generic [ref=e484]: 工数・生産性
+          - button "経費推移" [ref=e485] [cursor=pointer]:
+            - img [ref=e486]
+            - generic [ref=e489]: 経費推移
+          - button "キャッシュフロー" [ref=e490] [cursor=pointer]:
+            - img [ref=e491]
+            - generic [ref=e494]: キャッシュフロー
+          - button "借入管理" [ref=e495] [cursor=pointer]:
+            - img [ref=e496]
+            - generic [ref=e498]: 借入管理
+          - button "AIシミュレーター" [ref=e499] [cursor=pointer]:
+            - img [ref=e500]
+            - generic [ref=e502]: AIシミュレーター
+      - generic [ref=e503]:
+        - button "営業・顧客" [ref=e504] [cursor=pointer]:
+          - generic [ref=e505]:
+            - img [ref=e506]
+            - text: 営業・顧客
+          - img [ref=e511]
+        - generic [ref=e513]:
+          - button "リード管理" [ref=e514] [cursor=pointer]:
+            - img [ref=e515]
+            - generic [ref=e518]: リード管理
+          - button "営業管理" [ref=e519] [cursor=pointer]:
+            - img [ref=e520]
+            - generic [ref=e523]: 営業管理
+          - button "目標達成ダッシュボード" [ref=e524] [cursor=pointer]:
+            - img [ref=e525]
+            - generic [ref=e529]: 目標達成ダッシュボード
+          - button "見積管理" [ref=e530] [cursor=pointer]:
+            - img [ref=e531]
+            - generic [ref=e534]: 見積管理
+          - button "契約管理" [ref=e535] [cursor=pointer]:
+            - img [ref=e536]
+            - generic [ref=e539]: 契約管理
+          - button "顧客管理" [ref=e540] [cursor=pointer]:
+            - img [ref=e541]
+            - generic [ref=e546]: 顧客管理
+      - generic [ref=e547]:
+        - button "コミュニケーション" [ref=e548] [cursor=pointer]:
+          - generic [ref=e549]:
+            - img [ref=e550]
+            - text: コミュニケーション
+          - img [ref=e552]
+        - button "受信トレイ" [ref=e555] [cursor=pointer]:
+          - img [ref=e556]
+          - generic [ref=e559]: 受信トレイ
+      - generic [ref=e560]:
+        - button "工事・施工" [ref=e561] [cursor=pointer]:
+          - generic [ref=e562]:
+            - img [ref=e563]
+            - text: 工事・施工
+          - img [ref=e568]
+        - generic [ref=e570]:
+          - button "協力会社" [ref=e571] [cursor=pointer]:
+            - img [ref=e572]
+            - generic [ref=e577]: 協力会社
+          - button "工事台帳" [ref=e578] [cursor=pointer]:
+            - img [ref=e579]
+            - generic [ref=e582]: 工事台帳
+          - button "発注管理" [ref=e583] [cursor=pointer]:
+            - img [ref=e584]
+            - generic [ref=e588]: 発注管理
+          - button "請求管理" [ref=e589] [cursor=pointer]:
+            - img [ref=e590]
+            - generic [ref=e593]: 請求管理
+          - button "納品書" [ref=e594] [cursor=pointer]:
+            - img [ref=e595]
+            - generic [ref=e600]: 納品書
+          - button "点検管理" [ref=e601] [cursor=pointer]:
+            - img [ref=e602]
+            - generic [ref=e606]: 点検管理
+      - generic [ref=e607]:
+        - button "経理・財務" [ref=e608] [cursor=pointer]:
+          - generic [ref=e609]:
+            - img [ref=e610]
+            - text: 経理・財務
+          - img [ref=e612]
+        - generic [ref=e614]:
+          - button "入金管理" [ref=e615] [cursor=pointer]:
+            - img [ref=e616]
+            - generic [ref=e618]: 入金管理
+          - button "月次残高入力" [ref=e619] [cursor=pointer]:
+            - img [ref=e620]
+            - generic [ref=e623]: 月次残高入力
+          - button "月次予実管理" [ref=e624] [cursor=pointer]:
+            - img [ref=e625]
+            - generic [ref=e627]: 月次予実管理
+      - generic [ref=e628]:
+        - button "MA" [ref=e629] [cursor=pointer]:
+          - generic [ref=e630]:
+            - img [ref=e631]
+            - text: MA
+          - img [ref=e634]
+        - generic [ref=e636]:
+          - button "シナリオ" [ref=e637] [cursor=pointer]:
+            - img [ref=e638]
+            - generic [ref=e640]: シナリオ
+          - button "LINE" [ref=e641] [cursor=pointer]:
+            - img [ref=e642]
+            - generic [ref=e644]: LINE
+      - generic [ref=e645]:
+        - button "管理" [ref=e646] [cursor=pointer]:
+          - generic [ref=e647]:
+            - img [ref=e648]
+            - text: 管理
+          - img [ref=e651]
+        - generic [ref=e653]:
+          - button "リソース予約" [ref=e654] [cursor=pointer]:
+            - img [ref=e655]
+            - generic [ref=e659]: リソース予約
+          - button "承認管理" [ref=e660] [cursor=pointer]:
+            - img [ref=e661]
+            - generic [ref=e664]: 承認管理
+          - button "ケース管理" [ref=e665] [cursor=pointer]:
+            - img [ref=e666]
+            - generic [ref=e668]: ケース管理
+          - button "タスク" [ref=e669] [cursor=pointer]:
+            - img [ref=e670]
+            - generic [ref=e673]: タスク
+      - generic [ref=e674]:
+        - button "管理者メニュー" [ref=e675] [cursor=pointer]:
+          - generic [ref=e676]:
+            - img [ref=e677]
+            - text: 管理者メニュー
+          - img [ref=e679]
+        - button "管理コンソール" [ref=e682] [cursor=pointer]:
+          - img [ref=e683]
+          - generic [ref=e686]: 管理コンソール
+  - generic [ref=e24]:
+    - banner [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e28]:
+          - button "顧客名・電話番号で検索..." [ref=e29] [cursor=pointer]:
+            - img [ref=e30]
+            - generic [ref=e33]: 顧客名・電話番号で検索...
+          - button "⌘K" [ref=e34] [cursor=pointer]:
+            - generic [ref=e35]: ⌘K
+        - generic [ref=e36]: 2026年5月1日 金曜日
+        - generic [ref=e37]:
+          - button "クイック登録" [ref=e38] [cursor=pointer]:
+            - img [ref=e39]
+          - button "工数登録" [ref=e41] [cursor=pointer]:
+            - img [ref=e42]
+          - button "ご意見・ご要望" [ref=e45] [cursor=pointer]:
+            - img [ref=e46]
+          - button "通知" [ref=e48] [cursor=pointer]:
+            - img [ref=e49]
+          - button "設定" [ref=e52] [cursor=pointer]:
+            - img [ref=e53]
+    - main [ref=e57]:
+      - generic [ref=e60]:
+        - generic [ref=e63]:
+          - button "📋 0件 承認待ち 対応完了" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]:
+              - generic [ref=e67]: 📋
+              - generic [ref=e68]: 0件
+            - heading "承認待ち" [level=4] [ref=e69]
+            - paragraph [ref=e71]: 対応完了
+          - button "✏️ 0件 申請中 期限なし" [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]:
+              - generic [ref=e75]: ✏️
+              - generic [ref=e76]: 0件
+            - heading "申請中" [level=4] [ref=e77]
+            - paragraph [ref=e79]: 期限なし
+          - button "😤 0件 クレーム 対応完了" [ref=e80] [cursor=pointer]:
+            - generic [ref=e81]:
+              - generic [ref=e83]: 😤
+              - generic [ref=e84]: 0件
+            - heading "クレーム" [level=4] [ref=e85]
+            - paragraph [ref=e87]: 対応完了
+          - button "⚠️ 0件 問題一覧 問題なし" [ref=e88] [cursor=pointer]:
+            - generic [ref=e89]:
+              - generic [ref=e91]: ⚠️
+              - generic [ref=e92]: 0件
+            - heading "問題一覧" [level=4] [ref=e93]
+            - paragraph [ref=e95]: 問題なし
+          - button "💬 0件 未返信 全件返信済" [ref=e96] [cursor=pointer]:
+            - generic [ref=e97]:
+              - generic [ref=e99]: 💬
+              - generic [ref=e100]: 0件
+            - heading "未返信" [level=4] [ref=e101]
+            - paragraph [ref=e103]: 全件返信済
+        - generic [ref=e105]:
+          - button "経営コックピット 詳細を見る 💰 経常利益 ¥0 📊 粗利額（税抜） ¥0 💵 資金残高 ¥0 経常利益推移（6ヶ月） ¥0 12月 ¥0 1月 ¥0 2月 ¥0 3月 ¥0 4月 ¥0 5月 第14期 経営サマリー 詳細な推移は経営コックピットで確認 →" [ref=e107] [cursor=pointer]:
+            - generic [ref=e108]:
+              - generic [ref=e109]:
+                - img [ref=e110]
+                - heading "経営コックピット" [level=3] [ref=e114]
+              - generic [ref=e115]:
+                - generic [ref=e116]: 詳細を見る
+                - img [ref=e117]
+            - generic [ref=e119]:
+              - generic [ref=e120]:
+                - generic [ref=e121]:
+                  - generic [ref=e122]: 💰
+                  - generic [ref=e123]: 経常利益
+                - paragraph [ref=e124]: ¥0
+              - generic [ref=e125]:
+                - generic [ref=e126]:
+                  - generic [ref=e127]: 📊
+                  - generic [ref=e128]: 粗利額（税抜）
+                - paragraph [ref=e129]: ¥0
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - generic [ref=e132]: 💵
+                  - generic [ref=e133]: 資金残高
+                - paragraph [ref=e134]: ¥0
+            - generic [ref=e135]:
+              - generic [ref=e137]: 経常利益推移（6ヶ月）
+              - generic [ref=e138]:
+                - generic [ref=e139]:
+                  - generic "¥0" [ref=e141]
+                  - generic [ref=e142]: 12月
+                - generic [ref=e143]:
+                  - generic "¥0" [ref=e145]
+                  - generic [ref=e146]: 1月
+                - generic [ref=e147]:
+                  - generic "¥0" [ref=e149]
+                  - generic [ref=e150]: 2月
+                - generic [ref=e151]:
+                  - generic "¥0" [ref=e153]
+                  - generic [ref=e154]: 3月
+                - generic [ref=e155]:
+                  - generic "¥0" [ref=e157]
+                  - generic [ref=e158]: 4月
+                - generic [ref=e159]:
+                  - generic "¥0" [ref=e161]
+                  - generic [ref=e162]: 5月
+            - generic [ref=e164]:
+              - generic [ref=e165]: 第14期 経営サマリー
+              - generic [ref=e166]: 詳細な推移は経営コックピットで確認 →
+          - generic [ref=e168]:
+            - generic [ref=e170]:
+              - generic [ref=e171]:
+                - img [ref=e172]
+                - heading "今日のタスク" [level=3] [ref=e174]
+              - generic [ref=e175]: 5月1日(金)
+            - generic [ref=e176]:
+              - generic [ref=e177]:
+                - generic [ref=e178]: 🎉
+                - paragraph [ref=e179]: 今日のタスクはありません
+                - paragraph [ref=e180]: 新しいタスクを追加してください
+              - generic [ref=e181]:
+                - button "タスク追加" [ref=e182] [cursor=pointer]:
+                  - img [ref=e183]
+                  - text: タスク追加
+                - button "詳細を見る" [ref=e184] [cursor=pointer]:
+                  - text: 詳細を見る
+                  - img [ref=e185]
+        - generic [ref=e189]:
+          - generic [ref=e190]:
+            - heading "営業パフォーマンス" [level=2] [ref=e191]:
+              - img [ref=e193]
+              - text: 営業パフォーマンス
+            - generic [ref=e195]: 今月
+          - generic [ref=e196]:
+            - generic [ref=e197]:
+              - heading "今期売上進捗（14期）" [level=3] [ref=e198]
+              - generic [ref=e199]: 0%
+            - generic [ref=e202]: 0.0億 / 0.0億
+            - generic [ref=e203]:
+              - generic [ref=e204]:
+                - paragraph [ref=e205]: 実績
+                - paragraph [ref=e206]: 0.0億
+              - generic [ref=e207]:
+                - paragraph [ref=e208]: 目標
+                - paragraph [ref=e209]: 0.0億
+              - generic [ref=e210]:
+                - paragraph [ref=e211]: 残り（あと4ヶ月）
+                - paragraph [ref=e212]: "-0.0億"
+              - generic [ref=e213]:
+                - paragraph [ref=e214]: パイプライン（確度加味）
+                - paragraph [ref=e215]: 0.0億
+          - generic [ref=e216]:
+            - generic [ref=e217] [cursor=pointer]:
+              - generic [ref=e218]:
+                - generic [ref=e219]:
+                  - img [ref=e221]
+                  - heading "反響" [level=4] [ref=e226]
+                - generic [ref=e227]: 今月
+              - generic [ref=e228]:
+                - generic [ref=e229]: "0"
+                - generic [ref=e230]: 件
+                - generic [ref=e231]:
+                  - img [ref=e232]
+                  - text: "-5"
+            - generic [ref=e235] [cursor=pointer]:
+              - generic [ref=e236]:
+                - generic [ref=e237]:
+                  - img [ref=e239]
+                  - heading "商談・見積" [level=4] [ref=e242]
+                - generic [ref=e243]: 今月
+              - generic [ref=e244]:
+                - generic [ref=e245]:
+                  - generic [ref=e246]: 商談
+                  - generic [ref=e247]: 6件0.0億
+                - generic [ref=e248]:
+                  - generic [ref=e249]: 見積
+                  - generic [ref=e250]: 0件0.0億
+              - generic [ref=e251]:
+                - generic [ref=e252]:
+                  - generic [ref=e253]: 反響→商談
+                  - generic [ref=e254]: 0%
+                - generic [ref=e255]:
+                  - generic [ref=e256]: 商談→見積
+                  - generic [ref=e257]: 0%
+                - generic [ref=e258]:
+                  - generic [ref=e259]: 見積→受注
+                  - generic [ref=e260]: 0%
+            - generic [ref=e261] [cursor=pointer]:
+              - generic [ref=e262]:
+                - generic [ref=e263]:
+                  - img [ref=e265]
+                  - heading "受注" [level=4] [ref=e268]
+                - generic [ref=e269]: 今月
+              - generic [ref=e270]:
+                - generic [ref=e271]: "1"
+                - generic [ref=e272]: 件
+                - generic [ref=e273]: 0万
+              - generic [ref=e274]:
+                - generic [ref=e275]:
+                  - generic [ref=e276]: 受注率
+                  - generic [ref=e277]: 0%
+                - generic [ref=e278]:
+                  - generic [ref=e279]: 平均単価
+                  - generic [ref=e280]: 0万
+              - generic [ref=e282]:
+                - generic [ref=e283]: 失注
+                - generic [ref=e284]: 0件
+          - generic [ref=e285]:
+            - generic [ref=e286]:
+              - heading "📈 ファネル推移（6ヶ月）" [level=4] [ref=e287]:
+                - generic [ref=e288]: 📈
+                - text: ファネル推移（6ヶ月）
+              - generic [ref=e289]:
+                - generic [ref=e290]:
+                  - generic [ref=e291]: "7"
+                  - generic [ref=e292]: "0"
+                - generic [ref=e293]:
+                  - generic [ref=e294]:
+                    - generic [ref=e295]:
+                      - 'generic "反響: 0"'
+                      - 'generic "商談: 0"'
+                      - 'generic "受注: 0"'
+                    - generic [ref=e296]: 12月
+                  - generic [ref=e297]:
+                    - generic [ref=e298]:
+                      - 'generic "反響: 0"'
+                      - 'generic "商談: 0"'
+                      - 'generic "受注: 0"'
+                    - generic [ref=e299]: 1月
+                  - generic [ref=e300]:
+                    - generic [ref=e301]:
+                      - 'generic "反響: 1" [ref=e302]'
+                      - 'generic "商談: 1" [ref=e303]'
+                      - 'generic "受注: 0"'
+                    - generic [ref=e304]: 2月
+                  - generic [ref=e305]:
+                    - generic [ref=e306]:
+                      - 'generic "反響: 7" [ref=e307]'
+                      - 'generic "商談: 2" [ref=e308]'
+                      - 'generic "受注: 0"'
+                    - generic [ref=e309]: 3月
+                  - generic [ref=e310]:
+                    - generic [ref=e311]:
+                      - 'generic "反響: 5" [ref=e312]'
+                      - 'generic "商談: 4" [ref=e313]'
+                      - 'generic "受注: 0"'
+                    - generic [ref=e314]: 4月
+                  - generic [ref=e315]:
+                    - generic [ref=e316]:
+                      - 'generic "反響: 0"'
+                      - 'generic "商談: 0"'
+                      - 'generic "受注: 0"'
+                    - generic [ref=e317]: 5月
+              - generic [ref=e318]:
+                - generic [ref=e321]: 反響
+                - generic [ref=e324]: 商談
+                - generic [ref=e327]: 受注
+            - generic [ref=e328]:
+              - generic [ref=e329]:
+                - img [ref=e331]
+                - heading "進行中現場" [level=4] [ref=e335]
+              - generic [ref=e336]: 0件
+              - generic [ref=e337]:
+                - generic [ref=e338]:
+                  - paragraph [ref=e339]: 新築
+                  - paragraph [ref=e340]: "0"
+                - generic [ref=e341]:
+                  - paragraph [ref=e342]: リフォーム
+                  - paragraph [ref=e343]: "0"
+                - generic [ref=e344]:
+                  - paragraph [ref=e345]: その他
+                  - paragraph [ref=e346]: "0"
+              - generic [ref=e348] [cursor=pointer]:
+                - generic [ref=e349]:
+                  - generic [ref=e350]: 🏠
+                  - text: 今月完工予定
+                - generic [ref=e351]:
+                  - generic [ref=e352]: 0件
+                  - img [ref=e353]
+        - generic [ref=e357]:
+          - heading "🚀 クイックアクセス" [level=3] [ref=e358]
+          - generic [ref=e359]:
+            - button "✅ 承認管理 0件待ち" [ref=e360] [cursor=pointer]:
+              - generic [ref=e362]: ✅
+              - heading "承認管理" [level=4] [ref=e363]
+              - generic [ref=e364]: 0件待ち
+            - button "💰 入金管理 入金一覧" [ref=e365] [cursor=pointer]:
+              - generic [ref=e367]: 💰
+              - heading "入金管理" [level=4] [ref=e368]
+              - generic [ref=e369]: 入金一覧
+            - button "🏗️ 工事台帳 0件進行中" [ref=e370] [cursor=pointer]:
+              - generic [ref=e372]: 🏗️
+              - heading "工事台帳" [level=4] [ref=e373]
+              - generic [ref=e374]: 0件進行中
+            - button "📝 契約管理 0件進行中" [ref=e375] [cursor=pointer]:
+              - generic [ref=e377]: 📝
+              - heading "契約管理" [level=4] [ref=e378]
+              - generic [ref=e379]: 0件進行中
+  - button "ご意見・ご要望を送る" [ref=e10] [cursor=pointer]:
+    - img [ref=e11]
+  - button "RAGアシスタントを開く" [ref=e17] [cursor=pointer]:
+    - img [ref=e19]
+    - paragraph [ref=e22]: RAG
+    - paragraph [ref=e23]: ask me anything
+  - region "Notifications alt+T"
+  - alert [ref=e380]

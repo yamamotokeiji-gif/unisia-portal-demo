@@ -1,0 +1,136 @@
+- generic [ref=e19]:
+  - navigation [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]: 🏢
+      - generic [ref=e23]: UNISIA HD
+      - generic [ref=e24]: 統合ポータル
+    - generic [ref=e25]:
+      - generic "通知" [ref=e26] [cursor=pointer]: 🔔
+      - generic "クリックでログアウト" [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]: 山
+        - generic [ref=e30]: 山田 太郎
+        - generic [ref=e31]: 一般社員
+  - generic [ref=e32]:
+    - navigation [ref=e33]:
+      - generic [ref=e34]: メイン
+      - generic [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: 💬
+        - text: チャット
+        - generic [ref=e37]: "7"
+      - generic [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: 📋
+        - text: 申請・承認
+        - generic [ref=e40]: "3"
+      - generic [ref=e41] [cursor=pointer]:
+        - generic [ref=e42]: ⏱️
+        - text: 勤怠管理
+      - generic [ref=e44]: 店舗業務
+      - generic [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]: 🏪
+        - text: 臨店報告書
+    - generic [ref=e150]:
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - heading "ワークフロー" [level=1] [ref=e154]
+            - paragraph [ref=e155]: 申請の作成・承認・進捗管理を行います
+          - button "＋ 新規申請" [ref=e156] [cursor=pointer]
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - generic [ref=e160]: 承認待ち
+              - generic [ref=e161]: ⏰
+            - generic [ref=e162]: "1"
+            - generic [ref=e163]: 要対応
+          - generic [ref=e164]:
+            - generic [ref=e165]:
+              - generic [ref=e166]: 代理承認
+              - generic [ref=e167]: 👥
+            - generic [ref=e168]: "0"
+            - generic [ref=e169]: 委任済み
+          - generic [ref=e170]:
+            - generic [ref=e171]:
+              - generic [ref=e172]: 申請中
+              - generic [ref=e173]: 📋
+            - generic [ref=e174]: "2"
+            - generic [ref=e175]: 処理中
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - generic [ref=e178]: 承認済み
+              - generic [ref=e179]: ✅
+            - generic [ref=e180]: "1"
+            - generic [ref=e181]: 完了
+        - generic [ref=e182]:
+          - textbox "申請者名で検索..." [ref=e183]
+          - combobox [ref=e184] [cursor=pointer]:
+            - option "すべて" [selected]
+            - option "有給休暇"
+            - option "残業"
+            - option "在宅勤務"
+            - option "出張"
+          - combobox [ref=e185] [cursor=pointer]:
+            - option "すべて" [selected]
+            - option "承認待ち"
+            - option "承認済み"
+            - option "却下"
+        - generic [ref=e186]:
+          - generic [ref=e187]:
+            - generic [ref=e188] [cursor=pointer]: ⏰ 承認待ち (1)
+            - generic [ref=e189] [cursor=pointer]: 👤 自分の申請 (3)
+          - generic [ref=e191]:
+            - generic [ref=e192]: 🌴
+            - generic [ref=e193]:
+              - generic [ref=e194]: 有給休暇申請 — 5月15日（木）
+              - generic [ref=e195]: "山田 太郎 · 申請日: 2026/05/01 · 承認者: 坂本 憲介"
+            - generic [ref=e196]: 承認待ち
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - heading "新規申請を作成" [level=2]
+              - paragraph: 作成する申請の種類を選択してください
+            - button "✕"
+          - generic:
+            - generic:
+              - generic: 🗓️
+              - generic: 休暇申請
+            - generic:
+              - generic: 🌙
+              - generic: 残業申請
+            - generic:
+              - generic: 🏠
+              - generic: リモートワーク
+            - generic:
+              - generic: ✈️
+              - generic: 出張申請
+            - generic:
+              - generic: 💰
+              - generic: 経費申請
+            - generic:
+              - generic: 📝
+              - generic: 各種変更
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - heading "申請フォーム" [level=2]
+              - paragraph: 必要事項を入力して申請してください
+            - button "✕"
+          - generic:
+            - generic:
+              - generic: 申請日
+              - textbox: 2026-05-03
+            - generic:
+              - generic: 対象日
+              - textbox
+            - generic:
+              - generic: 承認者
+              - combobox:
+                - option "坂本 憲介（IT戦略部）" [selected]
+                - option "加藤（情報システム課）"
+            - generic:
+              - generic: 理由・備考
+              - textbox "理由を入力してください..."
+          - generic:
+            - button "キャンセル"
+            - button "申請する"

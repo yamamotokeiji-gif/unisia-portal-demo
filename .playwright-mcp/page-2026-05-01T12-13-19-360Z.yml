@@ -1,0 +1,205 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "メインコンテンツへスキップ" [ref=e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - complementary [ref=e4]:
+      - link "Dandori Portal Dandori Portal" [ref=e6] [cursor=pointer]:
+        - /url: /ja/dashboard
+        - generic [ref=e7]:
+          - img "Dandori Portal" [ref=e8]
+          - generic [ref=e9]: Dandori Portal
+      - navigation [ref=e10]:
+        - link "ダッシュボード" [ref=e12] [cursor=pointer]:
+          - /url: /ja/dashboard
+          - img [ref=e13]
+          - generic [ref=e18]: ダッシュボード
+        - generic [ref=e19]:
+          - button "人事・労務" [ref=e20] [cursor=pointer]:
+            - generic [ref=e21]: 人事・労務
+            - img [ref=e22]
+          - generic [ref=e26]:
+            - link "ユーザー管理" [ref=e27] [cursor=pointer]:
+              - /url: /ja/users
+              - img [ref=e28]
+              - generic [ref=e33]: ユーザー管理
+            - link "メンバー状況" [ref=e34] [cursor=pointer]:
+              - /url: /ja/members
+              - img [ref=e35]
+              - generic [ref=e39]: メンバー状況
+            - link "勤怠管理" [ref=e40] [cursor=pointer]:
+              - /url: /ja/attendance
+              - img [ref=e41]
+              - generic [ref=e44]: 勤怠管理
+            - link "日報" [ref=e45] [cursor=pointer]:
+              - /url: /ja/daily-report
+              - img [ref=e46]
+              - generic [ref=e49]: 日報
+            - link "休暇管理" [ref=e50] [cursor=pointer]:
+              - /url: /ja/leave
+              - img [ref=e51]
+              - generic [ref=e53]: 休暇管理
+        - generic [ref=e54]:
+          - button "申請・承認" [ref=e55] [cursor=pointer]:
+            - generic [ref=e56]: 申請・承認
+            - img [ref=e57]
+          - link "ワークフロー" [ref=e62] [cursor=pointer]:
+            - /url: /ja/workflow
+            - img [ref=e63]
+            - generic [ref=e67]: ワークフロー
+        - generic [ref=e68]:
+          - button "健康・資格" [ref=e69] [cursor=pointer]:
+            - generic [ref=e70]: 健康・資格
+            - img [ref=e71]
+          - generic [ref=e75]:
+            - link "健康管理" [ref=e76] [cursor=pointer]:
+              - /url: /ja/health
+              - img [ref=e77]
+              - generic [ref=e79]: 健康管理
+            - link "資格管理" [ref=e80] [cursor=pointer]:
+              - /url: /ja/certifications
+              - img [ref=e81]
+              - generic [ref=e84]: 資格管理
+        - generic [ref=e85]:
+          - button "組織・管理" [ref=e86] [cursor=pointer]:
+            - generic [ref=e87]: 組織・管理
+            - img [ref=e88]
+          - generic [ref=e92]:
+            - link "組織管理" [ref=e93] [cursor=pointer]:
+              - /url: /ja/organization
+              - img [ref=e94]
+              - generic [ref=e98]: 組織管理
+            - link "資産管理" [ref=e99] [cursor=pointer]:
+              - /url: /ja/assets
+              - img [ref=e100]
+              - generic [ref=e104]: 資産管理
+            - link "SaaS管理" [ref=e105] [cursor=pointer]:
+              - /url: /ja/saas
+              - img [ref=e106]
+              - generic [ref=e108]: SaaS管理
+        - generic [ref=e109]:
+          - button "運用" [ref=e110] [cursor=pointer]:
+            - generic [ref=e111]: 運用
+            - img [ref=e112]
+          - generic [ref=e116]:
+            - link "アナウンス" [ref=e117] [cursor=pointer]:
+              - /url: /ja/announcements
+              - img [ref=e118]
+              - generic [ref=e121]: アナウンス
+            - link "アナウンス管理" [ref=e122] [cursor=pointer]:
+              - /url: /ja/announcements-admin
+              - img [ref=e123]
+              - generic [ref=e126]: アナウンス管理
+            - link "法令・制度更新" [ref=e127] [cursor=pointer]:
+              - /url: /ja/legal-updates
+              - img [ref=e128]
+              - generic [ref=e132]: 法令・制度更新
+            - link "監査ログ" [ref=e133] [cursor=pointer]:
+              - /url: /ja/audit
+              - img [ref=e134]
+              - generic [ref=e137]: 監査ログ
+            - link "設定" [ref=e138] [cursor=pointer]:
+              - /url: /ja/settings
+              - img [ref=e139]
+              - generic [ref=e142]: 設定
+      - button "メニューを折りたたむ" [expanded] [ref=e144] [cursor=pointer]:
+        - generic [ref=e145]: メニューを折りたたむ
+        - img
+    - generic [ref=e146]:
+      - banner [ref=e147]:
+        - generic [ref=e148]:
+          - generic [ref=e149]:
+            - button "株 株式会社ダンドリワーク Asia/Tokyo" [ref=e151] [cursor=pointer]:
+              - generic [ref=e153]: 株
+              - generic [ref=e154]:
+                - generic [ref=e155]: 株式会社ダンドリワーク
+                - generic [ref=e156]: Asia/Tokyo
+              - img
+            - generic [ref=e157]:
+              - img [ref=e158]
+              - textbox "検索..." [ref=e161]
+              - generic:
+                - img
+                - text: K
+          - generic [ref=e162]:
+            - generic [ref=e163]: "最終更新: 21:13"
+            - button [ref=e164] [cursor=pointer]:
+              - img
+            - button "EN" [ref=e165] [cursor=pointer]:
+              - img
+              - generic [ref=e166]: EN
+            - button "管" [ref=e167] [cursor=pointer]:
+              - generic [ref=e169]: 管
+      - main [ref=e170]:
+        - generic [ref=e171]:
+          - generic [ref=e172]:
+            - generic [ref=e173]:
+              - heading "ワークフロー" [level=1] [ref=e174]
+              - paragraph [ref=e175]: 申請の作成・承認・進捗管理を行います
+            - button "新規申請" [ref=e176] [cursor=pointer]:
+              - img
+              - text: 新規申請
+          - generic [ref=e177]:
+            - generic [ref=e178]:
+              - generic [ref=e179]:
+                - generic [ref=e180]: 承認待ち
+                - img [ref=e181]
+              - generic [ref=e184]:
+                - generic [ref=e185]: "0"
+                - paragraph [ref=e186]: 要対応
+            - generic [ref=e187]:
+              - generic [ref=e188]:
+                - generic [ref=e189]: 代理承認
+                - img [ref=e190]
+              - generic [ref=e194]:
+                - generic [ref=e195]: "0"
+                - paragraph [ref=e196]: 委任済み
+            - generic [ref=e197]:
+              - generic [ref=e198]:
+                - generic [ref=e199]: 申請中
+                - img [ref=e200]
+              - generic [ref=e203]:
+                - generic [ref=e204]: "0"
+                - paragraph [ref=e205]: 処理中
+            - generic [ref=e206]:
+              - generic [ref=e207]:
+                - generic [ref=e208]: 承認済み
+                - img [ref=e209]
+              - generic [ref=e212]:
+                - generic [ref=e213]: "0"
+                - paragraph [ref=e214]: 完了
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - generic [ref=e217]: 平均処理時間
+                - img [ref=e218]
+              - generic [ref=e221]:
+                - generic [ref=e222]: "0.0"
+                - paragraph [ref=e223]: 日
+          - generic [ref=e224]:
+            - generic [ref=e225]:
+              - img [ref=e226]
+              - textbox "申請者名で検索..." [ref=e229]
+            - combobox [ref=e230] [cursor=pointer]:
+              - generic: すべて
+              - img [ref=e231]
+            - combobox [ref=e233] [cursor=pointer]:
+              - generic: すべて
+              - img [ref=e234]
+          - generic [ref=e236]:
+            - tablist [ref=e237]:
+              - tab "承認待ち (0)" [selected] [ref=e238] [cursor=pointer]:
+                - img [ref=e239]
+                - text: 承認待ち (0)
+              - tab "代理承認 (0)" [ref=e242] [cursor=pointer]:
+                - img [ref=e243]
+                - text: 代理承認 (0)
+              - tab "自分の申請 (0)" [ref=e247] [cursor=pointer]:
+                - img [ref=e248]
+                - text: 自分の申請 (0)
+            - tabpanel "承認待ち (0)" [ref=e251]:
+              - generic [ref=e253]:
+                - img [ref=e254]
+                - heading "承認待ち申請はありません" [level=3] [ref=e257]
+                - paragraph [ref=e258]: 新しい申請が提出されると、こちらに表示されます
+    - region "Notifications alt+T"
+  - region "Notifications alt+T"
+  - alert [ref=e259]

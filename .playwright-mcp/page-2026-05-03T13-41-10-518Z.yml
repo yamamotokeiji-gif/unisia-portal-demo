@@ -1,0 +1,61 @@
+- generic [ref=e19]:
+  - navigation [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]: 🏢
+      - generic [ref=e23]: UNISIA HD
+      - generic [ref=e24]: 統合ポータル
+    - generic [ref=e25]:
+      - generic "通知" [ref=e26] [cursor=pointer]: 🔔
+      - generic "クリックでログアウト" [ref=e28] [cursor=pointer]:
+        - generic [ref=e29]: 山
+        - generic [ref=e30]: 山田 太郎
+        - generic [ref=e31]: 一般社員
+  - generic [ref=e32]:
+    - navigation [ref=e33]:
+      - generic [ref=e34]: メイン
+      - generic [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: 💬
+        - text: チャット
+        - generic [ref=e37]: "7"
+      - generic [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: 📋
+        - text: 申請・承認
+        - generic [ref=e40]: "3"
+      - generic [ref=e41] [cursor=pointer]:
+        - generic [ref=e42]: ⏱️
+        - text: 勤怠管理
+      - generic [ref=e44]: 店舗業務
+      - generic [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]: 🏪
+        - text: 臨店報告書
+    - generic [ref=e301]:
+      - generic [ref=e302]:
+        - heading "🏪 臨店報告書" [level=2] [ref=e303]
+        - paragraph [ref=e304]: QSCチェック100項目・写真付き・AI改善提案・本部ダッシュボード連携
+      - generic [ref=e305]: 担当店舗一覧
+      - generic [ref=e306]:
+        - generic [ref=e307] [cursor=pointer]:
+          - generic [ref=e308]: 🍢
+          - generic [ref=e309]:
+            - generic [ref=e310]: 串カツ田中 渋谷店
+            - generic [ref=e311]: "前回臨店: 2026/04/20 · 担当: 山田 太郎"
+          - generic [ref=e312]: 78点
+        - generic [ref=e313] [cursor=pointer]:
+          - generic [ref=e314]: 🍢
+          - generic [ref=e315]:
+            - generic [ref=e316]: 串カツ田中 新宿東口店
+            - generic [ref=e317]: "前回臨店: 2026/04/18 · 担当: 山田 太郎"
+          - generic [ref=e318]: 91点
+        - generic [ref=e319] [cursor=pointer]:
+          - generic [ref=e320]: 🍢
+          - generic [ref=e321]:
+            - generic [ref=e322]: 串カツ田中 池袋店
+            - generic [ref=e323]: "前回臨店: 2026/04/10 · 担当: 山田 太郎"
+          - generic [ref=e324]: 62点
+        - generic [ref=e325] [cursor=pointer]:
+          - generic [ref=e326]: 🍕
+          - generic [ref=e327]:
+            - generic [ref=e328]: ピソラ 表参道店
+            - generic [ref=e329]: 未実施
+          - generic [ref=e330]: —
+      - button "＋ 新規臨店報告書を作成" [ref=e331] [cursor=pointer]

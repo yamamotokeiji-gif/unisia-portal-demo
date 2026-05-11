@@ -1,0 +1,359 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e31]:
+    - link "メインコンテンツへスキップ" [ref=e32] [cursor=pointer]:
+      - /url: "#main-content"
+    - complementary [ref=e33]:
+      - link "Dandori Portal Dandori Portal" [ref=e35] [cursor=pointer]:
+        - /url: /ja/dashboard
+        - generic [ref=e36]:
+          - img "Dandori Portal" [ref=e37]
+          - generic [ref=e38]: Dandori Portal
+      - navigation [ref=e39]:
+        - link "ダッシュボード" [ref=e41] [cursor=pointer]:
+          - /url: /ja/dashboard
+          - img [ref=e42]
+          - generic [ref=e47]: ダッシュボード
+        - generic [ref=e48]:
+          - button "人事・労務" [ref=e49] [cursor=pointer]:
+            - generic [ref=e50]: 人事・労務
+            - img [ref=e51]
+          - generic [ref=e55]:
+            - link "ユーザー管理" [ref=e56] [cursor=pointer]:
+              - /url: /ja/users
+              - img [ref=e57]
+              - generic [ref=e62]: ユーザー管理
+            - link "メンバー状況" [ref=e63] [cursor=pointer]:
+              - /url: /ja/members
+              - img [ref=e64]
+              - generic [ref=e68]: メンバー状況
+            - link "勤怠管理" [ref=e69] [cursor=pointer]:
+              - /url: /ja/attendance
+              - img [ref=e70]
+              - generic [ref=e73]: 勤怠管理
+            - link "日報" [ref=e74] [cursor=pointer]:
+              - /url: /ja/daily-report
+              - img [ref=e75]
+              - generic [ref=e78]: 日報
+            - link "休暇管理" [ref=e79] [cursor=pointer]:
+              - /url: /ja/leave
+              - img [ref=e80]
+              - generic [ref=e82]: 休暇管理
+        - generic [ref=e83]:
+          - button "申請・承認" [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: 申請・承認
+            - img [ref=e86]
+          - link "ワークフロー" [ref=e91] [cursor=pointer]:
+            - /url: /ja/workflow
+            - img [ref=e92]
+            - generic [ref=e96]: ワークフロー
+        - generic [ref=e97]:
+          - button "健康・資格" [ref=e98] [cursor=pointer]:
+            - generic [ref=e99]: 健康・資格
+            - img [ref=e100]
+          - generic [ref=e104]:
+            - link "健康管理" [ref=e105] [cursor=pointer]:
+              - /url: /ja/health
+              - img [ref=e106]
+              - generic [ref=e108]: 健康管理
+            - link "資格管理" [ref=e109] [cursor=pointer]:
+              - /url: /ja/certifications
+              - img [ref=e110]
+              - generic [ref=e113]: 資格管理
+        - generic [ref=e114]:
+          - button "組織・管理" [ref=e115] [cursor=pointer]:
+            - generic [ref=e116]: 組織・管理
+            - img [ref=e117]
+          - generic [ref=e121]:
+            - link "組織管理" [ref=e122] [cursor=pointer]:
+              - /url: /ja/organization
+              - img [ref=e123]
+              - generic [ref=e127]: 組織管理
+            - link "資産管理" [ref=e128] [cursor=pointer]:
+              - /url: /ja/assets
+              - img [ref=e129]
+              - generic [ref=e133]: 資産管理
+            - link "SaaS管理" [ref=e134] [cursor=pointer]:
+              - /url: /ja/saas
+              - img [ref=e135]
+              - generic [ref=e137]: SaaS管理
+        - generic [ref=e138]:
+          - button "運用" [ref=e139] [cursor=pointer]:
+            - generic [ref=e140]: 運用
+            - img [ref=e141]
+          - generic [ref=e145]:
+            - link "アナウンス" [ref=e146] [cursor=pointer]:
+              - /url: /ja/announcements
+              - img [ref=e147]
+              - generic [ref=e150]: アナウンス
+            - link "アナウンス管理" [ref=e151] [cursor=pointer]:
+              - /url: /ja/announcements-admin
+              - img [ref=e152]
+              - generic [ref=e155]: アナウンス管理
+            - link "法令・制度更新" [ref=e156] [cursor=pointer]:
+              - /url: /ja/legal-updates
+              - img [ref=e157]
+              - generic [ref=e161]: 法令・制度更新
+            - link "監査ログ" [ref=e162] [cursor=pointer]:
+              - /url: /ja/audit
+              - img [ref=e163]
+              - generic [ref=e166]: 監査ログ
+            - link "設定" [ref=e167] [cursor=pointer]:
+              - /url: /ja/settings
+              - img [ref=e168]
+              - generic [ref=e171]: 設定
+      - button "メニューを折りたたむ" [expanded] [ref=e173] [cursor=pointer]:
+        - generic [ref=e174]: メニューを折りたたむ
+        - img
+    - generic [ref=e175]:
+      - banner [ref=e176]:
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - button "株 株式会社ダンドリワーク Asia/Tokyo" [ref=e180] [cursor=pointer]:
+              - generic [ref=e182]: 株
+              - generic [ref=e183]:
+                - generic [ref=e184]: 株式会社ダンドリワーク
+                - generic [ref=e185]: Asia/Tokyo
+              - img
+            - generic [ref=e186]:
+              - img [ref=e187]
+              - textbox "検索..." [ref=e190]
+              - generic:
+                - img
+                - text: K
+          - generic [ref=e191]:
+            - generic [ref=e192]: "最終更新: 21:12"
+            - button [ref=e193] [cursor=pointer]:
+              - img
+            - button "EN" [ref=e194] [cursor=pointer]:
+              - img
+              - generic [ref=e195]: EN
+            - button "管" [ref=e196] [cursor=pointer]:
+              - generic [ref=e198]: 管
+      - main [ref=e199]:
+        - generic [ref=e200]:
+          - generic [ref=e201]:
+            - heading "ダッシュボード" [level=1] [ref=e202]
+            - paragraph [ref=e203]: システム管理者としてログイン中
+          - generic [ref=e204]:
+            - generic [ref=e205]:
+              - generic [ref=e206]: クイックアクション
+              - generic [ref=e207]: システム管理者として実行可能な操作
+            - generic [ref=e209]:
+              - link "勤怠打刻" [ref=e210] [cursor=pointer]:
+                - /url: /ja/attendance
+                - button "勤怠打刻" [ref=e211]:
+                  - img
+                  - generic [ref=e212]: 勤怠打刻
+              - link "休暇申請" [ref=e213] [cursor=pointer]:
+                - /url: /ja/leave
+                - button "休暇申請" [ref=e214]:
+                  - img
+                  - generic [ref=e215]: 休暇申請
+              - link "メンバー確認" [ref=e216] [cursor=pointer]:
+                - /url: /ja/members
+                - button "メンバー確認" [ref=e217]:
+                  - img
+                  - generic [ref=e218]: メンバー確認
+              - link "承認待ち" [ref=e219] [cursor=pointer]:
+                - /url: /ja/workflow
+                - button "承認待ち" [ref=e220]:
+                  - img
+                  - generic [ref=e221]: 承認待ち
+              - link "ユーザー管理" [ref=e222] [cursor=pointer]:
+                - /url: /ja/users
+                - button "ユーザー管理" [ref=e223]:
+                  - img
+                  - generic [ref=e224]: ユーザー管理
+              - link "システム設定" [ref=e225] [cursor=pointer]:
+                - /url: /ja/settings
+                - button "システム設定" [ref=e226]:
+                  - img
+                  - generic [ref=e227]: システム設定
+          - generic [ref=e228]:
+            - generic [ref=e229]:
+              - generic [ref=e230]:
+                - generic [ref=e231]:
+                  - img [ref=e232]
+                  - generic [ref=e234]: 入社手続き締切アラート
+                  - generic [ref=e235]: 3件
+                - link "管理画面へ" [ref=e236] [cursor=pointer]:
+                  - /url: /ja/onboarding-admin
+                  - button "管理画面へ" [ref=e237]
+              - generic [ref=e238]: 提出期限が3日以内の入社申請があります
+            - generic [ref=e240]:
+              - 'link "山田次郎 / 入社日: 2026/3/10 期限超過（59日前）" [ref=e241] [cursor=pointer]':
+                - /url: /ja/onboarding-admin/onb-1772614092748-9ajniy
+                - generic [ref=e242]:
+                  - img [ref=e244]
+                  - generic [ref=e249]:
+                    - paragraph [ref=e250]: 山田次郎
+                    - paragraph [ref=e251]: "/ 入社日: 2026/3/10"
+                - generic [ref=e253]: 期限超過（59日前）
+              - 'link "テスト太郎 / 入社日: 2026/4/1 期限超過（37日前）" [ref=e254] [cursor=pointer]':
+                - /url: /ja/onboarding-admin/onb-1775475964676-m8vaji
+                - generic [ref=e255]:
+                  - img [ref=e257]
+                  - generic [ref=e262]:
+                    - paragraph [ref=e263]: テスト太郎
+                    - paragraph [ref=e264]: "/ 入社日: 2026/4/1"
+                - generic [ref=e266]: 期限超過（37日前）
+              - 'link "テスト 検証 テスト部 / 入社日: 2026/4/1 期限超過（37日前）" [ref=e267] [cursor=pointer]':
+                - /url: /ja/onboarding-admin/onb-1773463872796-7uftcg
+                - generic [ref=e268]:
+                  - img [ref=e270]
+                  - generic [ref=e275]:
+                    - paragraph [ref=e276]: テスト 検証
+                    - paragraph [ref=e277]: "テスト部 / 入社日: 2026/4/1"
+                - generic [ref=e279]: 期限超過（37日前）
+          - generic [ref=e280]:
+            - generic [ref=e281]:
+              - generic [ref=e282]:
+                - generic [ref=e283]:
+                  - img [ref=e284]
+                  - generic [ref=e286]: 特定業務従事者 健康診断受診アラート
+                  - generic [ref=e287]: 1名
+                - link "特定業務従事者を確認" [ref=e288] [cursor=pointer]:
+                  - /url: /ja/health?tab=checkups&subtab=master
+                  - button "特定業務従事者を確認" [ref=e289]
+              - generic [ref=e290]: 受診から4ヶ月以上経過した特定業務従事者がいます（6ヶ月以内に再受診が必要）
+            - generic [ref=e293]:
+              - generic [ref=e294]:
+                - img [ref=e296]
+                - generic [ref=e298]:
+                  - paragraph [ref=e299]: 西平あゆみ
+                  - paragraph [ref=e300]: コーポレート / 担当者
+              - generic [ref=e302]: 未受診
+          - generic [ref=e303]:
+            - link "総従業員数 40 アクティブユーザー" [ref=e304] [cursor=pointer]:
+              - /url: /ja/users
+              - generic [ref=e305]:
+                - generic [ref=e307]:
+                  - generic [ref=e308]: 総従業員数
+                  - img [ref=e310]
+                - generic [ref=e315]:
+                  - generic [ref=e316]: "40"
+                  - generic [ref=e317]:
+                    - img [ref=e318]
+                    - paragraph [ref=e321]: アクティブユーザー
+            - link "本日の出勤率 0% 0名出勤中" [ref=e322] [cursor=pointer]:
+              - /url: /ja/members
+              - generic [ref=e323]:
+                - generic [ref=e325]:
+                  - generic [ref=e326]: 本日の出勤率
+                  - img [ref=e328]
+                - generic [ref=e331]:
+                  - generic [ref=e332]: 0%
+                  - generic [ref=e333]:
+                    - img [ref=e334]
+                    - paragraph [ref=e339]: 0名出勤中
+            - link "承認依頼 0 自分が承認すべき申請" [ref=e340] [cursor=pointer]:
+              - /url: /ja/workflow
+              - generic [ref=e341]:
+                - generic [ref=e343]:
+                  - generic [ref=e344]: 承認依頼
+                  - img [ref=e346]
+                - generic [ref=e348]:
+                  - generic [ref=e349]: "0"
+                  - generic [ref=e350]:
+                    - img [ref=e351]
+                    - paragraph [ref=e354]: 自分が承認すべき申請
+            - link "申請中 0 未承認の申請" [ref=e355] [cursor=pointer]:
+              - /url: /ja/workflow
+              - generic [ref=e356]:
+                - generic [ref=e358]:
+                  - generic [ref=e359]: 申請中
+                  - img [ref=e361]
+                - generic [ref=e364]:
+                  - generic [ref=e365]: "0"
+                  - generic [ref=e366]:
+                    - img [ref=e367]
+                    - paragraph [ref=e369]: 未承認の申請
+          - heading "システム統計" [level=2] [ref=e370]
+          - generic [ref=e371]:
+            - generic [ref=e372]:
+              - generic [ref=e373]:
+                - generic [ref=e374]:
+                  - img [ref=e375]
+                  - text: SaaSコスト推移
+                - generic [ref=e377]: カテゴリ別の月次コスト推移
+              - generic [ref=e380]:
+                - img [ref=e381]:
+                  - generic [ref=e386]:
+                    - generic [ref=e388]: 2026-01
+                    - generic [ref=e390]: 2026-03
+                    - generic [ref=e392]: 2026-05
+                  - generic [ref=e394]:
+                    - generic [ref=e396]: ¥0k
+                    - generic [ref=e398]: ¥0k
+                    - generic [ref=e400]: ¥0k
+                    - generic [ref=e402]: ¥0k
+                    - generic [ref=e404]: ¥0k
+                - list [ref=e406]:
+                  - listitem [ref=e407]:
+                    - img [ref=e408]
+                    - text: 営業支援
+                  - listitem [ref=e410]:
+                    - img [ref=e411]
+                    - text: 開発ツール
+                  - listitem [ref=e413]:
+                    - img [ref=e414]
+                    - text: 生産性ツール
+                  - listitem [ref=e416]:
+                    - img [ref=e417]
+                    - text: コミュニケーション
+                  - listitem [ref=e419]:
+                    - img [ref=e420]
+                    - text: プロジェクト管理
+            - generic [ref=e422]:
+              - generic [ref=e423]:
+                - generic [ref=e424]:
+                  - img [ref=e425]
+                  - text: カテゴリ別SaaSコスト
+                - generic [ref=e429]: 現在のSaaSサービスの費用内訳
+              - generic [ref=e431]:
+                - img [ref=e434]:
+                  - generic [ref=e435]:
+                    - img [ref=e437]
+                    - img [ref=e439]
+                    - img [ref=e441]
+                    - img [ref=e443]
+                    - img [ref=e445]
+                - generic [ref=e446]:
+                  - generic [ref=e447]:
+                    - generic [ref=e449]: 営業支援
+                    - generic [ref=e450]: 44%
+                  - generic [ref=e451]:
+                    - generic [ref=e453]: 生産性ツール
+                    - generic [ref=e454]: 30%
+                  - generic [ref=e455]:
+                    - generic [ref=e457]: 開発ツール
+                    - generic [ref=e458]: 12%
+                  - generic [ref=e459]:
+                    - generic [ref=e461]: コミュニケーション
+                    - generic [ref=e462]: 12%
+                  - generic [ref=e463]:
+                    - generic [ref=e465]: プロジェクト管理
+                    - generic [ref=e466]: 2%
+          - generic [ref=e468] [cursor=pointer]:
+            - generic [ref=e469]:
+              - generic [ref=e470]:
+                - img [ref=e471]
+                - text: 資産利用状況
+              - generic [ref=e475]: 社内資産の利用状況（クリックで詳細へ）
+            - generic [ref=e478]:
+              - generic [ref=e479]:
+                - img [ref=e481]
+                - generic [ref=e485]: 車両
+              - generic [ref=e486]:
+                - generic [ref=e487]:
+                  - text: "使用中:"
+                  - strong [ref=e488]: "0"
+                  - text: 台
+                - generic [ref=e489]:
+                  - text: "利用可能:"
+                  - strong [ref=e490]: "1"
+                  - text: 台
+    - region "Notifications alt+T"
+  - region "Notifications alt+T"
+  - alert [ref=e30]
+  - generic [ref=e491]: ¥0k

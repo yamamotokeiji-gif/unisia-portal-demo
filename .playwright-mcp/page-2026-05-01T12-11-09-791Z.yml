@@ -1,0 +1,31 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e8]
+      - heading "Dandori Portal" [level=1] [ref=e12]
+      - paragraph [ref=e13]: 統合型人事管理システム
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: ログイン
+        - generic [ref=e17]: メールアドレスとパスワードを入力してください
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - text: メールアドレス
+            - textbox "メールアドレス" [ref=e21]:
+              - /placeholder: you@example.com
+          - generic [ref=e22]:
+            - text: パスワード
+            - textbox "パスワード" [ref=e23]:
+              - /placeholder: ••••••••
+          - button "ログイン" [ref=e24] [cursor=pointer]:
+            - img
+            - text: ログイン
+        - link "パスワードを忘れた方" [ref=e26] [cursor=pointer]:
+          - /url: /ja/auth/forgot-password
+      - button "デモアカウント情報を入力" [ref=e28] [cursor=pointer]:
+        - img
+        - text: デモアカウント情報を入力
+    - paragraph [ref=e29]: © 2024 Dandori Portal. All rights reserved.
+  - region "Notifications alt+T"
+  - alert [ref=e30]
