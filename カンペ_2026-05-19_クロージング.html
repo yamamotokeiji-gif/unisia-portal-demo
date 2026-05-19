@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>想定質問と回答案 - 2026-05-19 クロージングMTG</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Meiryo",sans-serif;
+  color:#1A1A2E;background:#fff;
+  line-height:1.85;font-size:16px;
+  padding-bottom:80px;
+}
+.header{
+  position:sticky;top:0;z-index:50;
+  background:#4A2B8E;color:#fff;
+  padding:14px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+.header-inner{max-width:840px;margin:0 auto}
+.h-title{font-size:15px;font-weight:800;margin-bottom:2px;letter-spacing:0.5px}
+.h-meta{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:1px;margin-bottom:10px}
+.search{
+  width:100%;padding:8px 12px;
+  border:none;border-radius:6px;
+  font-size:14px;color:#1A1A2E;
+  margin-bottom:10px;
+}
+.search:focus{outline:2px solid #FBBF24}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{
+  padding:5px 11px;border-radius:99px;
+  font-size:12px;font-weight:700;
+  background:rgba(255,255,255,0.15);
+  color:#fff;border:1px solid rgba(255,255,255,0.25);
+  cursor:pointer;transition:all 0.15s;
+  user-select:none;
+}
+.tab:hover{background:rgba(255,255,255,0.25)}
+.tab.active{background:#FBBF24;color:#1A1A2E;border-color:#FBBF24}
+.tab .count{font-size:10px;opacity:0.7;margin-left:4px}
+
+main{max-width:840px;margin:0 auto;padding:32px 20px}
+
+h2{
+  font-size:17px;font-weight:800;color:#4A2B8E;
+  margin-top:36px;margin-bottom:14px;
+  padding-bottom:6px;border-bottom:1px solid #E5E0F0;
+}
+h2:first-child{margin-top:0}
+
+.qa{
+  margin-bottom:16px;
+  padding:14px 18px;
+  background:#FAFAFC;
+  border-left:3px solid #4A2B8E;
+  border-radius:4px;
+}
+.q{font-size:15px;font-weight:800;color:#1A1A2E;margin-bottom:6px;line-height:1.5}
+.q::before{content:'Q. ';color:#4A2B8E}
+.a{font-size:14.5px;color:#3F3F4E;line-height:1.85}
+.a::before{content:'A. ';color:#4A2B8E;font-weight:800}
+.a b{color:#1A1A2E;font-weight:800}
+
+.no-results{
+  text-align:center;padding:48px 20px;
+  color:#6B7280;font-size:14px;display:none;
+}
+
+.hidden{display:none !important}
+
+@media print{
+  .header{position:static}
+  .tabs,.search{display:none}
+  .qa{break-inside:avoid;page-break-inside:avoid}
+  body{padding:16px;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="h-title">クロージングMTG 想定質問と回答案</div>
+    <div class="h-meta">2026-05-19 · UNISIA HD 最終クロージング · 全60問</div>
+    <input class="search" id="search" type="text" placeholder="検索（例: 金額・解約・データ・セキュリティ）">
+    <div class="tabs" id="tabs">
+      <span class="tab active" data-filter="all">ALL<span class="count">60</span></span>
+      <span class="tab" data-filter="money">金額<span class="count">8</span></span>
+      <span class="tab" data-filter="sched">スケジュール<span class="count">7</span></span>
+      <span class="tab" data-filter="risk">リスク・契約<span class="count">11</span></span>
+      <span class="tab" data-filter="tech">技術<span class="count">7</span></span>
+      <span class="tab" data-filter="dev">開発<span class="count">13</span></span>
+      <span class="tab" data-filter="org">組織・既存<span class="count">6</span></span>
+      <span class="tab" data-filter="train">研修<span class="count">5</span></span>
+      <span class="tab" data-filter="store">出店AI<span class="count">3</span></span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<h2 data-h="money">金額・支払い</h2>
+
+<div class="qa" data-cat="money">
+  <div class="q">結局いくらかかるんですか？</div>
+  <div class="a">Salesforce(セールスフォース)代替は1機能のテスト導入で数百万〜。フル機能（申請＋勤怠＋臨店＋チャット）で初期◯◯◯◯万＋月額◯◯万。Salesforce(セールスフォース)年間2000万に対し半額以下が目標です。具体額は1週間のヒアリング後に確定見積もりを出します。</div>
+</div>
+
+<div class="qa" data-cat="money">
+  <div class="q">月額保守はいくら？</div>
+  <div class="a">利用ユーザー数連動で、600名規模なら月額◯◯万円〜。サーバー費・運用費・サポート全部込みです。</div>
+</div>
+
+<div class="qa" data-cat="money">
+  <div class="q">助成金で本当に下がるの？</div>
+  <div class="a">人材開発支援助成金で経費の45〜75%が戻ります。中小企業区分なら75%、大企業でも45%。受講開始前の届出が必須なので、契約と並行して手続きをサポートします。</div>
+</div>
+
+<div class="qa" data-cat="money">
+  <div class="q">支払いタイミング・分割は？</div>
+  <div class="a">開発費は着手金30%・納品時40%・検収後30%の3分割が標準です。御社の予算サイクルに合わせて調整可能です。</div>
+</div>
+
+<div class="qa" data-cat="money">
+  <div class="q">後から機能追加・拡張したい場合の費用は？</div>
+  <div class="a">月額保守の範囲内で対応できる軽微な変更と、別途見積もりとなる新規開発を契約時に明確に切り分けます。Claude Code(クロードコード)活用で従来の半分以下の工数で開発できるので、追加開発もリーズナブルです。</div>
+</div>
+
+<div class="qa" data-cat="money">
+  <div class="q">既存Salesforce(セールスフォース)契約と並走中、コストが二重に発生するのでは？</div>
+  <div class="a">テスト導入段階の数ヶ月は確かに並走しますが、テスト導入費用は数百万単位なのでSF年額に対する負担は小さいです。完全移行のタイミングをSF契約満了に合わせれば、無駄な二重コストは発生しません。</div>
+</div>
+
+<div class="qa" data-cat="money">
+  <div class="q">レベニューシェアの仕組みは？(出店AI)</div>
+  <div class="a">出店成功時、もしくは撤退損失を回避できた時の成果報酬モデルです。具体的な分配率は出店AIフェーズに入る前に、データ準備・実証実験を経てから設計します。今日決める話ではなく、構想として共有しておきます。</div>
+</div>
+
+<div class="qa" data-cat="money">
+  <div class="q">解約時の費用精算はどうなる？</div>
+  <div class="a">フェーズごとの段階契約なので、完了したフェーズ分のみのお支払いです。途中で止めても次フェーズの開発費が発生することはありません。検収済みコードはすべて御社の資産として残ります。</div>
+</div>
+
+<h2 data-h="sched">スケジュール・体制</h2>
+
+<div class="qa" data-cat="sched">
+  <div class="q">いつから始められる？</div>
+  <div class="a">契約合意後2週間でキックオフ可能です。1機能のテスト導入なら3週間で動くものをお見せできます。</div>
+</div>
+
+<div class="qa" data-cat="sched">
+  <div class="q">開発体制は何人？</div>
+  <div class="a">PM1名＋開発チームの少数体制です。山本が直接プロジェクトをハンドリングします。大手SIのような多階層は取りません。Claude Code(クロードコード)で開発生産性が大幅に上がっているため、少人数で従来の数倍のアウトプットが出せます。</div>
+</div>
+
+<div class="qa" data-cat="sched">
+  <div class="q">PMはどこまで関わる？常駐は必要？</div>
+  <div class="a">常駐は不要です。Zoom定例＋Slack/Chatwork(チャットワーク)等のテキストコミュニケーションで進めます。御社側に常駐対応の負担はかけません。</div>
+</div>
+
+<div class="qa" data-cat="sched">
+  <div class="q">進捗報告の頻度・形式は？</div>
+  <div class="a">週次定例（30分〜1時間）で進捗・課題・次週計画を共有します。それとは別に随時テキストで状況更新します。透明性を最優先します。</div>
+</div>
+
+<div class="qa" data-cat="sched">
+  <div class="q">検収プロセスはどうなる？</div>
+  <div class="a">機能ごとの検収基準を契約時に明文化します。テスト導入段階でも検収項目を事前に合意してから開発に入る形です。「動いた／動いていない」が曖昧にならない構造にします。</div>
+</div>
+
+<div class="qa" data-cat="sched">
+  <div class="q">600名一斉移行はリスクが大きいのでは？</div>
+  <div class="a">一斉移行はしません。1ブランド・1機能から段階的に。本社→直営→FCの順で展開します。最初のグループで動作確認できてから次へ広げる構造です。</div>
+</div>
+
+<div class="qa" data-cat="sched">
+  <div class="q">既存Salesforce(セールスフォース)契約タイミングと合わせられる？</div>
+  <div class="a">解約予告期間から逆算してスケジュールを組みます。テスト導入はSF継続中に並行できるので、完全移行のタイミングだけ契約満了に合わせる形がきれいです。今の契約条件、教えていただけますか？</div>
+</div>
+
+<h2 data-h="risk">リスク・契約</h2>
+
+<div class="qa" data-cat="risk">
+  <div class="q">RPAの二の舞にならない保証は？</div>
+  <div class="a">RPAが失敗したのは「IT戦略部止まりで現場に届かなかった」ことが原因です。今回はSalesforce(セールスフォース)代替の開発と並行してAI研修を走らせることで、現場に「作れる人」を育てます。研修で育ったメンバーが次のフェーズの主役になる構造です。<b>同時並走こそが構造的な違いです。</b></div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">途中で止めたい場合は？</div>
+  <div class="a">1機能ごとの段階契約にします。フェーズごとの完了時に「次に進むか」を判断いただける構造なので、途中での中断・縮小・撤退が可能です。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">開発が失敗したらどうなる？</div>
+  <div class="a">検収基準を契約時に明文化します。マイルストーン未達時の対応も契約に盛り込みます。たとえばテスト導入機能が3週間で動かなければ着手金返金、といった条項も検討可能です。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">契約形態は請負？準委任？</div>
+  <div class="a">機能ごとに最適な形態を選びます。仕様が確定している機能（申請・勤怠など）は請負契約で検収責任を明確に。発展的に作り込む機能（チャット・AI連携）は準委任で柔軟性を確保。これは契約時に明確に切り分けます。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">知的財産権はどうなる？</div>
+  <div class="a">開発成果物の著作権・利用権はすべて御社に帰属します。ダンドリワーク側で別案件に流用するようなことは契約で明確に禁止します。御社の業務ノウハウは御社の資産として守ります。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">データ漏洩時の責任は？</div>
+  <div class="a">ダンドリワーク側の過失による漏洩は契約上の損害賠償責任を負います。具体的な賠償上限額・対象範囲は契約時に明文化します。サイバー保険への加入も準備中です。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">損害賠償の上限は？</div>
+  <div class="a">一般的な受託開発契約と同じく、契約金額を上限とする形が標準です。ただし故意・重過失の場合はその限りではない、という条項も盛り込みます。具体的な金額は契約交渉時に詰めさせてください。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">NDA(秘密保持契約)は結べますか？</div>
+  <div class="a">もちろんです。提案段階でも必要であれば即時締結可能です。御社ひな形・弊社ひな形のどちらでも対応します。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">なぜダンドリワークなんですか？他社じゃダメ？</div>
+  <div class="a">差別化は3点です。①Claude Code(クロードコード)を全社で実践している唯一の受託会社、②コード所有権を完全に御社に移転する、③育てて渡す伴走型で内製化を支援する。一般的なSI・コンサルとは構造が違います。「3年後の自走力」で判断いただきたいです。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">他社見積もりも取ってますか？</div>
+  <div class="a">単純な価格比較では負ける構造ではなく勝つ構造です。同じスコープでSI会社に出すと数倍の見積もりが出てくるはずです。ただし弊社の本当の価値は「コード資産化」と「内製化支援」なので、見積額の比較ではなく価値の比較で見ていただきたいです。</div>
+</div>
+
+<div class="qa" data-cat="risk">
+  <div class="q">ダンドリワークが倒産したらどうなる？</div>
+  <div class="a">コードは契約時点で御社の資産なので、最悪の場合でも他社に引き継いで運用を継続できます。これがSalesforce(セールスフォース)や一般的なSaaSとの最大の違いです。ベンダーロックインしない構造を最初から作っています。</div>
+</div>
+
+<h2 data-h="tech">技術・セキュリティ</h2>
+
+<div class="qa" data-cat="tech">
+  <div class="q">データはどこに保管？個人情報は大丈夫？</div>
+  <div class="a">AWS(エーダブリューエス)東京リージョン、もしくは既存のGoogle Cloud(グーグルクラウド) DWH(データウェアハウス)と統合する形のどちらかを選んでいただけます。個人情報保護法準拠で、項目単位の暗号化・全アクセスログ・NDA(秘密保持契約)対応を契約時に明文化します。</div>
+</div>
+
+<div class="qa" data-cat="tech">
+  <div class="q">認証はSSO(シングルサインオン)できる？</div>
+  <div class="a">Google Workspace(グーグルワークスペース) SSO(シングルサインオン)に対応します。既存のGemini(ジェミニ)ユーザーがそのままログイン可能です。加藤さんがこの10ヶ月で構築されたGoogle Workspace(グーグルワークスペース)基盤の上に乗る形になります。</div>
+</div>
+
+<div class="qa" data-cat="tech">
+  <div class="q">既存の勤怠システムと連携できる？</div>
+  <div class="a">APIがあれば直接連携、なければAIエージェントで連携します。有給申請→勤怠登録の二度手間を解消するのが最大の効果です。今の勤怠システム、API公開されていますか？</div>
+</div>
+
+<div class="qa" data-cat="tech">
+  <div class="q">Salesforce(セールスフォース)のデータ移行はどうする？</div>
+  <div class="a">Salesforce(セールスフォース) Bulk API(バルクAPI・大量データ取得用API)で全レコード抽出可能です。臨店報告書の過去画像も含めて移行できます。テスト導入段階で1機能分から移行設計を始めます。</div>
+</div>
+
+<div class="qa" data-cat="tech">
+  <div class="q">コードの所有権は？ベンダーロックインしない？</div>
+  <div class="a">コードは完全に御社の資産になります。GitHub(ギットハブ)で全ソースを開示し、必要なら他社にも引き継げる状態でお渡しします。<b>これがSalesforce(セールスフォース)との最大の違いです。Salesforce(セールスフォース)はコードを渡せません。</b></div>
+</div>
+
+<div class="qa" data-cat="tech">
+  <div class="q">可用性・SLA(稼働率保証)はどう保証する？</div>
+  <div class="a">月間稼働率99.5%以上を目標に設計します。SLA(稼働率保証)の具体水準は契約時に明文化します。クラウドの冗長構成＋自動フェイルオーバーで業務影響を最小化します。</div>
+</div>
+
+<div class="qa" data-cat="tech">
+  <div class="q">バックアップ・障害復旧は？</div>
+  <div class="a">日次の自動バックアップに加え、地理冗長で別リージョンにも複製を持ちます。RPO（復旧目標時点）は24時間以内、RTO（復旧目標時間）は4時間以内を目安に設計します。</div>
+</div>
+
+<h2 data-h="dev">開発</h2>
+
+<div class="qa" data-cat="dev">
+  <div class="q">開発言語・技術スタックは？</div>
+  <div class="a">フロントはReact(リアクト)/Next.js(ネクスト)、バックエンドはNode.js(ノード) or Python(パイソン)、データベースはPostgreSQL(ポストグレ)、インフラはAWS(エーダブリューエス) or GCP(ジーシーピー)。すべてオープン標準の技術で、Salesforce(セールスフォース)のような独自言語に縛られません。汎用エンジニアが世界中にいる構成です。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">なぜReact(リアクト)/Next.js(ネクスト)を選ぶ？他のフレームワークではダメ？</div>
+  <div class="a">エコシステムが最大で、エンジニアの母数が多く、長期保守が現実的だからです。SSR(サーバーサイドレンダリング)(サーバーサイドレンダリング)で初期表示が速く、SEO・スマホ対応も自然に解決できます。Vue・Svelteも選択肢ですが、人材確保の観点でReact(リアクト)/Next.js(ネクスト)が最も現実的です。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">データベースはPostgreSQL(ポストグレ)で本当に大丈夫？</div>
+  <div class="a">600名規模・複数ブランド・FC加盟店まで含めても余裕で耐えられます。PostgreSQL(ポストグレ)はGoogle Cloud(グーグルクラウド) SQLでマネージドサービスとして使えるので、運用負荷も最小化できます。MySQL選択肢もありますが、JSON(ジェイソン)型・全文検索・地理データなど機能の豊富さでPostgreSQL(ポストグレ)が優位です。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">AWS(エーダブリューエス)とGCP(ジーシーピー)の選定基準は？</div>
+  <div class="a">既存のGoogle Workspace(グーグルワークスペース)・Gemini(ジェミニ)を活かすならGCP(ジーシーピー)が自然です。SSO(シングルサインオン)・データ連携・DWH(データウェアハウス)構築がシームレスになります。AWS(エーダブリューエス)は知見豊富なエンジニアが多い利点。御社の場合は<b>GCP(ジーシーピー)を第一候補</b>として、加藤さんの構築されたGoogle Cloud(グーグルクラウド) DWH(データウェアハウス)構想と統合する設計が最適と考えています。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">Claude Code(クロードコード)を使った開発プロセスはどんな感じ？</div>
+  <div class="a">CLAUDE.mdというファイルにルール・前提・禁止事項を明文化して、AIに守らせます。開発者はAIにペアプロするイメージで、設計→実装→テスト→レビューのサイクルを高速で回します。具体的な開発の様子は次回MTGでデモも可能です。芳野さんがClaude Code(クロードコード)勉強中とのことなので、研修でこのプロセス自体をお伝えします。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">テストはどう書く？テスト戦略は？</div>
+  <div class="a">Unit(ユニット・単体テスト) / Integration(インテグレーション・統合テスト) / E2E(エンドツーエンド・ユーザー操作シナリオテスト) の3層構成です。Unit(関数ひとつずつ) → Integration(API・データベース連携) → E2E(ユーザー操作シナリオ)。テスト自動化はCI/CD(シーアイシーディー)で全コミット時に実行します。Claude Code(クロードコード)はテスト生成も得意なので、テストカバレッジを高く保ちやすい構造です。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">CI/CD(シーアイシーディー)はどう構築する？</div>
+  <div class="a">GitHub(ギットハブ) Actions or GitLab(ギットラブ) CIで、コミット→自動テスト→ステージング自動デプロイ→承認後本番デプロイの流れを構築します。本番デプロイは必ず人間の承認を介する設計で、事故を防ぎます。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">APIの設計はREST(レスト)？GraphQL(グラフキューエル)？</div>
+  <div class="a">基本はREST(レスト)で、複雑なデータ取得が必要な部分のみGraphQL(グラフキューエル)という混在構成が現実的です。ポータルの大半の処理はREST(レスト)で十分です。シンプル・標準的な設計を優先し、過剰な抽象化は避けます。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">Gitのブランチ戦略・コードレビューは？</div>
+  <div class="a">GitHub(ギットハブ) Flow(フロー)ベース(main・メインの本流 + feature・機能ごとの枝)で、PR(プルリクエスト・変更依頼)単位で必ずコードレビュー→マージの運用です。御社側のエンジニアもGitHub(ギットハブ)に招待してレビューに参加いただけます。透明性とコード品質の両立を狙います。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">ドキュメント・引き継ぎ資料はどうなる？</div>
+  <div class="a">README(リードミー・説明書)・API仕様書・データベース設計書・運用手順書をすべてGitHub(ギットハブ)上で管理します。コードと一緒にバージョン管理されるので「ドキュメントが古い」問題が起きにくい構造です。引き継ぎ時はリポジトリごとお渡しすれば完結します。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">モニタリング・ログはどう取る？</div>
+  <div class="a">アプリログ・アクセスログ・エラーログをCloud Logging(クラウドロギング)(GCP(ジーシーピー)の標準ログサービス)またはCloudWatch(クラウドウォッチ)(AWS(エーダブリューエス)の標準ログサービス)に集約します。エラー検知は即時通知(Slack等)、パフォーマンス監視はダッシュボード化。問題発生時の原因特定が数分でできる体制を構築します。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">AIエージェントはどう実装する？</div>
+  <div class="a">Claude(クロード)APIをバックエンドから呼び出し、業務フローに組み込みます。「SaaSからデータ取得→Excel転記」のようなRPAタスクは、AIエージェントが自然言語の指示で実行します。プロンプトテンプレートを御社業務に合わせて作り込み、現場が自然言語で拡張できる状態を作ります。</div>
+</div>
+
+<div class="qa" data-cat="dev">
+  <div class="q">OWASP(オワスプ)などセキュリティ実装の具体策は？</div>
+  <div class="a">SQL Injection(エスキューエル・インジェクション)・XSS(クロスサイトスクリプティング)・CSRF(シーエスアールエフ)・SSRF(エスエスアールエフ)のOWASP(オワスプ) Top 10対策はフレームワークレベルで実装します。サーバー側で必ず再検証、クライアント側のバリデーションは信頼しない原則です。静的解析(SAST(静的解析))・依存パッケージスキャン(SCA(依存パッケージスキャン))もCIに組み込みます。</div>
+</div>
+
+<h2 data-h="org">組織・既存システム</h2>
+
+<div class="qa" data-cat="org">
+  <div class="q">既存のSalesforce(セールスフォース)担当者・IT戦略部の仕事はどうなる？</div>
+  <div class="a">「育てて渡す」が前提です。今のメンバーが新ポータルの運用主体になり、AI研修で能力を拡張していただきます。<b>人員削減を前提にした提案ではありません。</b>本社業務をAI化することで生まれた余力を、店舗開発・経営支援といった高付加価値業務に振り向ける構造です。</div>
+</div>
+
+<div class="qa" data-cat="org">
+  <div class="q">加藤さんのGoogle Workspace(グーグルワークスペース)・Gemini(ジェミニ)との棲み分けは？</div>
+  <div class="a">切り替えではなく共存です。Gemini(ジェミニ)はワークスペース内（Gmail・Docs・カレンダー）で強力に効きます。我々のポータルは業務システムのフロントを担い、データはDWH(データウェアハウス)で統合する。加藤さんがこの10ヶ月でやってきた基盤がそのまま活きる構造です。</div>
+</div>
+
+<div class="qa" data-cat="org">
+  <div class="q">DWH(データウェアハウス)構想との関係は？</div>
+  <div class="a">DWH(データウェアハウス)は構想自体が完成しているので、それを実装するパートを担います。ポータルから出るデータも自動的にDWH(データウェアハウス)に集約され、生成AIで経営層が即答を得る世界観の実現に貢献します。坂本さんの構想に乗っかる形です。</div>
+</div>
+
+<div class="qa" data-cat="org">
+  <div class="q">芳野さんのRPA(100台)はどうなる？</div>
+  <div class="a">全廃ではなく、現場に展開できなかった部分をAIエージェントに置き換えていきます。芳野さんがClaude Code(クロードコード)を勉強中とのことなので、AI研修を通じて芳野さんが主体的にRPA→AIエージェント移行を主導できる構造を作ります。</div>
+</div>
+
+<div class="qa" data-cat="org">
+  <div class="q">FC加盟店への展開はどう進める？</div>
+  <div class="a">本社→直営→FCの順で展開します。FC加盟店は契約形態がそれぞれ違うので、新ポータルでの機能・コスト負担をFC側にも合意いただく形が必要です。展開戦略は受注後すぐに整理します。</div>
+</div>
+
+<div class="qa" data-cat="org">
+  <div class="q">店舗アルバイト・カンリー・LINEとの関係は？</div>
+  <div class="a">店舗アルバイト層はSF未契約なので、LINE公式アカウント経由でポータル連携する設計が現実的です。カンリー（モドリー）は既存運用を尊重しつつ、ポータルとの通知連携を検討します。一気に統合せず、段階的に整理していきます。</div>
+</div>
+
+<h2 data-h="train">AI研修</h2>
+
+<div class="qa" data-cat="train">
+  <div class="q">受講料は具体的にいくら？</div>
+  <div class="a">梅(初級)が1人あたり◯◯万円、竹(中級)◯◯万円、松(上級)◯◯万円。全8回×2時間×4ヶ月のコース料金です。助成金で実質負担は半分以下になります。</div>
+</div>
+
+<div class="qa" data-cat="train">
+  <div class="q">講師は誰？オンラインだけで本当に身につく？</div>
+  <div class="a">講師は山本（Claude Code(クロードコード)実践者）が担当します。Zoom＋実機演習で「作れる」まで持っていきます。各回ハンズオン中心で、最終回までに業務ツールを1つ自作するのが到達目標です。受講者には宿題と個別フィードバックも付きます。</div>
+</div>
+
+<div class="qa" data-cat="train">
+  <div class="q">カリキュラムの具体的な中身は？</div>
+  <div class="a">梅: AIの基礎理解・プロンプト設計・Gemini(ジェミニ)を業務で使い倒す。竹: Claude Code(クロードコード)で簡単な業務ツール自作・APIの基礎・スプレッドシート自動化。松: 業務システムの構築・データベース設計・業務フロー再設計。各回後に詳細シラバスをお送りします。</div>
+</div>
+
+<div class="qa" data-cat="train">
+  <div class="q">受講人数の上限は？</div>
+  <div class="a">1コース最大15名を目安にしています。それ以上は別コースとして並行開催が可能です。「各部署に1人」を実現するなら、初回は10〜15名のキーパーソン選抜が効果的です。</div>
+</div>
+
+<div class="qa" data-cat="train">
+  <div class="q">助成金の申請主体はどっち？</div>
+  <div class="a">会社（御社）側で申請いただく形です。事業内職業能力開発計画の届出 → 訓練実施 → 支給申請の3ステップを、ダンドリワークが書式・スケジュール管理含めて伴走サポートします。</div>
+</div>
+
+<h2 data-h="store">出店AI</h2>
+
+<div class="qa" data-cat="store">
+  <div class="q">出店AIってどんなデータが必要？</div>
+  <div class="a">立地データ（人流・競合・駅距離・賃料）、過去店舗の売上実績、商圏特性、撤退物件情報の4つが核です。御社の既存データ＋外部購入データ＋AIスコアリングを組み合わせて、属人的判断から脱却します。</div>
+</div>
+
+<div class="qa" data-cat="store">
+  <div class="q">既存の立地分析SaaS(パワーマップ等)との違いは？</div>
+  <div class="a">既存SaaSは「分析ツール」、我々の提案は「意思決定支援AI」です。重回帰では捉えられないカニバリゼーション・人流変化・撤退兆候を、AIで動的にスコアリングします。さらに「コードが御社の資産」になるので、ノウハウが社外に流出しません。</div>
+</div>
+
+<div class="qa" data-cat="store">
+  <div class="q">レベニューシェアの撤退条件は？</div>
+  <div class="a">出店AIフェーズに入る前のヒアリングで、お互いが納得できる条件を設計します。基本は「使ってみて成果が出なければお互い止められる」構造です。長期契約で縛る形は取りません。</div>
+</div>
+
+<div class="no-results" id="no-results">該当する質問が見つかりませんでした</div>
+
+</main>
+
+<script>
+const search=document.getElementById('search');
+const tabs=document.querySelectorAll('.tab');
+const cards=document.querySelectorAll('[data-cat]');
+const heads=document.querySelectorAll('h2[data-h]');
+const noRes=document.getElementById('no-results');
+let activeFilter='all';
+
+function applyFilter(){
+  const kw=search.value.trim().toLowerCase();
+  let shown=0;
+  cards.forEach(c=>{
+    const cat=c.dataset.cat;
+    const txt=c.textContent.toLowerCase();
+    const matchCat=(activeFilter==='all'||cat===activeFilter);
+    const matchKw=(!kw||txt.includes(kw));
+    if(matchCat&&matchKw){c.classList.remove('hidden');shown++}
+    else{c.classList.add('hidden')}
+  });
+  heads.forEach(h=>{
+    const cat=h.dataset.h;
+    const hasVisible=document.querySelector('[data-cat="'+cat+'"]:not(.hidden)');
+    if(hasVisible)h.classList.remove('hidden');
+    else h.classList.add('hidden');
+  });
+  noRes.style.display=shown===0?'block':'none';
+}
+
+search.addEventListener('input',applyFilter);
+tabs.forEach(t=>{
+  t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    activeFilter=t.dataset.filter;
+    applyFilter();
+  });
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){search.value='';applyFilter();search.focus()}
+});
+</script>
+</body>
+</html>

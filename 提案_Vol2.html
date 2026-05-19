@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ユニシアホールディングスのAI戦略 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --purple:#4A2B8E;
+  --purple-d:#2E1A5C;
+  --purple-l:#7C5CC4;
+  --purple-bg:#F4EEFF;
+  --purple-bg2:#E9DFFB;
+  --ink:#1A1A2E;
+  --mid:#4A4A5E;
+  --gray:#6B7280;
+  --line:#E5E0F0;
+  --bg:#FAFAFC;
+  --accent:#F59E0B;
+  --green:#10B981;
+  --red:#DC2626;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Meiryo",sans-serif;
+  color:var(--ink);
+  background:#fff;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ──────── Nav ──────── */
+.nav{
+  position:fixed;top:16px;right:16px;z-index:100;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 14px;
+  font-size:11px;
+  box-shadow:0 4px 24px rgba(74,43,142,0.12);
+  max-width:200px;
+}
+.nav-title{font-weight:800;color:var(--purple);margin-bottom:6px;letter-spacing:0.5px;font-size:10px}
+.nav a{display:block;color:var(--mid);text-decoration:none;padding:3px 0;font-size:11px;transition:color 0.15s}
+.nav a:hover{color:var(--purple)}
+@media(max-width:900px){.nav{display:none}}
+
+/* ──────── Section共通 ──────── */
+section{padding:96px 24px;position:relative}
+.container{max-width:1080px;margin:0 auto}
+.sec-tag{
+  display:inline-block;
+  font-size:11px;font-weight:800;letter-spacing:3px;
+  color:var(--purple);
+  background:var(--purple-bg);
+  padding:6px 14px;border-radius:99px;
+  margin-bottom:20px;
+}
+.sec-title{
+  font-size:38px;font-weight:900;line-height:1.3;
+  color:var(--ink);margin-bottom:14px;letter-spacing:-0.5px;
+}
+.sec-sub{font-size:15px;color:var(--gray);margin-bottom:48px}
+
+/* ──────── Hero ──────── */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(135deg,#2E1A5C 0%,#4A2B8E 50%,#7C5CC4 100%);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  padding:80px 24px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 20%,rgba(255,255,255,0.1) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-inner{max-width:900px;text-align:center;position:relative;z-index:1}
+.hero-eyebrow{
+  font-size:12px;font-weight:700;letter-spacing:6px;
+  color:rgba(255,255,255,0.7);
+  margin-bottom:32px;
+}
+.hero-title{
+  font-size:64px;font-weight:900;line-height:1.15;
+  margin-bottom:28px;letter-spacing:-1px;
+}
+.hero-title .accent{color:#FBBF24}
+.hero-sub{
+  font-size:20px;font-weight:500;line-height:1.7;
+  color:rgba(255,255,255,0.85);
+  margin-bottom:48px;
+}
+.hero-meta{
+  display:inline-flex;gap:24px;
+  padding:14px 28px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:99px;
+  font-size:13px;color:rgba(255,255,255,0.75);
+}
+.hero-scroll{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:3px;
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@media(max-width:700px){
+  .hero-title{font-size:38px}
+  .hero-sub{font-size:16px}
+  .hero-meta{flex-direction:column;gap:6px;border-radius:14px}
+}
+
+/* ──────── Section: 第1回課題 ──────── */
+.s-issue1{background:#fff}
+.grid-4{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:700px){.grid-4{grid-template-columns:1fr}}
+.issue-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-left:4px solid var(--purple);
+  border-radius:12px;
+  padding:28px;
+  transition:all 0.2s;
+}
+.issue-card:hover{box-shadow:0 8px 32px rgba(74,43,142,0.1);transform:translateY(-2px)}
+.issue-num{
+  display:inline-block;
+  font-family:"Calibri",sans-serif;
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);
+  margin-bottom:8px;
+}
+.issue-name{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:6px}
+.issue-desc{font-size:13px;color:var(--gray);margin-bottom:14px}
+.issue-quote{
+  background:var(--purple-bg);
+  border-left:3px solid var(--purple-l);
+  padding:12px 14px;
+  font-size:13.5px;font-weight:700;color:var(--purple-d);
+  line-height:1.6;border-radius:4px;
+}
+
+/* ──────── Section: 第2回課題 ──────── */
+.s-issue2{background:var(--bg)}
+.grid-5{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-5 .issue-card:nth-child(4),
+.grid-5 .issue-card:nth-child(5){grid-column:span 1}
+@media(max-width:900px){.grid-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid-5{grid-template-columns:1fr}}
+
+/* ──────── Section: 動ける領域マップ ──────── */
+.s-map{background:#fff}
+.map-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:32px;align-items:start}
+@media(max-width:800px){.map-grid{grid-template-columns:1fr}}
+.map-left{
+  background:var(--bg);
+  border-radius:12px;
+  padding:24px;
+}
+.map-left-title{font-size:12px;font-weight:800;color:var(--gray);letter-spacing:2px;margin-bottom:14px}
+.issue-pill{
+  display:block;
+  background:#fff;border:1px solid var(--line);
+  padding:8px 14px;border-radius:99px;
+  font-size:13px;color:var(--mid);
+  margin-bottom:8px;
+}
+.map-right .priority-box{
+  background:linear-gradient(135deg,var(--purple-d),var(--purple));
+  color:#fff;
+  padding:24px 28px;border-radius:14px;
+  margin-bottom:16px;
+}
+.priority-label{font-size:11px;font-weight:800;letter-spacing:3px;color:#FBBF24;margin-bottom:8px}
+.priority-item{font-size:16px;font-weight:800;line-height:1.5;margin-bottom:10px;padding-left:0}
+.priority-item:last-child{margin-bottom:0}
+.priority-item small{font-size:12px;font-weight:500;color:rgba(255,255,255,0.75);display:block;margin-top:2px}
+.next-phase{
+  background:var(--purple-bg);
+  padding:20px 24px;border-radius:14px;
+}
+.next-phase-label{font-size:11px;font-weight:800;color:var(--purple);letter-spacing:3px;margin-bottom:12px}
+.next-phase-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.next-phase-item{
+  background:#fff;border:1px solid var(--line);
+  padding:10px 12px;border-radius:8px;
+  font-size:12.5px;color:var(--ink);
+}
+.next-phase-item b{display:block;font-size:11px;color:var(--purple);margin-bottom:2px;letter-spacing:0.5px}
+
+/* ──────── Section: 最優先① ──────── */
+.s-prio1{background:linear-gradient(180deg,#fff 0%,var(--purple-bg) 100%)}
+.flow-grid{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;align-items:stretch;margin-bottom:32px}
+@media(max-width:800px){.flow-grid{grid-template-columns:1fr;gap:16px}.flow-arrow{transform:rotate(90deg)}}
+.flow-current{
+  background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:24px;
+}
+.flow-label{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--gray);margin-bottom:8px}
+.flow-quote{
+  font-size:16px;font-weight:800;color:var(--red);
+  border-left:3px solid var(--red);padding-left:12px;
+  margin-bottom:16px;
+}
+.flow-list{list-style:none;font-size:13px;color:var(--mid);line-height:1.9}
+.flow-list li{padding-left:18px;position:relative}
+.flow-list li::before{content:'×';position:absolute;left:0;color:var(--red);font-weight:900}
+.flow-arrow{
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:var(--purple);
+}
+.flow-proposed{
+  background:linear-gradient(135deg,var(--purple),var(--purple-d));
+  color:#fff;
+  border-radius:12px;padding:24px;
+}
+.flow-proposed .flow-label{color:rgba(255,255,255,0.7)}
+.flow-proposed-title{font-size:18px;font-weight:800;margin-bottom:14px}
+.feat-list{display:flex;flex-direction:column;gap:10px}
+.feat-item{
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:8px;padding:10px 14px;
+  font-size:13px;
+}
+.feat-item b{display:block;font-size:11px;color:#FBBF24;letter-spacing:0.5px;margin-bottom:2px}
+.benefit-box{
+  background:#FBBF24;color:var(--ink);
+  border-radius:12px;padding:18px 24px;
+  font-size:15px;font-weight:800;text-align:center;
+}
+
+/* ──────── Demo CTA ──────── */
+.demo-cta{
+  background:linear-gradient(135deg,var(--purple),var(--purple-l));
+  color:#fff;
+  padding:64px 32px;
+  text-align:center;
+}
+.demo-cta-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;color:#FBBF24;margin-bottom:14px}
+.demo-cta-title{font-size:28px;font-weight:900;margin-bottom:14px;line-height:1.4}
+.demo-cta-sub{font-size:14px;color:rgba(255,255,255,0.85);margin-bottom:28px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
+.demo-btn{
+  display:inline-block;
+  background:#FBBF24;color:var(--ink);
+  font-size:16px;font-weight:800;
+  padding:16px 36px;border-radius:99px;
+  text-decoration:none;
+  transition:all 0.2s;
+  box-shadow:0 6px 24px rgba(0,0,0,0.2);
+}
+.demo-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,0.3)}
+.demo-btn::after{content:' →';font-weight:900}
+.demo-url{font-size:11px;color:rgba(255,255,255,0.55);margin-top:14px;font-family:"Calibri",monospace}
+
+/* ──────── 最優先② AI研修 ──────── */
+.s-prio2{background:#fff}
+.s-prio2 .container{max-width:1080px}
+.tagline-quote{
+  font-size:18px;font-weight:700;color:var(--purple);
+  background:var(--purple-bg);
+  padding:18px 24px;border-radius:12px;
+  margin-bottom:32px;text-align:center;
+}
+.common-info{
+  background:var(--bg);
+  border:1px dashed var(--line);
+  padding:14px 20px;border-radius:8px;
+  font-size:13px;color:var(--mid);text-align:center;
+  margin-bottom:24px;
+}
+.common-info b{color:var(--purple)}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+@media(max-width:800px){.plan-grid{grid-template-columns:1fr}}
+.plan-card{
+  border:2px solid var(--line);
+  border-radius:14px;
+  padding:28px 24px;
+  text-align:center;
+  transition:all 0.2s;
+  background:#fff;
+}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(74,43,142,0.15)}
+.plan-card.bamboo{border-color:var(--purple-l);background:linear-gradient(180deg,#fff,var(--purple-bg) 200%)}
+.plan-card.pine{border-color:var(--purple);background:linear-gradient(180deg,var(--purple-d),var(--purple));color:#fff}
+.plan-card.pine .plan-level,.plan-card.pine .plan-target{color:rgba(255,255,255,0.75)}
+.plan-rank{
+  font-size:32px;font-weight:900;
+  margin-bottom:6px;
+  color:var(--purple);
+}
+.plan-card.pine .plan-rank{color:#FBBF24}
+.plan-level{font-size:12px;color:var(--gray);margin-bottom:18px;letter-spacing:1px}
+.plan-name{font-size:17px;font-weight:800;line-height:1.5;margin-bottom:14px}
+.plan-target{font-size:12px;color:var(--gray);padding-top:14px;border-top:1px solid var(--line)}
+.plan-card.pine .plan-target{border-top-color:rgba(255,255,255,0.2)}
+.subsidy{
+  background:linear-gradient(135deg,#FBBF24,#F59E0B);
+  color:var(--ink);font-weight:800;
+  padding:14px 20px;border-radius:8px;
+  font-size:14px;text-align:center;
+}
+
+/* ──────── 開発しながら学ぶ ──────── */
+.s-strategy{background:var(--bg)}
+.strat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:32px}
+@media(max-width:700px){.strat-grid{grid-template-columns:1fr}}
+.strat-card{
+  background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:28px;
+}
+.strat-q{font-size:13px;color:var(--gray);margin-bottom:6px}
+.strat-a{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:14px}
+.strat-bar{
+  background:linear-gradient(90deg,var(--purple),var(--purple-l));
+  color:#fff;
+  padding:12px 18px;border-radius:99px;
+  font-size:14px;font-weight:700;
+  display:inline-block;
+}
+.goal-box{
+  background:linear-gradient(135deg,var(--purple-d),var(--purple));
+  color:#fff;
+  padding:32px 36px;border-radius:14px;
+  text-align:center;
+}
+.goal-box .goal-label{font-size:11px;font-weight:800;letter-spacing:4px;color:#FBBF24;margin-bottom:14px}
+.goal-box .goal-text{font-size:18px;font-weight:700;line-height:1.7}
+
+/* ──────── 次のフェーズ ──────── */
+.s-nextphase{background:#fff}
+.np-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:800px){.np-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.np-grid{grid-template-columns:1fr}}
+.np-card{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-top:4px solid var(--purple-l);
+  border-radius:12px;
+  padding:22px;
+}
+.np-tag{font-size:11px;font-weight:800;color:var(--purple);letter-spacing:1px;margin-bottom:8px}
+.np-title{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:10px;line-height:1.4}
+.np-desc{font-size:13px;color:var(--mid);line-height:1.7}
+
+/* ──────── 出店AI ──────── */
+.s-storeai{background:linear-gradient(135deg,#1A1A2E 0%,#2E1A5C 100%);color:#fff}
+.s-storeai .sec-tag{background:rgba(255,255,255,0.1);color:#FBBF24}
+.s-storeai .sec-title{color:#fff}
+.s-storeai .sec-sub{color:rgba(255,255,255,0.65)}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+@media(max-width:700px){.compare-grid{grid-template-columns:1fr}}
+.compare-card{
+  border-radius:14px;
+  padding:28px;
+}
+.compare-x{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1)}
+.compare-o{background:linear-gradient(135deg,#FBBF24,#F59E0B);color:var(--ink)}
+.compare-label{font-size:14px;font-weight:800;margin-bottom:18px;letter-spacing:1px}
+.compare-list{list-style:none;font-size:14px;line-height:2}
+.compare-list li{padding-left:24px;position:relative}
+.compare-x .compare-list li::before{content:'×';position:absolute;left:0;color:#F87171;font-weight:900}
+.compare-o .compare-list li::before{content:'✓';position:absolute;left:0;color:#10B981;font-weight:900}
+.storeai-goal{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:14px;padding:24px 28px;
+  text-align:center;
+  font-size:15px;font-weight:700;line-height:1.8;
+}
+.storeai-goal b{color:#FBBF24}
+
+/* ──────── プラン表 ──────── */
+.s-plans{background:#fff}
+.plan-table{
+  width:100%;border-collapse:separate;border-spacing:0;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;font-size:14px;
+}
+.plan-table th{
+  background:var(--purple-d);color:#fff;
+  padding:16px 14px;
+  text-align:left;font-weight:800;font-size:13px;letter-spacing:1px;
+}
+.plan-table td{
+  padding:16px 14px;
+  border-bottom:1px solid var(--line);
+  color:var(--mid);
+}
+.plan-table tr:last-child td{border-bottom:none}
+.plan-table tr:hover td{background:var(--purple-bg)}
+.plan-table .theme{font-weight:800;color:var(--ink)}
+.diff{color:var(--purple);font-weight:700;letter-spacing:1px}
+.plan-note{margin-top:14px;font-size:12px;color:var(--gray);line-height:1.7}
+@media(max-width:700px){
+  .plan-table{font-size:12px}
+  .plan-table th,.plan-table td{padding:10px 8px}
+}
+
+/* ──────── 最後の次のステップ ──────── */
+.s-next{
+  background:linear-gradient(135deg,var(--purple-d) 0%,var(--purple) 100%);
+  color:#fff;
+}
+.s-next .sec-tag{background:rgba(255,255,255,0.1);color:#FBBF24}
+.s-next .sec-title{color:#fff;font-size:42px}
+.s-next .sec-sub{color:rgba(255,255,255,0.75)}
+.next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
+@media(max-width:800px){.next-grid{grid-template-columns:1fr}}
+.next-step-card{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:12px;padding:24px;
+}
+.step-num{
+  font-family:"Calibri",sans-serif;
+  font-size:48px;font-weight:900;color:#FBBF24;
+  line-height:1;margin-bottom:12px;
+}
+.step-title{font-size:16px;font-weight:800;margin-bottom:8px}
+.step-desc{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7}
+.final-cta{text-align:center;padding-top:32px;border-top:1px solid rgba(255,255,255,0.15)}
+.final-cta .demo-btn{box-shadow:0 8px 32px rgba(251,191,36,0.3)}
+
+/* ──────── Footer ──────── */
+footer{
+  background:#0F0820;color:rgba(255,255,255,0.5);
+  padding:32px 24px;text-align:center;font-size:11px;
+}
+footer b{color:#fff;font-weight:800}
+
+/* ──────── Section divider ──────── */
+.divider{height:2px;background:linear-gradient(90deg,transparent,var(--purple-l),transparent);margin:0 auto;width:80px;margin-bottom:32px}
+</style>
+</head>
+<body>
+
+<!-- ──────── Floating Nav ──────── -->
+<nav class="nav">
+  <div class="nav-title">CONTENTS</div>
+  <a href="#issue1">第1回MTG課題</a>
+  <a href="#issue2">第2回MTG深掘り</a>
+  <a href="#map">動ける領域</a>
+  <a href="#prio1">最優先① SF代替</a>
+  <a href="#prio2">最優先② AI研修</a>
+  <a href="#strategy">同時並走の意味</a>
+  <a href="#nextphase">次のフェーズ</a>
+  <a href="#storeai">出店AI</a>
+  <a href="#plans">プラン一覧</a>
+  <a href="#next">次のステップ</a>
+</nav>
+
+<!-- ──────── Hero ──────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">UNISIA HOLDINGS — AI STRATEGY 2026</div>
+    <h1 class="hero-title">
+      ユニシアホールディングスの<br>
+      <span class="accent">AI戦略</span> 2026
+    </h1>
+    <p class="hero-sub">
+      Salesforce代替・AI活用研修からはじめる、<br>
+      自社資産化と現場主導のDX。
+    </p>
+    <div class="hero-meta">
+      <span>📋 2回のMTGで整理された9つの課題</span>
+      <span>🎯 段階的に進められる7つのテーマ</span>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL ↓</div>
+</section>
+
+<!-- ──────── 第1回MTGの4課題 ──────── -->
+<section id="issue1" class="s-issue1">
+  <div class="container">
+    <div class="sec-tag">SESSION 01 · 2026.04.02</div>
+    <h2 class="sec-title">第1回打合せで確認した4つの課題</h2>
+    <p class="sec-sub">大須賀副社長とのキックオフMTGで共有された、グループ全体の経営課題</p>
+
+    <div class="grid-4">
+      <div class="issue-card">
+        <div class="issue-num">課題 01 / SaaSコスト</div>
+        <div class="issue-name">年間数千万規模の費用が膨張</div>
+        <div class="issue-desc">複数のSaaSが重なり、用途に見合わない契約が散在</div>
+        <div class="issue-quote">「ツールによっては年間数千万の契約。コストに見合わない領域がある」</div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-num">課題 02 / データ分散</div>
+        <div class="issue-name">情報が散乱し、経営判断が遅延</div>
+        <div class="issue-desc">各SaaSがつながっておらず、人が手作業で集約している</div>
+        <div class="issue-quote">「飲食店の情報が散らばっている。集約し判断できる環境が欲しい」</div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-num">課題 03 / 出店精度</div>
+        <div class="issue-name">重回帰分析の限界</div>
+        <div class="issue-desc">既存の出店予測が当たらず、属人的判断にも依存</div>
+        <div class="issue-quote">「重回帰分析はやっているが、当たらない。AIで精度を上げたい」</div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-num">課題 04 / AI活用</div>
+        <div class="issue-name">個人レベルでの停滞</div>
+        <div class="issue-desc">Geminiを個別展開中。組織として使うフェーズに到達できていない</div>
+        <div class="issue-quote">「会社全体としてAIを活用するフェーズには、全くいけていない」</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── 第2回MTGの深掘り課題 ──────── -->
+<section id="issue2" class="s-issue2">
+  <div class="container">
+    <div class="sec-tag">SESSION 02 · 2026.04.22</div>
+    <h2 class="sec-title">第2回打合せで深掘りされた5つの課題</h2>
+    <p class="sec-sub">坂本様・加藤様・芳野様のヒアリングで浮き彫りになった、現場の実態</p>
+
+    <div class="grid-5">
+      <div class="issue-card">
+        <div class="issue-num">課題 A / Salesforce</div>
+        <div class="issue-name">費用対効果に課題</div>
+        <div class="issue-desc">数千万・600名超でCRM未稼働。チャット・申請・臨店報告のみ。有給申請と勤怠の二重登録が発生</div>
+        <div class="issue-quote">「費用対効果に課題感あり」</div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-num">課題 B / RPA</div>
+        <div class="issue-name">現場に届かなかった</div>
+        <div class="issue-desc">ロボット100台がIT戦略部に閉じ、売上突合・勤怠チェックなど現場業務へ展開できず</div>
+        <div class="issue-quote">「RPA最大の失敗は各部署に展開できなかったこと」</div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-num">課題 C / コミュニケーション</div>
+        <div class="issue-name">ツールの乱立</div>
+        <div class="issue-desc">全社員(Salesforce)・本社(Google)・外部(Chatwork)・店舗(LINE/カンリー)の4系統が並立</div>
+        <div class="issue-quote">「どこに書いても、全員には届かない」</div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-num">課題 D / 子会社労務</div>
+        <div class="issue-name">人事労務の一元管理が未整備</div>
+        <div class="issue-desc">残業時間・外国人就労時間など、コンプライアンス違反をリアルタイムで防げない</div>
+        <div class="issue-quote">「問題が起きてから発覚する。事前に止める手段がない」</div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-num">課題 E / DWH構想</div>
+        <div class="issue-name">構想は完了しているが実装に至らず</div>
+        <div class="issue-desc">「全データ集約→生成AI→経営陣が即答」という構想は明確。しかし動き出せていない</div>
+        <div class="issue-quote">「構想はある。ただし、まだ動き出せていない」</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── 動ける領域マップ ──────── -->
+<section id="map" class="s-map">
+  <div class="container">
+    <div class="sec-tag">POSITIONING</div>
+    <h2 class="sec-title">ダンドリワークが動ける領域</h2>
+    <p class="sec-sub">9つの課題に対して、7つのテーマで段階的にアプローチします</p>
+
+    <div class="map-grid">
+      <div class="map-left">
+        <div class="map-left-title">確認された9つの課題</div>
+        <div class="issue-pill">課題 01 — SaaSコスト</div>
+        <div class="issue-pill">課題 02 — データ分散</div>
+        <div class="issue-pill">課題 03 — 出店精度</div>
+        <div class="issue-pill">課題 04 — AI活用</div>
+        <div class="issue-pill">課題 A — Salesforce費用対効果</div>
+        <div class="issue-pill">課題 B — RPA展開失敗</div>
+        <div class="issue-pill">課題 C — コミュニケーション乱立</div>
+        <div class="issue-pill">課題 D — 子会社労務</div>
+        <div class="issue-pill">課題 E — DWH構想</div>
+      </div>
+      <div class="map-right">
+        <div class="priority-box">
+          <div class="priority-label">★ 最優先</div>
+          <div class="priority-item">① Salesforce代替システム開発<small>課題 01・A への対応</small></div>
+          <div class="priority-item">② AI活用研修<small>課題 04 への対応</small></div>
+        </div>
+        <div class="next-phase">
+          <div class="next-phase-label">次のフェーズ</div>
+          <div class="next-phase-list">
+            <div class="next-phase-item"><b>③ RPA現場展開支援</b>課題 B</div>
+            <div class="next-phase-item"><b>④ コミュ統合</b>課題 C</div>
+            <div class="next-phase-item"><b>⑤ 子会社労務管理AI</b>課題 D</div>
+            <div class="next-phase-item"><b>⑥ DWH構築</b>課題 02・E</div>
+            <div class="next-phase-item" style="grid-column:span 2;background:#FBBF24;border-color:#F59E0B"><b style="color:var(--purple-d)">⑦ 出店シミュレーションAI</b><span style="color:var(--ink);font-weight:700">課題 03 / 最終ゴール</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── 最優先① Salesforce代替 ──────── -->
+<section id="prio1" class="s-prio1">
+  <div class="container">
+    <div class="sec-tag">PRIORITY 01</div>
+    <h2 class="sec-title">最優先テーマ① ── Salesforce代替システム開発</h2>
+    <p class="sec-sub">課題01・A への対応。1機能からテスト開始可能</p>
+
+    <div class="flow-grid">
+      <div class="flow-current">
+        <div class="flow-label">現状の実態</div>
+        <div class="flow-quote">「費用対効果に課題感あり」</div>
+        <ul class="flow-list">
+          <li>年間数千万・600名超のライセンス</li>
+          <li>利用は3機能（チャット／申請／臨店報告）のみ。CRM利用ゼロ</li>
+          <li>別途稼働の勤怠システムとの二重入力が発生</li>
+        </ul>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-proposed">
+        <div class="flow-label">ダンドリワークの提案</div>
+        <div class="flow-proposed-title">ユニシアHD専用ポータル<br>(1つのシステムに集約)</div>
+        <div class="feat-list">
+          <div class="feat-item"><b>機能 1</b>各種申請＋勤怠管理<span style="color:rgba(255,255,255,0.7);font-size:11px;display:block;margin-top:2px">二度手間を完全解消</span></div>
+          <div class="feat-item"><b>機能 2</b>臨店報告書<span style="color:rgba(255,255,255,0.7);font-size:11px;display:block;margin-top:2px">写真・点数・FC共有</span></div>
+          <div class="feat-item"><b>機能 3</b>社内チャット<span style="color:rgba(255,255,255,0.7);font-size:11px;display:block;margin-top:2px">本社・店舗・外部統合</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit-box">
+      コスト1/2以下・自社資産・ベンダーロックインから脱却 ── 1機能からテスト開始可能
+    </div>
+  </div>
+</section>
+
+<!-- ──────── Demo CTA (1回目) ──────── -->
+<section class="demo-cta">
+  <div class="demo-cta-eyebrow">LIVE DEMO</div>
+  <h2 class="demo-cta-title">実際に動くプロトタイプをご用意しています</h2>
+  <p class="demo-cta-sub">
+    一般社員ポータル・管理職ポータルの両方を、ブラウザ上で体験いただけます。<br>
+    チャット統合・申請承認・臨店報告書(QSC100項目)が実際に操作可能です。
+  </p>
+  <a href="https://yamamotokeiji-gif.github.io/unisia-portal-demo/" target="_blank" rel="noopener" class="demo-btn">ポータルデモを開く</a>
+  <div class="demo-url">yamamotokeiji-gif.github.io/unisia-portal-demo/</div>
+</section>
+
+<!-- ──────── 最優先② AI研修 ──────── -->
+<section id="prio2" class="s-prio2">
+  <div class="container">
+    <div class="sec-tag">PRIORITY 02</div>
+    <h2 class="sec-title">最優先テーマ② ── AI活用研修</h2>
+    <p class="sec-sub">坂本様の「各部署に1人、AI使いこなせる人を」── この言葉をそのまま実現する</p>
+
+    <div class="tagline-quote">「各部署に1人、AI使いこなせる人を」 ── この言葉をそのまま実現する</div>
+
+    <div class="common-info">
+      <b>全プラン共通:</b> 全8回 × 2時間 ／ 4ヶ月間 ／ 月2回 ／ オンライン(Zoom)
+    </div>
+
+    <div class="plan-grid">
+      <div class="plan-card">
+        <div class="plan-rank">梅</div>
+        <div class="plan-level">★☆☆ 初級</div>
+        <div class="plan-name">AI活用基礎<br>まず「使える人」を増やす</div>
+        <div class="plan-target">対象: 全社員・現場スタッフ</div>
+      </div>
+      <div class="plan-card bamboo">
+        <div class="plan-rank">竹</div>
+        <div class="plan-level">★★☆ 中級</div>
+        <div class="plan-name">Claude Code入門<br>簡単な業務ツールを自作<br>「作れる」第一歩</div>
+        <div class="plan-target">対象: 部門・DX担当</div>
+      </div>
+      <div class="plan-card pine">
+        <div class="plan-rank">松</div>
+        <div class="plan-level">★★★ 上級</div>
+        <div class="plan-name">Claude Code実践＋業務改革<br>業務ツール構築と<br>オペレーション変革</div>
+        <div class="plan-target">対象: 幹部〜全階層</div>
+      </div>
+    </div>
+
+    <div class="subsidy">💡 人材開発支援助成金の活用で実質負担を大幅削減</div>
+  </div>
+</section>
+
+<!-- ──────── 同時並走の意味 ──────── -->
+<section id="strategy" class="s-strategy">
+  <div class="container">
+    <div class="sec-tag">STRATEGY</div>
+    <h2 class="sec-title">開発しながら学ぶ。<br>その先に、一緒に作るものがある。</h2>
+    <p class="sec-sub">①②を別々ではなく、同時並走で進める理由</p>
+
+    <div class="strat-grid">
+      <div class="strat-card">
+        <div class="strat-q">なぜ同時か？(1)</div>
+        <div class="strat-a">システムだけでは属人化する</div>
+        <div class="strat-bar">Salesforce代替開発 (約3ヶ月)</div>
+      </div>
+      <div class="strat-card">
+        <div class="strat-q">なぜ同時か？(2)</div>
+        <div class="strat-a">研修だけでは定着しない</div>
+        <div class="strat-bar" style="background:linear-gradient(90deg,var(--purple-l),#FBBF24)">AI活用研修 (4ヶ月)</div>
+      </div>
+    </div>
+
+    <div class="goal-box">
+      <div class="goal-label">FINAL GOAL</div>
+      <div class="goal-text">
+        ①〜⑥を積み上げた先に、<b style="color:#FBBF24">出店シミュレーションAI</b>を<br>
+        ユニシアHDとダンドリワークで一緒に作る。<br>
+        研修で育てたメンバーが、そこで本領を発揮する。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── 次のフェーズ ──────── -->
+<section id="nextphase" class="s-nextphase">
+  <div class="container">
+    <div class="sec-tag">NEXT PHASE</div>
+    <h2 class="sec-title">①②の次に、動ける領域がこれだけある</h2>
+    <p class="sec-sub">第2回MTGで深掘りされた残課題に、順次対応していきます</p>
+
+    <div class="np-grid">
+      <div class="np-card">
+        <div class="np-tag">課題 B 対応</div>
+        <div class="np-title">③ RPA現場展開</div>
+        <div class="np-desc">100台のロボットをIT部門から解放。現場の武器に変える。</div>
+      </div>
+      <div class="np-card">
+        <div class="np-tag">課題 C 対応</div>
+        <div class="np-title">④ コミュニケーションツール統合</div>
+        <div class="np-desc">4系統の並立を整理。情報の流れを1本化し、コストと混乱を削減。</div>
+      </div>
+      <div class="np-card">
+        <div class="np-tag">課題 D 対応</div>
+        <div class="np-title">⑤ 子会社労務管理AI</div>
+        <div class="np-desc">労務違反をリアルタイム検知。コンプライアンスリスクを先手で防ぐ。</div>
+      </div>
+      <div class="np-card">
+        <div class="np-tag">課題 02・E 対応</div>
+        <div class="np-title">⑥ DWH構築</div>
+        <div class="np-desc">構想の実装。全データ集約から生成AIフロントでの即答環境へ。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── 出店AI ──────── -->
+<section id="storeai" class="s-storeai">
+  <div class="container">
+    <div class="sec-tag">⑦ FINAL THEME</div>
+    <h2 class="sec-title">出店シミュレーションAI</h2>
+    <p class="sec-sub">①〜⑥の先にある、グループ最大の競争優位</p>
+
+    <div class="compare-grid">
+      <div class="compare-card compare-x">
+        <div class="compare-label">× 現在の出店判断</div>
+        <ul class="compare-list">
+          <li>当たらない重回帰分析</li>
+          <li>担当者の属人的判断</li>
+          <li>他社に先取りされる撤退物件情報</li>
+        </ul>
+      </div>
+      <div class="compare-card compare-o">
+        <div class="compare-label">✓ AIによる出店判断</div>
+        <ul class="compare-list">
+          <li>データ統合 × AIスコアリング(バイアスなし)</li>
+          <li>カニバリゼーションの自動シミュレーション</li>
+          <li>撤退物件の先行取得システム</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="storeai-goal">
+      今日決めることは<b>①②から始めること</b>。<br>
+      ①〜⑥を一緒に積み上げた先に、ユニシアHDとダンドリワークで一緒に作るもの。それがこのテーマ。
+    </div>
+  </div>
+</section>
+
+<!-- ──────── プラン表 ──────── -->
+<section id="plans" class="s-plans">
+  <div class="container">
+    <div class="sec-tag">PLANS</div>
+    <h2 class="sec-title">ご提案プラン</h2>
+    <p class="sec-sub">まず「Salesforce代替 + AI研修」からスタートする。どのプランで進めるか、ご相談しましょう。</p>
+
+    <table class="plan-table">
+      <thead>
+        <tr>
+          <th>テーマ</th>
+          <th>難易度</th>
+          <th>期間</th>
+          <th>費用モデル</th>
+          <th>プラン</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="theme">① Salesforce代替</td>
+          <td class="diff">★★☆</td>
+          <td>約2〜3ヶ月</td>
+          <td>初期開発費 + 月額保守</td>
+          <td>フル依頼型</td>
+        </tr>
+        <tr>
+          <td class="theme">② AI研修(梅)</td>
+          <td class="diff">★☆☆</td>
+          <td>約4ヶ月</td>
+          <td>受講料</td>
+          <td>都度払い型</td>
+        </tr>
+        <tr>
+          <td class="theme">② AI研修(竹)</td>
+          <td class="diff">★★☆</td>
+          <td>約4ヶ月</td>
+          <td>受講料</td>
+          <td>都度払い型</td>
+        </tr>
+        <tr>
+          <td class="theme">② AI研修(松)</td>
+          <td class="diff">★★★</td>
+          <td>約4ヶ月</td>
+          <td>受講料</td>
+          <td>都度払い型</td>
+        </tr>
+        <tr>
+          <td class="theme">③〜⑥ 次フェーズ</td>
+          <td class="diff">★★☆〜★★★</td>
+          <td>①②完了後</td>
+          <td>初期開発費 + 月額保守</td>
+          <td>フル依頼型</td>
+        </tr>
+        <tr>
+          <td class="theme">⑦ 出店AI</td>
+          <td class="diff">★★★+</td>
+          <td>③〜⑥の後</td>
+          <td>初期開発費 + 保守 / レベニューシェア</td>
+          <td>フル依頼型 / パートナー型</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="plan-note">
+      ※ 詳細条件はヒアリング後にご提案します<br>
+      ※ 人材開発支援助成金活用で研修の実質負担を大幅に抑えられます
+    </div>
+  </div>
+</section>
+
+<!-- ──────── 次のステップ ──────── -->
+<section id="next" class="s-next">
+  <div class="container">
+    <div class="sec-tag">NEXT STEPS</div>
+    <h2 class="sec-title">次のステップ</h2>
+    <p class="sec-sub">まず①②からスタートし、実績を積みながら次のフェーズへ進めていきます</p>
+
+    <div class="next-grid">
+      <div class="next-step-card">
+        <div class="step-num">01</div>
+        <div class="step-title">デモの確認</div>
+        <div class="step-desc">実際に動くSalesforce代替ポータルをブラウザで操作いただきます。1機能からテスト開始可能です。</div>
+      </div>
+      <div class="next-step-card">
+        <div class="step-num">02</div>
+        <div class="step-title">スモールスタート</div>
+        <div class="step-desc">まず1機能・1ブランドからテスト導入。実績を作りながら段階的に展開します。</div>
+      </div>
+      <div class="next-step-card">
+        <div class="step-num">03</div>
+        <div class="step-title">研修の同時並走</div>
+        <div class="step-desc">開発と並行してAI活用研修をスタート。育てたメンバーが次フェーズの主役になります。</div>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <p style="font-size:15px;color:rgba(255,255,255,0.85);margin-bottom:24px">まずは、動くデモをご覧ください。</p>
+      <a href="https://yamamotokeiji-gif.github.io/unisia-portal-demo/" target="_blank" rel="noopener" class="demo-btn">ポータルデモを開く</a>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── Footer ──────── -->
+<footer>
+  <b>UNISIA HOLDINGS — AI STRATEGY 2026</b><br>
+  © 2026 Dandori Work, Inc.
+</footer>
+
+</body>
+</html>
