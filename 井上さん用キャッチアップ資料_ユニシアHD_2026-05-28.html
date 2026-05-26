@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ユニシアHD案件 キャッチアップ資料 / 井上さん向け</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #2c3e50;
+  background: #f5f7fa;
+}
+.layout { display: flex; max-width: 1400px; margin: 0 auto; }
+nav.side {
+  position: sticky; top: 0;
+  width: 260px; height: 100vh;
+  background: #1e3a5f; color: #fff;
+  padding: 24px 20px; overflow-y: auto;
+  flex-shrink: 0;
+}
+nav.side h1 { font-size: 16px; margin-bottom: 20px; line-height: 1.4; }
+nav.side .meta { font-size: 11px; opacity: 0.7; margin-bottom: 24px; }
+nav.side ul { list-style: none; }
+nav.side li { margin: 8px 0; }
+nav.side a {
+  color: #d6e1ee; text-decoration: none; font-size: 13px;
+  display: block; padding: 6px 10px; border-radius: 4px;
+  transition: background 0.2s;
+}
+nav.side a:hover { background: #2c5183; color: #fff; }
+main { flex: 1; padding: 40px 60px; background: #fff; min-width: 0; }
+section { margin-bottom: 60px; scroll-margin-top: 20px; }
+section h2 {
+  font-size: 24px; color: #1e3a5f;
+  border-bottom: 3px solid #1e3a5f;
+  padding-bottom: 8px; margin-bottom: 24px;
+}
+section h3 {
+  font-size: 18px; color: #2c5183;
+  margin: 24px 0 12px;
+  border-left: 4px solid #2c5183;
+  padding-left: 12px;
+}
+section h4 { font-size: 15px; color: #1e3a5f; margin: 16px 0 8px; }
+p { margin-bottom: 12px; }
+ul, ol { margin-left: 24px; margin-bottom: 12px; }
+li { margin: 4px 0; }
+.lead {
+  background: #eef3f9; border-left: 4px solid #1e3a5f;
+  padding: 16px 20px; margin-bottom: 24px;
+  font-size: 14px;
+}
+.callout {
+  background: #fff8e6; border-left: 4px solid #d4a72c;
+  padding: 14px 18px; margin: 16px 0;
+  font-size: 14px;
+}
+.callout.danger { background: #fff0f0; border-left-color: #c0392b; }
+.callout.info { background: #e8f4f8; border-left-color: #2c89a0; }
+.callout strong { color: #1e3a5f; }
+.callout.danger strong { color: #c0392b; }
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0 20px;
+  font-size: 13px;
+}
+th, td {
+  border: 1px solid #d6e1ee; padding: 8px 12px;
+  text-align: left; vertical-align: top;
+}
+th { background: #eef3f9; color: #1e3a5f; font-weight: 600; }
+tr:nth-child(even) td { background: #fafbfd; }
+.timeline { position: relative; padding-left: 24px; margin: 20px 0; }
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 4px; bottom: 4px;
+  width: 2px; background: #2c5183;
+}
+.timeline .event {
+  position: relative; margin-bottom: 24px; padding-left: 20px;
+}
+.timeline .event::before {
+  content: ''; position: absolute; left: -22px; top: 6px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #2c5183; border: 2px solid #fff;
+}
+.timeline .event .date { font-size: 12px; color: #2c5183; font-weight: 600; }
+.timeline .event .title { font-size: 15px; font-weight: 600; margin: 2px 0 6px; color: #1e3a5f; }
+.persona {
+  background: #fafbfd; border: 1px solid #d6e1ee;
+  border-radius: 6px; padding: 16px 20px; margin: 12px 0;
+}
+.persona .role { font-size: 11px; color: #2c5183; font-weight: 600; letter-spacing: 0.5px; }
+.persona .name { font-size: 17px; font-weight: 600; color: #1e3a5f; margin: 4px 0 8px; }
+.quote {
+  font-style: italic; color: #2c5183;
+  border-left: 3px solid #d6e1ee; padding-left: 14px;
+  margin: 8px 0; font-size: 13px;
+}
+.pkg-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 20px 0; }
+.pkg { border: 1px solid #d6e1ee; border-radius: 6px; padding: 18px; background: #fafbfd; }
+.pkg.recommended { background: #eef7f1; border-color: #2c8956; }
+.pkg .tag {
+  display: inline-block; font-size: 10px; padding: 2px 8px;
+  border-radius: 10px; background: #e8f4f8; color: #2c89a0;
+  margin-bottom: 6px; letter-spacing: 0.5px;
+}
+.pkg.recommended .tag { background: #2c8956; color: #fff; }
+.pkg .pkg-name { font-size: 18px; font-weight: 600; color: #1e3a5f; }
+.pkg .price { font-size: 22px; font-weight: 700; color: #1e3a5f; margin: 4px 0 4px; }
+.pkg .price small { font-size: 11px; opacity: 0.7; font-weight: 400; }
+.pkg .concept { font-size: 12px; color: #2c5183; margin-bottom: 10px; }
+.pkg .components { font-size: 12px; line-height: 1.7; }
+.pkg .components li { margin: 2px 0; }
+.task-item {
+  background: #f5f7fa; padding: 12px 16px; margin: 8px 0;
+  border-radius: 4px; border-left: 3px solid #2c5183;
+}
+.task-item.priority { border-left-color: #c0392b; background: #fff0f0; }
+.muted { color: #6c7a8a; font-size: 12px; }
+.tag-pill {
+  display: inline-block; font-size: 11px; padding: 2px 8px;
+  background: #1e3a5f; color: #fff; border-radius: 10px;
+  margin-right: 4px;
+}
+hr { border: none; border-top: 1px solid #e0e6ed; margin: 28px 0; }
+footer { margin-top: 60px; padding: 24px 0; border-top: 2px solid #d6e1ee; font-size: 12px; color: #6c7a8a; }
+@media (max-width: 900px) {
+  .layout { flex-direction: column; }
+  nav.side { position: static; width: 100%; height: auto; padding: 16px; }
+  nav.side ul { display: flex; flex-wrap: wrap; gap: 6px; }
+  nav.side li { margin: 0; }
+  main { padding: 24px 20px; }
+  .pkg-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <h1>ユニシアHD案件<br>キャッチアップ資料</h1>
+  <div class="meta">井上さん向け / 2026-05-26作成<br>2026-05-28 打合せ前</div>
+  <ul>
+    <li><a href="#sec1">1. プロジェクト概要</a></li>
+    <li><a href="#sec2">2. 先方キーパーソン</a></li>
+    <li><a href="#sec3">3. これまでの経緯</a></li>
+    <li><a href="#sec4">4. 先方の本質課題4つ</a></li>
+    <li><a href="#sec5">5. 提案構造（3パッケージ）</a></li>
+    <li><a href="#sec6">6. 5/26社長MTG決定事項</a></li>
+    <li><a href="#sec7">7. 井上さんへの期待</a></li>
+    <li><a href="#sec8">8. 28日打合せの論点</a></li>
+    <li><a href="#sec9">9. 参考情報</a></li>
+  </ul>
+</nav>
+
+<main>
+<section id="sec1">
+<h2>1. プロジェクト概要</h2>
+<div class="lead">
+ユニシアホールディングス（飲食FC事業・串カツ田中・ピソラ等を傘下に持つホールディングス）への DX 推進提案。<br>
+SaaS最適化・出店AI・データ基盤・AI活用支援の4テーマで切り込み、現在は <strong>提案フェーズ</strong>（受注前）。
+</div>
+
+<h3>クライアント基本情報</h3>
+<table>
+<tr><th>会社名</th><td>株式会社ユニシアホールディングス</td></tr>
+<tr><th>事業</th><td>飲食FC事業（グループ会社 7社：串カツ田中／ピソラ／TANAKA INTERNATIONAL／TI.LA.INC／ジーティーデザイン／UKYE／Restartz）</td></tr>
+<tr><th>規模</th><td>連結従業員 563名（2025年11月末）／資本金 3億600万円／直営店 170店舗</td></tr>
+<tr><th>ユーザー規模</th><td>Salesforceユーザー 600名以上（直営社員 + FC加盟店）</td></tr>
+</table>
+
+<h3>案件の戦略的位置付け（KJ視点）</h3>
+<ul>
+  <li>飲食FC業界への参入実績を作る案件</li>
+  <li>受注・成功すれば同業種・隣接業種への横展開の起点になる</li>
+  <li>KJの評価が決まる最重要案件（100点以上必須・流用・手抜き厳禁）</li>
+</ul>
+
+<h3>提案金額レンジ（暫定・井上さん相談後再算定予定）</h3>
+<table>
+<tr><th>パッケージ</th><th>金額（税抜・年額）</th><th>備考</th></tr>
+<tr><td>セットアップ（軽量）</td><td>2,500万円</td><td>研修＋アドバイザリーの2要素</td></tr>
+<tr><td>コア（標準）</td><td>3,900万円</td><td>＋ ポータル開発 標準範囲</td></tr>
+<tr><td>コンプリート（完全）</td><td>4,850万円</td><td>＋ ポータル拡張範囲＋加賀爪トップ会談標準組込</td></tr>
+</table>
+<p class="muted">※ 金額は5/26社長MTG前のもの。井上さんに相談したい単価感の検討中</p>
+</section>
+
+<hr>
+
+<section id="sec2">
+<h2>2. 先方キーパーソン</h2>
+<div class="lead">
+4名がキーマン。それぞれ本音と温度感が違うため、提案は「3人それぞれの本音に応える設計」を内包しています。
+</div>
+
+<div class="persona">
+  <div class="role">副社長 / 最終意思決定者</div>
+  <div class="name">大須賀 伸博 副社長</div>
+  <p>4/2キックオフに参加。4/22は急遽不参加・5/19は欠席。攻め派。「3ヶ月でSF止めましょう」スタンス。経営層向けの課題（出店AI・データ基盤）を持つ。</p>
+  <p class="quote">本音：「データ可視化できるなら早く取り入れろ」（攻め・スピード重視）</p>
+</div>
+
+<div class="persona">
+  <div class="role">IT戦略部 / 実質リード（窓口）</div>
+  <div class="name">坂本 憲介 様</div>
+  <p>4/22以降の実質リード。AI化に前向きだが「人を切るのではなく育てる」哲学。保守派・「清掃で止められない」「保守側ブレーキ」。窓口は坂本様継続だが、実質意思決定者は大須賀副社長。</p>
+  <p class="quote">本音：「合っているか分からない不安・正解が分からない・相談したい時に相談したい」（独学で進めている自前開発の方向性確認が最大ニーズ）</p>
+  <p class="muted">→ 副社長・岩本取締役と週1MTGで自前アプリ構築中（Geminiでダッシュボード化・Tableauから置き換え進行中）</p>
+</div>
+
+<div class="persona">
+  <div class="role">情報システム課 / 課長</div>
+  <div class="name">加藤 様</div>
+  <p>Google Workspace・Gemini展開担当。10ヶ月かけて全社展開済み。次の計画は Gemini Enterprise 新規契約＋Google Cloud DWH連携。</p>
+  <p class="quote">本音：「3人チームが中途半端に作ったら俺ら困る・防御線張ってほしい」（ガードレール・統合設計の要望）</p>
+</div>
+
+<div class="persona">
+  <div class="role">DX推進課</div>
+  <div class="name">芳野 様</div>
+  <p>Salesforce・RPA担当。Claude Code を勉強中。RPA はライセンス2本・ロボット100台稼働中だが、IT戦略部止まりで現場展開できなかった。</p>
+</div>
+
+<div class="callout info">
+<strong>キーパーソン構造の本質：</strong>窓口は坂本様継続だが、中身は大須賀副社長刺さりが必要。両者の哲学差（保守 vs 攻め）を考慮した「両建て構造」が提案の前提。
+</div>
+</section>
+
+<hr>
+
+<section id="sec3">
+<h2>3. これまでの経緯（4回のMTG）</h2>
+
+<div class="timeline">
+
+<div class="event">
+  <div class="date">2026-04-02 第1回 キックオフMTG</div>
+  <div class="title">大須賀副社長と4つの課題を確認</div>
+  <p>大須賀副社長参加。Vol.1（10ページPDF）の骨格を固める打合せ。先方発言から4つの課題が抽出された：</p>
+  <ol>
+    <li>SaaSコスト：「ツールによっては年間数千万の契約。コストに見合っていない領域がある」</li>
+    <li>データ分散：「飲食店の情報が散らばっている。集約した上で判断できる環境が欲しい」</li>
+    <li>出店精度：「重回帰分析はやっているが当たらない。AIで精度を上げていきたい」</li>
+    <li>AI活用：「会社全体としてAIをどう活用するかというフェーズまではまだいけてない」</li>
+  </ol>
+</div>
+
+<div class="event">
+  <div class="date">2026-04-22 第2回 ヒアリングMTG</div>
+  <div class="title">坂本・加藤・芳野（副社長は急遽不参加）でヒアリング深掘り</div>
+  <p>SaaS現状と業務課題を深掘り。判明事項：</p>
+  <ul>
+    <li><strong>Salesforce年間2,000万円超</strong>：CRMとして未活用・チャット/申請/臨店報告書だけ・坂本様本人「費用対効果に課題感あり」と明言</li>
+    <li><strong>RPA年間200万円・100台稼働</strong>：IT戦略部止まり・売上金突合・勤怠チェック等の現場業務に届かず</li>
+    <li><strong>コミュニケーション乱立</strong>：Salesforceチャット/Googleチャット/Chatwork/LINEグループ/カンリーが部署対象ごとに分断</li>
+    <li><strong>子会社管理</strong>：人事・労務の一元管理ができていない・労務違反検知が困難</li>
+  </ul>
+</div>
+
+<div class="event">
+  <div class="date">2026-05-19 第3回 クロージングMTG</div>
+  <div class="title">坂本様＋加賀爪社長で「卒業＋同盟」モデル確定</div>
+  <p>大須賀副社長は欠席。坂本様＋加賀爪社長＋KJで実施。重大な方針転換が起きた回。</p>
+  <ul>
+    <li><strong>SF代替「当面ブラ下げ」転換</strong>：坂本様「営業側のエリアマネージャー・部長の動きを変えるのが多分1番重い」発言を受け、SF代替最優先方針を見直し</li>
+    <li><strong>坂本様本音判明</strong>：「正解が分からない・ちゃんと指導を受けたい・独学でやってしまっている」</li>
+    <li><strong>3人体制でアプリ自作中</strong>：坂本様・大須賀副社長・岩本取締役の週1MTGでGemini×アプリ構築進行中</li>
+    <li><strong>「卒業＋同盟」モデル確定</strong>：フェーズ①立ち上げ → ②自走移行 → ③同盟（業界パッケージ化＋レベニューシェア）の3段階設計</li>
+    <li><strong>加賀爪3軸ニーズ整理</strong>：(1) AI研修上級編 (2) 現場ヒアリング+コンサル+手足動かす実装支援 (3) 坂本様チームへのコンサル知見提供</li>
+  </ul>
+</div>
+
+<div class="event">
+  <div class="date">2026-05-26 社内MTG（KJ×加賀爪社長）</div>
+  <div class="title">提案レビュー：「井上で巻き取って欲しい」発言で大規模構造修正</div>
+  <p>KJが組み立てた3パッケージを社長レビュー。社長判断で構造が大きく変わった重要回（詳細はセクション6）：</p>
+  <ul>
+    <li>加賀爪コンサル → <strong>井上さん主軸へ転換</strong>（「俺ありきはやめてほしい」）</li>
+    <li>Dandori Voice（B-SCORE型ヒアリングシステム）<strong>全削除</strong>（質問設計の難所回避）</li>
+    <li>開発スタック → <strong>Gemini／Googleワークスペース寄せ</strong>に確定</li>
+    <li>ポータル「1線までやれるかで気分けた方がいい」→ 標準範囲 vs 拡張範囲で分ける</li>
+  </ul>
+</div>
+
+<div class="event">
+  <div class="date">2026-05-28 次回MTG（井上さん打合せ）</div>
+  <div class="title">本資料の出口。井上さんとの初回擦り合わせ</div>
+  <p>井上さんが急にアサインされたため、本資料でキャッチアップしてから打合せに臨む想定。論点はセクション8。</p>
+</div>
+
+</div>
+</section>
+
+<hr>
+
+<section id="sec4">
+<h2>4. 先方の本質課題4つ（提案軸ひも付き）</h2>
+<div class="lead">
+5/19打合せの先方発言を整理して4つの本質課題に再構成しました。各課題が「どの提案要素で応答するか」が明確に紐付いています。<strong>提案の正当性の根幹</strong>。
+</div>
+
+<h3>課題① 独学による「正解が分からない」不安 → AI戦略アドバイザリー</h3>
+<p class="quote">「今の時点で、私も含めて、正解が分からないので、ちゃんと指導を受けたいっていうのが本音のところです。いわゆるその独学でやってしまっているので」（坂本様・5/19）</p>
+<p><strong>我々の課題定義：</strong>IT戦略部3名のコアチームで自前アプリ開発・データ基盤構築を内製中。独学のため判断軸が固まらず、業界×実装の両知見を持つ伴走者が不在。</p>
+<p><strong>本提案でのコミット：</strong>DW井上＋現メンバーが月1ペースで伴走するアドバイザリー体制を提供。設計判断・技術選定・他社事例共有に加え、現場メンバーへのヒアリングまで含む実装伴走。</p>
+
+<h3>課題② AI活用が個人技に偏在し全社底上げ・上級者育成が進まない → 生成AI研修</h3>
+<p class="quote">「外部の検証を受けたことがなくて、あくまでも自前で、加藤が中心になって社内向けに、ジェミニの使い方とかそういう諸法的な部分の勉強会を開催してやっています」（坂本様・5/19）</p>
+<p class="quote">「ゆくゆくはやっぱり内製化したいっていう思いはあるんですけど」（坂本様・5/19）</p>
+<p><strong>我々の課題定義：</strong>全社AIリテラシー底上げが加藤様個人の社内勉強会に依存している。バイブコーディング／AIコーディングまで踏み込んだ上級者育成カリキュラムが存在しない。</p>
+<p><strong>本提案でのコミット：</strong>全社向け生成AI研修（25名×全5回×2時間・4ヶ月・オンライン）を提供。基礎リテラシー底上げ＋上級者向けAIコーディング演習までを体系化。<strong>Gemini／Googleワークスペース寄せ</strong>のカリキュラム。</p>
+
+<h3>課題③ 現場の業務実態が経営判断に届かず、属人的吸い上げに依存 → アドバイザリー内「現場伴走ヒアリング枠」</h3>
+<p class="quote">「現時点では、私がもうとにかく、実際いつもやってる担当者に『今どういうことやってんの』って、もう隣の席で気にして話を聞いて、業務を見ながらプロンプト打って、というのを繰り返してアプリを作っています」（坂本様・5/19）</p>
+<p><strong>我々の課題定義：</strong>現場の業務実態を経営層が体系的に把握する仕組みが存在せず、坂本様個人が隣の席で聞き取る属人的な吸い上げに依存している。</p>
+<p><strong>本提案でのコミット：</strong>AI戦略アドバイザリーの中に「井上＋現メンバーによる現場伴走ヒアリング枠」を組み込み。坂本様個人に依存していた現場ヒアリング業務をDWメンバーが分担。坂本様の時間を経営層との戦略議論に振り向けられる構造。</p>
+<p class="muted">※ 当初は「Dandori Voice（B-SCORE型ヒアリングシステム）」で応答する構想だったが、5/26社長MTGで「20問の設問を現場の悩みで作るのが難しい」「いらん」発言を受けて削除し、アドバイザリー内に統合。</p>
+
+<h3>課題④ 年間2,000万円超のSaaSコストが「垂れ流し」のまま継続 → ポータル開発</h3>
+<p class="quote">「営業活動に関わる、店舗営業の管理に関わるようなところを中心としてやっているので、そこの部分を今すぐ切り離すっていうのはなかなかちょっと難しい」（坂本様・5/19）</p>
+<p class="quote">「営業側のそのエリアマネージャーさんたちの動きを変えなきゃいけないとか、部長さんの動きを変えなきゃいけないといったところが絶対出てくるので、ちょっとそこが多分1番重い」（坂本様・5/19）</p>
+<p><strong>我々の課題定義：</strong>年間2,000万円超のSalesforce費用が、CRMとしての本来価値を発揮しないまま「申請＋チャット＋臨店報告書」の限定利用で継続している＝実質的に高コスト機能の「垂れ流し」状態。</p>
+<p><strong>重要な視点（KJ整理）：</strong>坂本様の「重い」発言は表向き。実際にはSF営業UIは特段優れていないため、運用変更の支障は限定的と想定される。「重いから動かない」のではなく「止めれば動かないと無意識に思い込んでいる構造」。「申請」「チャット」「臨店報告書」だけなら今すぐ別基盤に置き換えてコストを止められる。</p>
+<p><strong>本提案でのコミット：</strong>SF代替ポータル（申請＋チャット統合＋臨店報告書 標準セット）を1年で構築。<strong>浮いたコストはVol.1で提案した出店AI・グループデータ基盤などの「攻めの投資」に振り替え可能</strong>。</p>
+</section>
+
+<hr>
+
+<section id="sec5">
+<h2>5. 提案構造（3パッケージ・3要素）</h2>
+<div class="lead">
+3要素（生成AI研修・AI戦略アドバイザリー・ポータル開発）で組み上げ、3パッケージで段階提示。差別化軸は<strong>「ポータルの有無・範囲深さ」</strong>。
+</div>
+
+<div class="pkg-grid">
+<div class="pkg">
+  <span class="tag">STANDARD</span>
+  <div class="pkg-name">セットアップ</div>
+  <div class="price">2,500<small>万円/年（暫定）</small></div>
+  <div class="concept">正解を一緒に握る、最小構成</div>
+  <ul class="components">
+    <li>生成AI研修（25名×全5回・GW寄せ）</li>
+    <li>AI戦略アドバイザリー（井上＋現メンバー・月1×12回）</li>
+    <li>ー（ポータル無し）</li>
+  </ul>
+  <p class="muted" style="margin-top:8px;font-size:11px;">応答課題：① ② ③（④非応答）</p>
+</div>
+
+<div class="pkg recommended">
+  <span class="tag">RECOMMENDED</span>
+  <div class="pkg-name">コア</div>
+  <div class="price">3,900<small>万円/年（暫定）</small></div>
+  <div class="concept">攻めと守りを揃える、標準構成</div>
+  <ul class="components">
+    <li>セットアップ全要素</li>
+    <li>＋ ポータル開発 <strong>標準範囲</strong>（申請＋チャット統合＋臨店報告書）</li>
+  </ul>
+  <p class="muted" style="margin-top:8px;font-size:11px;">応答課題：① ② ③ ④（全課題応答）</p>
+</div>
+
+<div class="pkg">
+  <span class="tag">COMPLETE</span>
+  <div class="pkg-name">コンプリート</div>
+  <div class="price">4,850<small>万円/年（暫定）</small></div>
+  <div class="concept">経営から現場まで貫く、完全構成</div>
+  <ul class="components">
+    <li>コア全要素</li>
+    <li>＋ ポータル <strong>拡張範囲</strong>（標準＋勤怠／資産管理／組織体制管理／LINEワークス移行）</li>
+    <li>＋ 加賀爪トップ会談オプション年X回 標準組込</li>
+  </ul>
+  <p class="muted" style="margin-top:8px;font-size:11px;">応答課題：① ② ③ ④（深さ最大）</p>
+</div>
+</div>
+
+<h3>差別化軸の構造</h3>
+<table>
+<tr><th>項目</th><th>セットアップ</th><th>コア</th><th>コンプリート</th></tr>
+<tr><td>生成AI研修（課題②）</td><td>✓ 25名×全5回</td><td>同左</td><td>同左</td></tr>
+<tr><td>AI戦略アドバイザリー<br>（井上＋現メンバー・課題①③）</td><td>月1×12回</td><td>月1×12回</td><td>月1×12回＋<strong>加賀爪トップ会談年X回 標準組込</strong></td></tr>
+<tr><td>ポータル開発（課題④）</td><td>ー</td><td>標準範囲<br>申請＋チャット＋臨店</td><td>拡張範囲<br>標準＋勤怠／資産／組織／LINEワークス</td></tr>
+</table>
+
+<div class="callout">
+<strong>差別化軸の心理戦略：</strong>アドバイザリーは全パッケージ共通の月1×12回。差別化はポータル有無＆範囲深さで明確に分ける。<strong>セットアップでは課題④（年2,000万円垂れ流し）に応答できない</strong>ことを明示することで、自然にコア以上への誘導を効かせる構造（アンカリング効果）。
+</div>
+</section>
+
+<hr>
+
+<section id="sec6">
+<h2>6. 5/26社長MTG決定事項（井上さん主軸転換の経緯）</h2>
+<div class="lead">
+2026-05-26 KJと加賀爪社長の社内MTG。本案件の構造が大きく変わった回。<strong>井上さんが主軸になった経緯</strong>はここに集約されます。
+</div>
+
+<h3>社長の重要発言・指示</h3>
+
+<div class="callout">
+<strong>① 加賀爪 → 井上さん主軸へ：</strong>
+<p class="quote">「（アドバイザリーが）労力かかるな、俺がな。結構飽きないね」<br>「井上とかで巻き取って欲しいなと思うんだけどな」<br>「Googleワスペース圏内やし、Geminiをメインに使って開発していくって言ってたから、それも含めて井上が勉強したらいいんちゃうかな」<br>「俺ありきはやめてほしい、ほんまに」</p>
+→ アドバイザリーの主軸を井上さんに巻き取り。社長は希少資源として温存（コンプリートで「年X回オプション標準組込」のみ関与）
+</div>
+
+<div class="callout">
+<strong>② Dandori Voice 削除：</strong>
+<p class="quote">「20問の設問がめちゃくちゃ改造（精緻に作り込む）たかないとあかんから、それを現場の悩みで20問作る方が難しいと思う」<br>「（井上さんがやれるなら）これいらんか？」→「そう、そう、そう、そう、そう、そう」</p>
+→ B-SCORE型ヒアリングシステム構想を削除。現場ヒアリングはアドバイザリー内「現場伴走ヒアリング枠」に統合
+</div>
+
+<div class="callout">
+<strong>③ ポータル：「1線までやれるか」で気分け：</strong>
+<p class="quote">「ポータルは本当にこれ1線までやれんのかって話はあるから、全然気分けた方がいいと思う」</p>
+→ ポータルを <strong>標準範囲（申請＋チャット＋臨店）</strong> と <strong>拡張範囲（標準＋勤怠／資産／組織／LINEワークス）</strong> で明確に分ける構造に
+</div>
+
+<div class="callout danger">
+<strong>④ 助成金 KRDミス：</strong>
+<p class="quote">山本「大企業262万、中小企業767万」と説明 → 社長「それ間違ってると思うで多分」「時給500円だって気がすんねんな。ほんで6割と」</p>
+→ 助成金算定式は <strong>「賃金助成：時給500円×時間×人数×60%」「経費助成：受講料×60%」</strong> が正解。KRDが提案資料に誤算出を記載していたため訂正中。具体的な金額は受講時間・人数確定後に再算定
+</div>
+
+<div class="callout info">
+<strong>⑤ 金額帯：</strong>
+<p class="quote">「俺、俺の感覚も、なんか安いんかな？」「分からへん。俺の感覚は安い可能性がある」<br>「俺が1回200万を結構高く取ってんで、お前それ言ったって…」（200万単価は社長相場では高い）<br>「井上とタッグ組んで、あのコースかけるっていう風なイメージやったらなんかなくはないな」</p>
+→ 単価感は社長と井上さんで擦り合わせが必要。「井上さんで回数を増やすと単価が下がるか／逆に安すぎる可能性」両論あり
+</div>
+
+<div class="callout">
+<strong>⑥ 内訳開示方針：</strong>
+<p class="quote">「研修はそのまま期待していいと思うけど、段取りボイスが見えすぎるよな」<br>「アドバイザリーと現メンバーでのヒアリングみたいなところで足してしまった方がいいんちゃう？」<br>「ポータルは本当にこれ1線までやれんのかって話はあるから全然気分けた方がいいと思う」</p>
+→ 研修：開示OK／アドバイザリー＋現メンバーヒアリング：統合した塊で見せる／ポータル：標準範囲と拡張範囲を分けて開示
+</div>
+
+<h3>5/26決定事項を反映した構造変更まとめ</h3>
+<table>
+<tr><th>項目</th><th>変更前</th><th>変更後（5/26反映）</th></tr>
+<tr><td>アドバイザリー主担当</td><td>加賀爪＋KJ・年4〜8回</td><td>井上＋現メンバー・月1×12回／加賀爪はコンプリートで年X回オプション標準組込のみ</td></tr>
+<tr><td>Dandori Voice</td><td>全パッケージで提供（標準版／Pro版）</td><td><strong>全削除</strong>。アドバイザリー内「現場伴走ヒアリング枠」に統合</td></tr>
+<tr><td>パッケージ要素数</td><td>4要素（研修・アドバイザリー・Voice・ポータル）</td><td>3要素（研修・アドバイザリー・ポータル）</td></tr>
+<tr><td>ポータル差別化</td><td>標準版／Voice Pro埋め込み版</td><td><strong>標準範囲</strong>（申請＋チャット＋臨店）／<strong>拡張範囲</strong>（標準＋勤怠／資産／組織／LINEワークス）</td></tr>
+<tr><td>開発スタック</td><td>Claude Code 中心</td><td><strong>Gemini／Googleワークスペース寄せ</strong>（井上さんが学習）</td></tr>
+<tr><td>助成金算定</td><td>大企業25%／中小50%（誤算出）</td><td><strong>6割×時給500円ベース</strong>（再算定中）</td></tr>
+</table>
+</section>
+
+<hr>
+
+<section id="sec7">
+<h2>7. 井上さんに期待される役割</h2>
+<div class="lead">
+5/26社長MTGで「井上で巻き取って欲しい」と明示。アドバイザリー主担当として、設計判断と実装伴走の両軸を担っていただく想定です。
+</div>
+
+<h3>主な役割</h3>
+<ol>
+  <li><strong>AI戦略アドバイザリー主担当</strong>：井上＋現メンバーで月1×12回ペースの伴走。坂本様・経営層との戦略議論・設計判断・技術選定相談</li>
+  <li><strong>Gemini／Googleワークスペース寄せの開発実践リード</strong>：先方が Gemini＋Googleワークスペース環境でアプリ自作中のため、技術スタックをそちらに合わせて伴走</li>
+  <li><strong>現場伴走ヒアリング枠</strong>：坂本様が「隣の席で個別に聞き取って」やっている現場ヒアリング業務を、井上＋現メンバーが分担して受け持つ。経営層レポートまで整理</li>
+  <li><strong>ポータル開発の方向性整理</strong>：標準範囲（申請＋チャット＋臨店）／拡張範囲（標準＋勤怠／資産／組織／LINEワークス）の技術設計・スコープ判断</li>
+  <li><strong>加賀爪との役割分担</strong>：井上が日常伴走・加賀爪はコンプリートのトップ会談（年X回）に絞って関与</li>
+</ol>
+
+<h3>クライアントへの開示・呼称</h3>
+<p>提案資料・先方への呼称は「<strong>DW井上＋現メンバー</strong>」または「<strong>AI戦略アドバイザリー（井上＋現メンバー）</strong>」を統一表記としています。</p>
+
+<h3>先方の3人体制との関係</h3>
+<p>先方は坂本様・大須賀副社長・岩本取締役の3人体制で週1MTGを開催し、自前でアプリ開発中。井上さんは <strong>この3人体制の外部伴走者ポジション</strong> として、Gemini基盤のアプリ開発をサポートする役割になります。</p>
+</section>
+
+<hr>
+
+<section id="sec8">
+<h2>8. 28日打合せの論点</h2>
+<div class="lead">
+KJが井上さんに相談したい論点。これが揃わないと先方提出版の金額確定ができないため、5/28打合せで擦り合わせたい事項です。
+</div>
+
+<div class="task-item priority">
+<strong>論点1：アドバイザリー月1×12回ペースで井上さんが受けられるか</strong>
+<p>負荷感・現メンバーアサイン・時間配分。現実的に回せるかどうか。</p>
+</div>
+
+<div class="task-item priority">
+<strong>論点2：単価設定</strong>
+<p>社長は「200万単価は高い／逆に安すぎる可能性」と言及。井上さん主軸ペースで適正単価をどう設定するか。社長との二人会話で「安いかも」発言もあったため、相場感の擦り合わせが必要。</p>
+</div>
+
+<div class="task-item priority">
+<strong>論点3：開発スタック（Gemini／Googleワークスペース寄せ）</strong>
+<p>井上さんがどこまで Gemini／GW環境にキャッチアップ済みか。学習期間・現メンバーへの展開計画。</p>
+</div>
+
+<div class="task-item">
+<strong>論点4：現メンバーアサイン</strong>
+<p>井上さん+現メンバーの「現メンバー」とは誰か。実装力・コミット可能工数。</p>
+</div>
+
+<div class="task-item">
+<strong>論点5：ポータル開発の技術設計</strong>
+<p>標準範囲（申請＋チャット＋臨店）の開発期間・工数感。拡張範囲（勤怠／資産／組織／LINEワークス）はどこまで本提案に含めるか。</p>
+</div>
+
+<div class="task-item">
+<strong>論点6：現場伴走ヒアリング枠の運用</strong>
+<p>坂本様の個別ヒアリング業務をDWで巻き取る運用設計。月どの程度の頻度・どの部署対象から開始するか。</p>
+</div>
+
+<div class="task-item">
+<strong>論点7：助成金算定の再実行</strong>
+<p>賃金助成（時給500円×時間×人数×60%）＋経費助成（受講料×60%）の正確な算定。社労士相談の要否。</p>
+</div>
+
+<div class="task-item">
+<strong>論点8：1年プラン全体スケジュール感</strong>
+<p>研修（4ヶ月）・ポータル設計→開発→β→本稼働（12ヶ月）・アドバイザリー（月1×12回）の年内スケジュール。マイルストーン設定。</p>
+</div>
+</section>
+
+<hr>
+
+<section id="sec9">
+<h2>9. 参考情報・関連ファイル</h2>
+
+<h3>本資料の元になっているファイル（プロジェクトディレクトリ内）</h3>
+<table>
+<tr><th>ファイル</th><th>内容</th></tr>
+<tr><td><code>docs/2026-05-25_先方提出資料_構成書.md</code></td><td>先方提出資料の構成書（全11ページ・本資料の主要ソース）</td></tr>
+<tr><td><code>docs/業務フロー・前提.md</code></td><td>先方の業務・課題・組織の全前提＋「思想・スタンス」蓄積</td></tr>
+<tr><td><code>docs/エンジニア想定QA.md</code></td><td>技術的質問への回答準備</td></tr>
+<tr><td><code>docs/2026-05-22_社長MTG確認事項.md</code></td><td>加賀爪社長への確認事項一覧（10項目登録済）</td></tr>
+<tr><td><code>docs/2026-05-25_セッションログ.md</code></td><td>このプロジェクトの作業履歴・設計判断ログ</td></tr>
+<tr><td><code>ユニシアホールディングスVol.1.pdf</code></td><td>4/2 / 4/22 で先方へ提示した1回目の提案資料（10ページ）</td></tr>
+<tr><td><code>WEB営）【株式会社ユニシアホールディングス様】 - 2026_05_19 17_53 JST - Gemini によるメモ.pdf</code></td><td>5/19クロージングMTGの文字起こし（31ページ）</td></tr>
+</table>
+
+<h3>キーワード・略語</h3>
+<table>
+<tr><th>用語</th><th>意味</th></tr>
+<tr><td>HD</td><td>ホールディングス（本案件先）</td></tr>
+<tr><td>SF</td><td>Salesforce（先方が年間2,000万円超で利用中・代替候補）</td></tr>
+<tr><td>GW</td><td>Google Workspace（先方の主要DX基盤・加藤様が全社展開済み）</td></tr>
+<tr><td>FC</td><td>フランチャイズ（先方の事業領域）</td></tr>
+<tr><td>QSC</td><td>Quality / Service / Cleanliness（飲食店舗の点検チェック項目フレーム）</td></tr>
+<tr><td>BI</td><td>Business Intelligence（経営層向けデータ可視化）</td></tr>
+<tr><td>KJ</td><td>山本 啓司（DW・本案件のメイン担当者）</td></tr>
+<tr><td>KRD</td><td>本資料を作成しているAIアシスタントの呼称</td></tr>
+</table>
+
+<h3>関係先（数値）</h3>
+<table>
+<tr><th>項目</th><th>数値</th></tr>
+<tr><td>ユニシアHD連結従業員数</td><td>563名（2025年11月末）</td></tr>
+<tr><td>資本金</td><td>3億600万円</td></tr>
+<tr><td>直営店</td><td>170店舗</td></tr>
+<tr><td>Salesforceユーザー</td><td>600名以上（直営社員＋FC加盟店）</td></tr>
+<tr><td>Salesforce年間費用</td><td>年間2,000万円超</td></tr>
+<tr><td>RPA年間費用</td><td>年間200万円・ロボット100台稼働</td></tr>
+<tr><td>研修対象人数</td><td>最大25-30名（IT戦略部全員＋大須賀副社長＋岩本取締役＋役員＋部長職）</td></tr>
+</table>
+
+<h3>禁則事項（坂本様哲学を踏まえた表現ルール）</h3>
+<ul>
+  <li>「人員削減」「リストラ」「効率化で人を切る」というワードは使わない</li>
+  <li>「本社業務効率化」「現場の意思決定支援」「やめた人の業務をAI化」と言い換える</li>
+  <li>「ドラスティックな変更」は坂本様に嫌われる→「段階的アプローチ」「小さく始めて実績を積む」を強調</li>
+  <li>「育てて渡す」「内製化伴走」「卒業＋同盟」が本案件のキーワード</li>
+</ul>
+</section>
+
+<footer>
+本資料はDW社内向け（井上さん）キャッチアップ用です。社外への共有はお控えください。<br>
+作成：KRD（KJセッション内）／作成日：2026-05-26／対象MTG：2026-05-28／案件：株式会社ユニシアホールディングス DX推進提案
+</footer>
+
+</main>
+</div>
+</body>
+</html>
