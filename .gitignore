@@ -2,3 +2,6 @@
 CLAUDE.md
 docs/
 *.pdf
+
+# Codex.app自動生成（CLAUDE.mdへのシンボリックリンク・git管理しない）
+AGENTS.md
